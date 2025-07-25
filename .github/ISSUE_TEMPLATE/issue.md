@@ -5,23 +5,23 @@ title: ''
 assignees: ''
 ---
 
-# [⚙️ setting](https://github.com/OZ-Coding-School/oz_externship_fe_01_team2/labels/⚙️setting)
+# [⚙️setting](https://github.com/main-10-2team/boardgame-frontend/labels/⚙️setting)
 
-# [✨feature](https://github.com/OZ-Coding-School/oz_externship_fe_01_team2/labels/✨feature)
+# [✨feature](https://github.com/main-10-2team/boardgame-frontend/labels/✨feature)
 
-# [🐛fix](https://github.com/OZ-Coding-School/oz_externship_fe_01_team2/labels/🐛fix)
+# [🐛fix](https://github.com/main-10-2team/boardgame-frontend/labels/🐛fix)
 
-# [♻️refactor](https://github.com/OZ-Coding-School/oz_externship_fe_01_team2/labels/♻️refactor)
+# [♻️refactor](https://github.com/main-10-2team/boardgame-frontend/labels/♻️refactor)
 
-# [📑docs](https://github.com/OZ-Coding-School/oz_externship_fe_01_team2/labels/📑docs)
+# [📑docs](https://github.com/main-10-2team/boardgame-frontend/labels/📑docs)
 
-# [📦chore](https://github.com/OZ-Coding-School/oz_externship_fe_01_team2/labels/📦chore)
+# [📦chore](https://github.com/main-10-2team/boardgame-frontend/labels/📦chore)
 
-# [🔥remove](https://github.com/OZ-Coding-School/oz_externship_fe_01_team2/labels/🔥remove)
+# [🔥remove](https://github.com/main-10-2team/boardgame-frontend/labels/🔥remove)
 
-# [🔧config](https://github.com/OZ-Coding-School/oz_externship_fe_01_team2/labels/🔧config)
+# [🔧config](https://github.com/main-10-2team/boardgame-frontend/labels/🔧config)
 
-// 이슈 라벨 하나 선택하고 지우기 예: # 🔧 config
+<!-- 이슈 라벨 하나 선택하고 지우기 예: # 🔧 config -->
 
 ## Description
 

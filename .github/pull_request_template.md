@@ -8,11 +8,14 @@ assignees: ''
 
 ## 이슈 타입
 
-- [ ] 🐛 Bug (버그)
-- [ ] ✨ Feature (기능 요청)
-- [ ] 📝 Documentation (문서)
-- [ ] 🔧 Refactor (리팩토링)
-- [ ] ❓ Question (질문)
+- [ ] ⚙️setting
+- [ ] ✨feature
+- [ ] 🐛fix
+- [ ] ♻️refactor
+- [ ] 📑docs
+- [ ] 📦chore
+- [ ] 🔥remove
+- [ ] 🔧config
 
 ## 현재 상황
 
