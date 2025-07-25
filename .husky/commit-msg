@@ -1,0 +1,21 @@
+#!/usr/bin/env sh
+
+# 커밋 메시지 검증
+commit_regex='^(feat|fix|chore|docs|build|test|refactor|hotfix): .+ \(#[0-9]+\)$'
+
+if ! grep -qE "$commit_regex" "$1"; then
+    echo "❌ 커밋 메시지 형식이 올바르지 않습니다!"
+    echo "올바른 형식: <타입>: <메시지> (#번호)"
+    echo "예시: feat: 로그인 기능 추가 (#123)"
+    echo ""
+    echo "🔍 사용 가능한 타입:"
+    echo "  feat     : 새로운 기능 추가"
+    echo "  fix      : 버그 수정"
+    echo "  chore    : 기능 추가 없이 코드 수정"
+    echo "  docs     : 문서 수정"
+    echo "  build    : 빌드 관련 파일 수정"
+    echo "  test     : 테스트 코드 추가/변경"
+    echo "  refactor : 리팩터링"
+    echo "  hotfix   : 긴급 수정"
+    exit 1
+fi
