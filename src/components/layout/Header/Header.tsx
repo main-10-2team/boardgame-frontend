@@ -1,5 +1,4 @@
 'use client';
-import closeIcon from '@/assets/icons/close.svg';
 import menuIcon from '@/assets/icons/menu.svg';
 import Icon from '@/components/common/Icon';
 import { AuthButtons } from '@/components/layout/Header/AuthButtons';
@@ -35,7 +34,7 @@ export default function Header() {
           className="lg:hidden text-2xl"
           onClick={() => setIsMenuOpen((prev) => !prev)}
         >
-          <Icon icon={isMenuOpen ? closeIcon : menuIcon} size={24} />
+          <Icon icon={menuIcon} size={24} />
         </button>
       </div>
       <MobileMenu isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />
