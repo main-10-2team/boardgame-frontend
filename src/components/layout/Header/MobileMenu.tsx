@@ -15,7 +15,7 @@ export default function MobileMenu({ isOpen, setIsOpen }: Props) {
       {/* 오버레이 */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-40"
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
           onClick={() => setIsOpen(false)}
         />
       )}
