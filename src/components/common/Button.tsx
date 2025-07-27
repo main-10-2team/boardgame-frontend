@@ -1,11 +1,4 @@
-import type { MouseEvent, ReactNode } from 'react';
-
-type ButtonProps = {
-  children: ReactNode;
-  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
-  disabled?: boolean;
-  className?: string;
-};
+import { ButtonProps } from '@/types/button';
 
 export default function Button({
   children,
