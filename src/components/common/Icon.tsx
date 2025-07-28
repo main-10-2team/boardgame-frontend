@@ -1,4 +1,14 @@
-import { type IconProps } from '@custom-types/icon';
+import type { ComponentType, SVGProps } from 'react';
+
+export type SvgIconComponent = ComponentType<SVGProps<SVGSVGElement>>;
+
+export interface IconProps {
+  icon: SvgIconComponent;
+  size?: number;
+  color?: string;
+  className?: string;
+  iconClassName?: string;
+}
 
 export default function Icon({
   icon: ImgIcon,

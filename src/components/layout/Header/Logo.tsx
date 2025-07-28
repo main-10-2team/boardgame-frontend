@@ -1,3 +1,5 @@
+'use client';
+
 import LogoIcon from '@/assets/icons/logo.svg';
 import Icon from '@/components/common/Icon';
 import Link from 'next/link';

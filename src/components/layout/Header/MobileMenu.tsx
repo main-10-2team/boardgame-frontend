@@ -1,50 +1,99 @@
 'use client';
 
-import { SearchInput } from '@/components/layout/Header/SearchInput';
+import Button from '@/components/common/Button';
+import { useEscapeKey } from '@/hooks/useEscapeKey';
+import { cn } from '@/utils/cn';
+import {
+  RiArrowRightSLine,
+  RiCloseLine,
+  RiMenuLine,
+  RiUserLine,
+} from '@remixicon/react';
 import Link from 'next/link';
-import { Dispatch, SetStateAction } from 'react';
+import { useEffect, useState } from 'react';
 
-type Props = {
-  isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
-};
+interface MenuItem {
+  label: string;
+  href: string;
+}
 
-export default function MobileMenu({ isOpen, setIsOpen }: Props) {
+const menuItems: MenuItem[] = [
+  { label: '보드큐 소개', href: '/introduce' },
+  { label: '오늘 뭐하지', href: '/recommend' },
+  { label: '보드게임 찾기', href: '/search' },
+];
+
+export default function MobileMenu() {
+  // 메뉴바 상태
+  const [isOpen, setIsOpen] = useState(false);
+  // 메뉴바 닫기 함수
+  const handleClose = () => setIsOpen(false);
+  // esc 클릭 시 메뉴바 닫힘
+  useEscapeKey(handleClose);
+
+  // 스크롤 막기
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   return (
     <>
+      <div
+        className="text-2xl cursor-pointer lg:hidden"
+        onClick={() => setIsOpen((prev) => !prev)}
+      >
+        <RiMenuLine />
+      </div>
       {/* 오버레이 */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
-          onClick={() => setIsOpen(false)}
+          className="fixed inset-0 z-40 bg-black/50 lg:hidden"
+          onClick={handleClose}
         />
       )}
-
       {/* 슬라이드 메뉴 */}
       <aside
-        className={`fixed top-0 right-0 w-64 h-full bg-white shadow z-50 transform transition-transform duration-300 font-medium lg:hidden ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
+        className={cn(
+          `fixed top-0 right-0 w-64 h-full bg-white shadow z-50 transform transition-transform duration-300 font-medium lg:hidden ${
+            isOpen ? 'translate-x-0' : 'translate-x-full'
+          }`
+        )}
       >
-        <div className="flex flex-col gap-4 p-6">
-          {/* 검색창 */}
-          <SearchInput />
-          <hr className="my-2 border-gray-200" />
+        <div className="flex flex-col h-full gap-4 p-6">
+          <div className="flex items-center justify-between mb-2">
+            <div className={cn('flex gap-1 items-center px-0')}>
+              <RiUserLine size={20} />
+              <Link href="/login" className="ml-2">
+                로그인
+              </Link>
+              <RiArrowRightSLine size={20} />
+            </div>
+            <div className="cursor-pointer" onClick={handleClose}>
+              <RiCloseLine />
+            </div>
+          </div>
+          <div className="flex flex-col">
+            <Button
+              className="text-white bg-gray-400"
+              variant="primary"
+              size="md"
+            >
+              <Link href="/signup">회원가입</Link>
+            </Button>
+          </div>
+          <div className="my-1 border border-gray-200"></div>
+
           {/* 메뉴 항목들 */}
-          <Link href="/introduce" onClick={() => setIsOpen(false)}>
-            보드큐 소개
-          </Link>
-          <Link href="/recommend" onClick={() => setIsOpen(false)}>
-            오늘 뭐하지
-          </Link>
-          <Link href="/search" onClick={() => setIsOpen(false)}>
-            보드게임 찾기
-          </Link>
-
-          <hr className="my-2 border-gray-200" />
-
-          <Link href="/login">로그인</Link>
-          <Link href="/signup">회원가입</Link>
+          {menuItems.map(({ label, href }, index) => (
+            <div key={index}>
+              <Link href={href} onClick={handleClose}>
+                {label}
+              </Link>
+            </div>
+          ))}
         </div>
       </aside>
     </>
