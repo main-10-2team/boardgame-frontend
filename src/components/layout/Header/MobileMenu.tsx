@@ -2,7 +2,9 @@
 
 import Button from '@/components/common/Button';
 import { CATEGORY_MENU_ITEMS } from '@/constants/category/menuItems';
+import { Z_INDEX } from '@/constants/zIndex';
 import { useEscapeKey } from '@/hooks/useEscapeKey';
+import useScrollLock from '@/hooks/useScrollLock';
 import { cn } from '@/utils/cn';
 import {
   RiArrowRightSLine,
@@ -11,7 +13,7 @@ import {
   RiUserLine,
 } from '@remixicon/react';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function MobileMenu() {
   // 메뉴바 상태
@@ -22,12 +24,7 @@ export default function MobileMenu() {
   useEscapeKey(handleClose);
 
   // 스크롤 막기
-  useEffect(() => {
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isOpen]);
+  useScrollLock(isOpen);
 
   return (
     <>
@@ -40,17 +37,19 @@ export default function MobileMenu() {
       {/* 오버레이 */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/50 lg:hidden"
+          className="fixed inset-0 bg-black/50 lg:hidden"
+          style={{ zIndex: Z_INDEX.MOBILE_MENU }}
           onClick={handleClose}
         />
       )}
       {/* 슬라이드 메뉴 */}
       <aside
         className={cn(
-          `fixed top-0 right-0 z-50 h-full w-64 transform bg-white font-medium shadow transition-transform duration-300 lg:hidden ${
+          `fixed top-0 right-0 h-full w-64 transform bg-white font-medium shadow transition-transform duration-300 lg:hidden ${
             isOpen ? 'translate-x-0' : 'translate-x-full'
           }`
         )}
+        style={{ zIndex: Z_INDEX.MOBILE_MENU + 1 }}
       >
         <div className="flex h-full flex-col gap-4 p-6">
           <div className="mb-2 flex items-center justify-between">

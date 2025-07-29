@@ -2,7 +2,7 @@ export const CATEGORY_MENU_ITEMS = [
   {
     label: (
       <>
-        보드<span className="text-primary-500">Pick!</span>
+        보드<span className="text-primary-500 font-bold">Pick!</span>
       </>
     ),
     href: '/today',

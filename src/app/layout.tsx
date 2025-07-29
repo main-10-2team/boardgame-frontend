@@ -24,6 +24,7 @@ export default function RootLayout({
       <body className={`antialiased`}>
         <Header />
         {children}
+        <div id="modal" />
         <Footer />
       </body>
     </html>
