@@ -10,4 +10,3 @@ export const INPUT_VARIANTS = {
   success: 'border-green-600 bg-white text-gray-900',
   disabled: 'border-gray-200 bg-gray-50 text-gray-400 cursor-not-allowed',
 } as const;
-
