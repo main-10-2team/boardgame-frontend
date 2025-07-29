@@ -2,15 +2,12 @@ import React, { forwardRef } from 'react';
 import { cn } from '@/utils/cn';
 import { INPUT_SIZES, INPUT_VARIANTS } from '@/constants/input/input';
 
-interface InputProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
-  error?: string;
-  success?: boolean;
-  successMessage?: string;
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  error?: boolean | string;
+  success?: boolean | string;
   label?: string;
-  helperText?: string;
   variant?: keyof typeof INPUT_VARIANTS;
-  size?: keyof typeof INPUT_SIZES;
+  inputSize?: keyof typeof INPUT_SIZES;
   containerClassName?: string;
 }
 
@@ -22,11 +19,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       className = '',
       error,
       success,
-      successMessage,
       label,
-      helperText,
       variant = 'default',
-      size = 'md',
+      inputSize = 'md',
       containerClassName = '',
       ...props
     },
@@ -39,11 +34,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       return variant;
     };
 
-    const hasMessage = error || (success && successMessage) || helperText;
+    const errorMessage = typeof error === 'string' ? error : '';
+    const successMessage = typeof success === 'string' ? success : '';
+    const message = errorMessage || successMessage;
+
     return (
       <div className={cn('w-full', containerClassName)}>
         {label && (
-          <label className="block text-sm font-medium text-black mb-2">
+          <label className="mb-2 block text-sm font-medium text-black">
             {label}
           </label>
         )}
@@ -54,10 +52,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             type={type}
             disabled={disabled}
             className={cn(
-              'w-full border-2 rounded-lg',
+              'w-full rounded-lg border-2',
               'transition-colors duration-200 focus:outline-none',
               'font-pretendard text-base placeholder:text-gray-400',
-              INPUT_SIZES[size],
+              INPUT_SIZES[inputSize],
               INPUT_VARIANTS[getVariant()],
               className
             )}
@@ -65,18 +63,15 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           />
         </div>
 
-        {hasMessage && (
-          <div className="mt-3 transition-all duration-200">
-            {error && <p className="text-sm text-red-600">{error}</p>}
-
-            {success && successMessage && !error && (
-              <p className="text-sm text-green-600">{successMessage}</p>
+        {message && (
+          <p
+            className={cn(
+              'mt-2 text-sm',
+              errorMessage ? 'text-red-400' : 'text-green-600'
             )}
-
-            {helperText && !error && !successMessage && (
-              <p className="text-sm text-black">{helperText}</p>
-            )}
-          </div>
+          >
+            {message}
+          </p>
         )}
       </div>
     );
