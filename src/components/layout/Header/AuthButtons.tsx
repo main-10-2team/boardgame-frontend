@@ -7,7 +7,7 @@ export function AuthButtons() {
       <Button variant="transparent">
         <Link href="/login">로그인</Link>
       </Button>
-      <Button className="text-white bg-gray-400">
+      <Button className="bg-gray-400 text-white">
         <Link href="/signup">회원가입</Link>
       </Button>
     </div>

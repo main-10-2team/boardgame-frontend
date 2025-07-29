@@ -2,14 +2,14 @@ export default function Footer() {
   return (
     <footer>
       <div className="bg-linear-to-b from-[#fff] from-20% to-[#e8e8e8] to-70% p-20 text-sm text-gray-600">
-        <div className="max-w-[1440px] mx-auto ">
-          <div className="mb-6 font-extrabold text-2xl">보드큐</div>
+        <div className="mx-auto max-w-[1440px]">
+          <div className="mb-6 text-2xl font-extrabold">보드큐</div>
           <p className="text-gray-500">
             보드게임 큐레이션으로
             <br />
             당신의 저녁 라이프를 풍성하게 만들어보세요.
           </p>
-          <p className="flex gap-6 mt-8">
+          <p className="mt-8 flex gap-6">
             <span>이용약관</span>
             <span>개인정보처리방침</span>
           </p>
