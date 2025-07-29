@@ -8,7 +8,7 @@ const menuItems = [
 
 export default function CategoryMenu() {
   return (
-    <nav className="hidden lg:flex gap-6 text-sm font-semibold">
+    <nav className="hidden gap-6 text-sm font-semibold lg:flex">
       {menuItems.map((item, i) => (
         <Link key={i} href={item.href}>
           {item.label}

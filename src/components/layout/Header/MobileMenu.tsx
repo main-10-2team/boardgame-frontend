@@ -42,7 +42,7 @@ export default function MobileMenu() {
   return (
     <>
       <div
-        className="text-2xl cursor-pointer lg:hidden"
+        className="cursor-pointer text-2xl lg:hidden"
         onClick={() => setIsOpen((prev) => !prev)}
       >
         <RiMenuLine />
@@ -57,14 +57,14 @@ export default function MobileMenu() {
       {/* 슬라이드 메뉴 */}
       <aside
         className={cn(
-          `fixed top-0 right-0 w-64 h-full bg-white shadow z-50 transform transition-transform duration-300 font-medium lg:hidden ${
+          `fixed top-0 right-0 z-50 h-full w-64 transform bg-white font-medium shadow transition-transform duration-300 lg:hidden ${
             isOpen ? 'translate-x-0' : 'translate-x-full'
           }`
         )}
       >
-        <div className="flex flex-col h-full gap-4 p-6">
-          <div className="flex items-center justify-between mb-2">
-            <div className={cn('flex gap-1 items-center px-0')}>
+        <div className="flex h-full flex-col gap-4 p-6">
+          <div className="mb-2 flex items-center justify-between">
+            <div className={cn('flex items-center gap-1 px-0')}>
               <RiUserLine size={20} />
               <Link href="/login" className="ml-2">
                 로그인
@@ -77,7 +77,7 @@ export default function MobileMenu() {
           </div>
           <div className="flex flex-col">
             <Button
-              className="text-white bg-gray-400"
+              className="bg-gray-400 text-white"
               variant="primary"
               size="md"
             >

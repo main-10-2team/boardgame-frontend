@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 export default function Logo() {
   return (
-    <div className="text-2xl font-extrabold cursor-pointer">
+    <div className="cursor-pointer text-2xl font-extrabold">
       <Link href="/">
         <div className="flex items-center">
           <Icon icon={LogoIcon} size={24} className="mr-2" />
