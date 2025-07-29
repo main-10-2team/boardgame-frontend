@@ -1,6 +1,42 @@
 @import 'tailwindcss';
 
 @theme {
+  --color-success-50: #f6fef9;
+  --color-success-100: #effdf6;
+  --color-success-200: #d9f9e6;
+  --color-success-300: #b8f1d2;
+  --color-success-400: #8ee4ba;
+  --color-success-500: #6ad09d;
+  --color-success-600: #53b483;
+  --color-success-700: #2f9461;
+  --color-success-800: #2f7657;
+  --color-success-900: #255e46;
+  --color-success-1000: #1e4d3a;
+
+  --color-error-50: #fffbfa;
+  --color-error-100: #fef2f2;
+  --color-error-200: #fde9e9;
+  --color-error-300: #fac7c7;
+  --color-error-400: #f7a1a1;
+  --color-error-500: #f37373;
+  --color-error-600: #f34141;
+  --color-error-700: #cd3636;
+  --color-error-800: #a32e2e;
+  --color-error-900: #7c2323;
+  --color-error-1000: #601b1b;
+
+  --color-warning-50: #fffcf5;
+  --color-warning-100: #fefaf5;
+  --color-warning-200: #fbf2cb;
+  --color-warning-300: #fde57e;
+  --color-warning-400: #ffd16a;
+  --color-warning-500: #fbbc55;
+  --color-warning-600: #e9a23b;
+  --color-warning-700: #c8811a;
+  --color-warning-800: #a35c00;
+  --color-warning-900: #8b4400;
+  --color-warning-1000: #78310b;
+
   --color-primary-50: #fef1fb;
   --color-primary-100: #fee5f8;
   --color-primary-200: #ffcbf4;
@@ -12,4 +48,23 @@
   --color-primary-800: #a80c6c;
   --color-primary-900: #8c0f5b;
   --color-primary-950: #560135;
+}
+
+body {
+  font-family:
+    'Pretendard Variable',
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    'Helvetica Neue',
+    'Segoe UI',
+    'Apple SD Gothic Neo',
+    'Noto Sans KR',
+    'Malgun Gothic',
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol',
+    sans-serif;
 }
