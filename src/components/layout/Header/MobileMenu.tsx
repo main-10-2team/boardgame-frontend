@@ -1,6 +1,7 @@
 'use client';
 
 import Button from '@/components/common/Button';
+import { CATEGORY_MENU_ITEMS } from '@/constants/category/menuItems';
 import { useEscapeKey } from '@/hooks/useEscapeKey';
 import { cn } from '@/utils/cn';
 import {
@@ -11,17 +12,6 @@ import {
 } from '@remixicon/react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-
-interface MenuItem {
-  label: string;
-  href: string;
-}
-
-const menuItems: MenuItem[] = [
-  { label: '보드큐 소개', href: '/introduce' },
-  { label: '오늘 뭐하지', href: '/recommend' },
-  { label: '보드게임 찾기', href: '/search' },
-];
 
 export default function MobileMenu() {
   // 메뉴바 상태
@@ -87,7 +77,7 @@ export default function MobileMenu() {
           <div className="my-1 border border-gray-200"></div>
 
           {/* 메뉴 항목들 */}
-          {menuItems.map(({ label, href }, index) => (
+          {CATEGORY_MENU_ITEMS.map(({ label, href }, index) => (
             <div key={index}>
               <Link href={href} onClick={handleClose}>
                 {label}
