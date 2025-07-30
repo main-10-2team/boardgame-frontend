@@ -62,7 +62,7 @@ const Modal = ({
 
   // 현재 열린 모달이 없으면 렌더링 x
   if (!openModals.includes(modalId)) return null;
-  
+
   // z-index 계산 (열린 순서 기준)
   const currentZIndex = zIndexBase + openModals.indexOf(modalId) * 10;
 
@@ -71,11 +71,14 @@ const Modal = ({
       <div
         id={modalId}
         className={cn(
-          'fixed inset-0 flex h-screen w-screen items-center justify-center',
+          'fixed inset-0 flex items-center justify-center',
           isBackgroundOverlay && 'bg-black/30'
         )}
         style={{ zIndex: currentZIndex }}
         onClick={isTopModal ? handleClose : undefined}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={`${modalId}`}
       >
         <div
           className={cn(
@@ -89,6 +92,7 @@ const Modal = ({
             <button
               onClick={handleClose}
               className="absolute top-8 right-6 cursor-pointer"
+              aria-label="모달 닫기"
             >
               <RiCloseLine />
             </button>
