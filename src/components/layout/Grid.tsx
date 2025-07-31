@@ -25,10 +25,9 @@ const Grid = ({ children, className }: GridProps) => {
     <section
       aria-label="Grid layout"
       className={cn(
-        'mx-auto grid w-full max-w-[1024px]',
+        'mx-auto grid w-full max-w-5xl',
         'grid-cols-4 sm:grid-cols-8 md:grid-cols-12',
         'gap-2 sm:gap-4 lg:gap-6',
-        'px-4 sm:px-6 lg:px-0',
         className
       )}
     >
