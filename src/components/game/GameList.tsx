@@ -17,10 +17,10 @@ const GameList = ({
     <div
       className={cn(
         `grid grid-cols-2 gap-6`,
-        columnNumber === 3 && 'md:grid-cols-3',
-        columnNumber === 4 && 'md:grid-cols-4',
-        columnNumber === 5 && 'md:grid-cols-5',
-        columnNumber === 6 && 'md:grid-cols-6'
+        columnNumber === 3 && 'lg:grid-cols-3',
+        columnNumber === 4 && 'lg:grid-cols-4',
+        columnNumber === 5 && 'lg:grid-cols-5',
+        columnNumber === 6 && 'lg:grid-cols-6'
       )}
     >
       {games.map((game) => (
