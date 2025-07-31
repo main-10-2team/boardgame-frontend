@@ -57,12 +57,6 @@ function formatDateToKorean(dateString: string): string {
 }
 
 export default function MyPage() {
-  // const isLoggedIn = false; // 추후 실제 로그인 상태로 변경
-
-  // if (!isLoggedIn) {
-  //   redirect('/login');
-  // }
-
   return (
     <div className="mx-auto flex min-h-screen max-w-[1440px] flex-col gap-8 px-12 py-10 md:flex-row">
       {/* 사이드바 */}
