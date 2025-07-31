@@ -47,7 +47,7 @@ const allKeywords = [
   ...mockUser.popularGenres,
 ];
 
-export function formatDateToKorean(dateString: string): string {
+function formatDateToKorean(dateString: string): string {
   const date = new Date(dateString);
   return new Intl.DateTimeFormat('ko-KR', {
     year: 'numeric',
