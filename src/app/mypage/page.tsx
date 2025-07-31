@@ -1,5 +1,3 @@
-import defaultProfileImg from '@/assets/images/defaultProfileImg.png';
-import preferenceBannerImg from '@/assets/images/preferenceBannerImg.png';
 import Button from '@/components/common/Button';
 import MyPageSideMenu from '@/components/myPage/SideMenu';
 import WordCloud from '@/components/wordCloud/WordCloud';
@@ -69,7 +67,7 @@ export default function MyPage() {
         <section className="flex flex-col gap-10 rounded-xl border border-gray-200 p-6 md:flex-row">
           <div className="flex flex-col items-center gap-6 md:items-start">
             <Image
-              src={mockUser.profileImage || defaultProfileImg}
+              src={mockUser.profileImage || '/images/defaultProfileImg.png'}
               alt="기본 프로필 이미지"
               priority
               className="size-[150px] rounded-full object-cover md:size-[100px]"
@@ -139,7 +137,7 @@ export default function MyPage() {
               </p>
             </div>
             <Image
-              src={preferenceBannerImg}
+              src="/images/preferenceBannerImg.png"
               alt="preference Img"
               className="absolute right-0 hidden max-w-[45%] object-contain md:block"
               priority
