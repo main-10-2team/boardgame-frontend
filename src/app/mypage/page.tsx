@@ -14,9 +14,26 @@ const mockUser = {
   reviewCount: 13,
   likeCount: 24,
   joinDate: '2025-07-22T00:00:00Z',
-  preferredGenres: ['전략', '카드'],
+  preferredGenres: [
+    '전략',
+    '카드',
+    '추리',
+    '파티',
+    '블러핑',
+    '협동',
+    '경제',
+    '문명',
+    '정치',
+    '타일 배치',
+    '주사위',
+    '세트컬렉션',
+    '거래',
+    '배틀',
+    '영역확장',
+    '스토리텔링',
+  ],
   preferredPlaytimes: ['30분 미만', '1시간 이상'],
-  popularGenres: ['전략', '파티', '추리'],
+  popularGenres: ['전략', '블러핑', '추리'],
   // 이건 백엔드에서 해줘야할듯
   percentile: 73,
   // percentile을 토대로 프론트에서 가공 필요
@@ -131,6 +148,7 @@ export default function MyPage() {
               src={preferenceBannerImg}
               alt="preference Img"
               className="absolute right-0 hidden max-w-[45%] object-contain md:block"
+              priority
             />
           </section>
         </Link>
