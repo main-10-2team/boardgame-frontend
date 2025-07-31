@@ -69,8 +69,10 @@ export default function MyPage() {
             <Image
               src={mockUser.profileImage || '/images/defaultProfileImg.png'}
               alt="기본 프로필 이미지"
+              width={100}
+              height={100}
               priority
-              className="size-[150px] rounded-full object-cover md:size-[100px]"
+              className="rounded-full object-cover"
             />
             <div className="text-center md:text-left">
               <p className="text-xl font-medium">{mockUser.nickname}</p>
@@ -140,6 +142,8 @@ export default function MyPage() {
               src="/images/preferenceBannerImg.png"
               alt="preference Img"
               className="absolute right-0 hidden max-w-[45%] object-contain md:block"
+              width={309}
+              height={253}
               priority
             />
           </section>
