@@ -56,7 +56,7 @@ function formatDateToKorean(dateString: string): string {
 
 export default function MyPage() {
   return (
-    <div className="mx-auto flex min-h-screen max-w-[1440px] flex-col gap-8 px-12 py-10 md:flex-row">
+    <div className="mx-auto flex min-h-screen max-w-[1140px] flex-col gap-8 px-12 py-10 md:flex-row">
       {/* 사이드바 */}
       <div className="flex flex-col">
         <div className="mb-6 text-2xl font-bold">마이페이지</div>

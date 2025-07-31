@@ -2,7 +2,7 @@ export default function Footer() {
   return (
     <footer>
       <div className="bg-linear-to-b from-[#fff] from-20% to-[#e8e8e8] to-70% p-20 text-sm text-gray-600">
-        <div className="mx-auto max-w-[1440px]">
+        <div className="mx-auto max-w-[1024px]">
           <div className="mb-6 text-2xl font-extrabold">보드큐</div>
           <p className="text-gray-500">
             보드게임 큐레이션으로
