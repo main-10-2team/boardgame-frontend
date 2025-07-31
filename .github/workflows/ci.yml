@@ -21,10 +21,9 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
-
-      - name: Install sharp for next/image
-        run: npm install -include=option sharp
+        run: |
+          npm ci
+          npm install --platform=linux --arch=x64 sharp
 
       - name: Lint check
         run: npm run lint
