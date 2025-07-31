@@ -1,6 +1,6 @@
 // 색깔
 export const BUTTON_VARIANTS = {
-  primary: 'bg-primary-500 text-white shadow-md',
+  primary: 'bg-primary-400 text-white shadow-md',
   secondary: 'border border-gray-200 text-black bg-white shadow-md',
   transparent: 'bg-transparent text-black',
 } as const;
