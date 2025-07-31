@@ -22,7 +22,7 @@ export default function Dropdown({
   selectedValue,
   onChange,
 }: DropdownProps) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const selectedLabel =
