@@ -8,7 +8,7 @@ import { RiSearchLine } from '@remixicon/react';
 export default function Header() {
   return (
     <header className="relative z-50 bg-white whitespace-nowrap shadow">
-      <div className="mx-auto flex max-w-[1440px] items-center justify-between px-8 py-4">
+      <div className="mx-auto flex max-w-[1140px] items-center justify-between px-8 py-4">
         <Logo />
         <div className="hidden w-full items-center justify-between gap-6 text-sm font-medium lg:ml-10 lg:flex">
           <CategoryMenu />
