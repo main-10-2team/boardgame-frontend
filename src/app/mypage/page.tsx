@@ -1,4 +1,5 @@
 import Button from '@/components/common/Button';
+import Grid from '@/components/layout/Grid';
 import MyPageSideMenu from '@/components/myPage/SideMenu';
 import WordCloud from '@/components/wordCloud/WordCloud';
 import Image from 'next/image';
@@ -56,13 +57,17 @@ function formatDateToKorean(dateString: string): string {
 
 export default function MyPage() {
   return (
-    <div className="mx-auto flex min-h-screen max-w-[1140px] flex-col gap-8 px-12 py-10 md:flex-row">
+    <Grid className="mx-auto min-h-screen max-w-[1140px] py-10 lg:px-6 xl:px-0">
       {/* 사이드바 */}
-      <div className="flex flex-col">
-        <div className="mb-6 text-2xl font-bold">마이페이지</div>
+      <Grid.Item span="col-span-12 md:col-span-3">
         <MyPageSideMenu />
-      </div>
-      <main className="flex w-full flex-col gap-6">
+      </Grid.Item>
+
+      {/* 메인 콘텐츠 */}
+      <Grid.Item
+        span="col-span-12 md:col-span-9"
+        className="flex flex-col gap-6"
+      >
         {/* 프로필 */}
         <section className="flex flex-col gap-10 rounded-xl border border-gray-200 p-6 md:flex-row">
           <div className="flex flex-col items-center gap-6 md:items-start">
@@ -103,8 +108,9 @@ export default function MyPage() {
           </div>
         </section>
 
-        <section className="flex flex-col gap-6 lg:flex-row">
-          <div className="bg-primary-100 flex flex-1 flex-col justify-center rounded-2xl p-6 text-2xl text-gray-800 lg:min-w-1/2">
+        {/* 취향 + 퍼센트 */}
+        <section className="flex flex-col gap-6 lg:grid lg:grid-cols-9">
+          <div className="bg-primary-100 flex flex-1 flex-col justify-center rounded-2xl p-6 text-2xl text-gray-800 lg:col-span-4">
             <span className="font-semibold">
               {mockUser.name} 님은
               <span className="text-primary-400 ml-1">
@@ -114,7 +120,7 @@ export default function MyPage() {
             </span>
             <span className="mt-2 font-bold text-black">{mockUser.tier}</span>
           </div>
-          <div className="border-primary-400 min-w-0 flex-1 rounded-2xl border p-6">
+          <div className="border-primary-400 min-w-0 flex-1 rounded-2xl border p-6 lg:col-span-5">
             <p className="mb-2 text-2xl font-semibold text-gray-800">
               취향 키워드
             </p>
@@ -126,6 +132,8 @@ export default function MyPage() {
             </div>
           </div>
         </section>
+
+        {/* 선호도 조사 배너 */}
         <Link href={'/preference'}>
           <section className="border-primary-300 relative flex items-center justify-between overflow-hidden rounded-2xl border bg-gradient-to-r from-[#FFE6FA] via-[#A1DCE4] to-[#D7FFAC] p-6 text-sm">
             <div>
@@ -148,7 +156,7 @@ export default function MyPage() {
             />
           </section>
         </Link>
-      </main>
-    </div>
+      </Grid.Item>
+    </Grid>
   );
 }

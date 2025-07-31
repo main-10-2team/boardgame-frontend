@@ -9,45 +9,34 @@ const MY_PAGE_MENUS = [
   { label: '좋아요', href: '/mypage/likes' },
 ];
 
-function PcSideMenu() {
+function SideMenu({ isMobile }: { isMobile: boolean }) {
   const pathname = usePathname();
-  return (
-    <>
-      {MY_PAGE_MENUS.map(({ label, href }) => {
-        return (
-          <Link
-            key={href}
-            href={href}
-            className={cn(
-              pathname === href
-                ? 'text-primary-500 font-semibold'
-                : 'hover:text-primary-400 text-gray-700 transition-colors duration-300'
-            )}
-          >
-            {label}
-          </Link>
-        );
-      })}
-    </>
-  );
-}
 
-function MobileSideMenu() {
-  const pathname = usePathname();
   return (
     <>
       {MY_PAGE_MENUS.map(({ label, href }) => {
         const isActive = pathname === href;
+        // 공통 스타일
+        const common = 'transition-colors duration-300';
+        const mobileStyle = cn(
+          'rounded-full px-4 py-1.5 text-sm',
+          isActive
+            ? 'bg-primary-400 text-white'
+            : 'bg-gray-50 text-black hover:text-primary-400',
+          common
+        );
+        const pcStyle = cn(
+          isActive
+            ? 'text-primary-500 font-semibold'
+            : 'text-gray-700 hover:text-primary-400',
+          common
+        );
+
         return (
           <Link
             key={href}
             href={href}
-            className={cn(
-              'rounded-full px-4 py-1.5 text-sm transition-colors duration-300',
-              isActive
-                ? 'bg-primary-400 text-white'
-                : 'hover:text-primary-400 bg-gray-50 text-black'
-            )}
+            className={isMobile ? mobileStyle : pcStyle}
           >
             {label}
           </Link>
@@ -59,15 +48,20 @@ function MobileSideMenu() {
 
 export default function MyPageSideMenu() {
   return (
-    <div>
-      <aside className="hidden w-[160px] shrink-0 text-lg text-black md:block">
-        <ul className="mt-3 flex flex-col gap-4 text-lg text-gray-500">
-          <PcSideMenu />
-        </ul>
-      </aside>
-      <nav className="flex gap-4 py-3 text-sm font-medium text-gray-600 md:hidden">
-        <MobileSideMenu />
-      </nav>
+    <div className="flex flex-col">
+      <Link href={'/mypage'}>
+        <div className="mb-6 text-2xl font-bold">마이페이지</div>
+      </Link>
+      <div>
+        <aside className="hidden w-[160px] shrink-0 text-lg text-black md:block">
+          <ul className="mt-3 flex flex-col gap-4 text-lg text-gray-500">
+            <SideMenu isMobile={false} />
+          </ul>
+        </aside>
+        <nav className="flex gap-4 py-3 text-sm font-medium text-gray-600 md:hidden">
+          <SideMenu isMobile />
+        </nav>
+      </div>
     </div>
   );
 }
