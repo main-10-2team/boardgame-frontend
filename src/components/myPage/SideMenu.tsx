@@ -15,7 +15,7 @@ function SideMenu({ isMobile }: { isMobile: boolean }) {
   return (
     <>
       {MY_PAGE_MENUS.map(({ label, href }) => {
-        const isActive = pathname === href;
+        const isActive = pathname.startsWith(href);
         // 공통 스타일
         const common = 'transition-colors duration-300';
         const mobileStyle = cn(
@@ -50,7 +50,7 @@ export default function MyPageSideMenu() {
   return (
     <div className="flex flex-col">
       <Link href={'/mypage'}>
-        <div className="mb-6 text-2xl font-bold">마이페이지</div>
+        <div className="mb-6 text-4xl font-bold">마이페이지</div>
       </Link>
       <div>
         <aside className="hidden w-[160px] shrink-0 text-lg text-black md:block">
@@ -58,7 +58,7 @@ export default function MyPageSideMenu() {
             <SideMenu isMobile={false} />
           </ul>
         </aside>
-        <nav className="flex gap-4 py-3 text-sm font-medium text-gray-600 md:hidden">
+        <nav className="flex gap-4 py-4 text-sm font-medium text-gray-600 md:hidden">
           <SideMenu isMobile />
         </nav>
       </div>
