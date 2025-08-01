@@ -1,8 +1,9 @@
 // 색깔
 export const BUTTON_VARIANTS = {
-  primary: 'bg-primary-500 text-white shadow-md',
-  secondary: 'border border-gray-200 text-black bg-white shadow-md',
-  transparent: 'bg-transparent text-black',
+  primary: 'bg-primary-400 text-white shadow-md hover:bg-primary-500',
+  secondary:
+    'border border-gray-200 text-black bg-white shadow-md hover:bg-gray-50',
+  transparent: 'bg-transparent text-black hover:bg-gray-50',
 } as const;
 
 // 크기
