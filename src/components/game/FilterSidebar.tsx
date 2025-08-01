@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Button from '../common/Button';
 import Checkbox from '../common/Checkbox';
+import Radio from '../common/Radio';
 import RangeSlider from '../common/RangeSlider';
 import StarRating from '../common/StarRating';
 
@@ -135,18 +136,13 @@ export default function FilterSidebar() {
       {/* 연령대 */}
       <section className="mb-6">
         <h3 className="mb-2 font-medium">연령대</h3>
-        {ageGroups.map((a) => (
-          <label key={a} className="mb-1 block text-sm">
-            <input
-              type="radio"
-              name="age"
-              checked={age === a}
-              onChange={() => setAge(a)}
-              className="mr-2"
-            />
-            {a}
-          </label>
-        ))}
+        <div className="flex flex-col gap-2">
+          {ageGroups.map((a) => (
+            <Radio key={a} checked={age === a} onChange={() => setAge(a)}>
+              {a}
+            </Radio>
+          ))}
+        </div>
       </section>
 
       {/* 검색 버튼 */}
