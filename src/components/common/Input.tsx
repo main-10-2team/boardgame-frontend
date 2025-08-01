@@ -1,6 +1,6 @@
-import React, { forwardRef } from 'react';
-import { cn } from '@/utils/cn';
 import { INPUT_SIZES, INPUT_VARIANTS } from '@/constants/input/input';
+import { cn } from '@/utils/cn';
+import React, { forwardRef } from 'react';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: boolean | string;
@@ -9,6 +9,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   variant?: keyof typeof INPUT_VARIANTS;
   inputSize?: keyof typeof INPUT_SIZES;
   containerClassName?: string;
+  required?: boolean;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -23,6 +24,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       variant = 'default',
       inputSize = 'md',
       containerClassName = '',
+      required = false,
       ...props
     },
     ref
@@ -43,6 +45,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         {label && (
           <label className="mb-2 block text-sm font-medium text-black">
             {label}
+            {required && <span className="ml-0.5 text-pink-500">*</span>}
           </label>
         )}
 
