@@ -1,5 +1,6 @@
 'use client';
 
+import { userProfile } from '@/assets/mocks/userProfile';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 import Grid from '@/components/layout/Grid';
@@ -9,36 +10,9 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-const mockUser = {
-  name: '김유저',
-  nickname: '닉유네저임',
-  email: 'user@example.com',
-  profileImage: '',
-  reviewCount: 13,
-  likeCount: 24,
-  joinDate: '2025-07-22T00:00:00Z',
-  preferredGenres: [
-    '전략',
-    '카드',
-    '추리',
-    '파티',
-    '거래',
-    '배틀',
-    '영역확장',
-    '블러핑',
-    '스토리텔링',
-  ],
-  preferredPlaytimes: ['30분 미만', '1시간 이상'],
-  popularGenres: ['전략', '블러핑', '추리'],
-  // 이건 백엔드에서 해줘야할듯
-  percentile: 73,
-  // percentile을 토대로 프론트에서 가공 필요
-  tier: '보드게임 비기너!',
-};
-
 export default function ProfileEditPage() {
-  const [nickname, setNickname] = useState(mockUser.nickname);
-  const [email, setEmail] = useState(mockUser.email);
+  const [nickname, setNickname] = useState(userProfile.nickname);
+  const [email, setEmail] = useState(userProfile.email);
   const [image, setImage] = useState<string | null>(null);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,8 +38,8 @@ export default function ProfileEditPage() {
   };
 
   return (
-    <main className="flex flex-1 flex-col">
-      <Grid className="mx-auto max-w-[1140px] py-10 lg:px-6 xl:px-0">
+    <main className="inner flex flex-1 flex-col py-10">
+      <Grid>
         {/* 사이드바 */}
         <Grid.Item span="col-span-12 md:col-span-3">
           <MyPageSideMenu />
@@ -84,8 +58,8 @@ export default function ProfileEditPage() {
                   src={
                     image?.trim()
                       ? image
-                      : mockUser.profileImage?.trim()
-                        ? mockUser.profileImage
+                      : userProfile.profile_image?.trim()
+                        ? userProfile.profile_image
                         : '/images/defaultProfileImg.png'
                   }
                   alt="프로필 이미지"

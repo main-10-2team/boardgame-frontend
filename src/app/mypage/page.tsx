@@ -1,3 +1,4 @@
+import { userProfile } from '@/assets/mocks/userProfile';
 import Button from '@/components/common/Button';
 import Grid from '@/components/layout/Grid';
 import MyPageSideMenu from '@/components/myPage/SideMenu';
@@ -5,46 +6,15 @@ import WordCloud from '@/components/wordCloud/WordCloud';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const mockUser = {
-  name: '김유저',
-  nickname: '닉유네저임',
-  email: 'user@example.com',
-  profileImage: '',
-  reviewCount: 13,
-  likeCount: 24,
-  joinDate: '2025-07-22T00:00:00Z',
-  preferredGenres: [
-    '전략',
-    '카드',
-    '추리',
-    '파티',
-    '블러핑',
-    '협동',
-    '경제',
-    '문명',
-    '정치',
-    '타일 배치',
-    '주사위',
-    '세트컬렉션',
-    '거래',
-    '배틀',
-    '영역확장',
-    '스토리텔링',
-  ],
-  preferredPlaytimes: ['30분 미만', '1시간 이상'],
-  popularGenres: ['전략', '블러핑', '추리'],
-  // 이건 백엔드에서 해줘야할듯
-  percentile: 73,
-  // percentile을 토대로 프론트에서 가공 필요
-  tier: '보드게임 비기너!',
-};
-
 // 워드클라우드에 들어갈 키워드들
 const allKeywords = [
-  ...mockUser.preferredGenres,
-  ...mockUser.preferredPlaytimes,
-  ...mockUser.popularGenres,
+  ...userProfile.preferred_genres,
+  ...userProfile.preferred_playtimes,
+  ...userProfile.popular_genres,
 ];
+
+const percentile = 73;
+const tier = '보드게임 비기너';
 
 function formatDateToKorean(dateString: string): string {
   const date = new Date(dateString);
@@ -57,8 +27,8 @@ function formatDateToKorean(dateString: string): string {
 
 export default function MyPage() {
   return (
-    <main className="flex flex-1 flex-col">
-      <Grid className="mx-auto max-w-[1140px] py-10 lg:px-6 xl:px-0">
+    <main className="inner flex flex-1 flex-col py-10">
+      <Grid>
         {/* 사이드바 */}
         <Grid.Item span="col-span-12 md:col-span-3">
           <MyPageSideMenu />
@@ -73,7 +43,9 @@ export default function MyPage() {
           <section className="flex flex-col gap-10 rounded-xl border border-gray-200 p-6 md:flex-row">
             <div className="flex flex-col items-center gap-6 md:items-start">
               <Image
-                src={mockUser.profileImage || '/images/defaultProfileImg.png'}
+                src={
+                  userProfile.profile_image || '/images/defaultProfileImg.png'
+                }
                 alt="기본 프로필 이미지"
                 width={100}
                 height={100}
@@ -81,8 +53,8 @@ export default function MyPage() {
                 className="rounded-full object-cover"
               />
               <div className="text-center md:text-left">
-                <p className="text-xl font-medium">{mockUser.nickname}</p>
-                <p className="text-sm text-gray-400">{mockUser.email}</p>
+                <p className="text-xl font-medium">{userProfile.nickname}</p>
+                <p className="text-sm text-gray-400">{userProfile.email}</p>
               </div>
               <Link href="/mypage/profile/edit">
                 <Button
@@ -98,14 +70,16 @@ export default function MyPage() {
               <h3 className="mb-4 text-2xl font-semibold">내 활동</h3>
               <div className="grid grid-cols-2 gap-y-2 text-sm">
                 <span className="text-gray-500">리뷰수</span>
-                <span className="font-semibold">{mockUser.reviewCount}</span>
+                <span className="font-semibold">
+                  {userProfile.review_count}
+                </span>
 
                 <span className="text-gray-500">좋아요 수</span>
-                <span className="font-semibold">{mockUser.likeCount}</span>
+                <span className="font-semibold">{userProfile.like_count}</span>
 
                 <span className="text-gray-500">가입일</span>
                 <span className="font-semibold">
-                  {formatDateToKorean(mockUser.joinDate)}
+                  {formatDateToKorean(userProfile.created_at)}
                 </span>
               </div>
             </div>
@@ -115,13 +89,13 @@ export default function MyPage() {
           <section className="flex flex-col gap-6 lg:grid lg:grid-cols-9">
             <div className="bg-primary-100 flex flex-1 flex-col justify-center rounded-2xl p-6 text-2xl text-gray-800 lg:col-span-4">
               <span className="font-semibold">
-                {mockUser.name} 님은
+                {userProfile.name} 님은
                 <span className="text-primary-400 ml-1">
-                  상위 {mockUser.percentile}%
+                  상위 {percentile}%
                 </span>
                 ,
               </span>
-              <span className="mt-2 font-bold text-black">{mockUser.tier}</span>
+              <span className="mt-2 font-bold text-black">{tier}!</span>
             </div>
             <div className="border-primary-400 min-w-0 flex-1 rounded-2xl border p-6 lg:col-span-5">
               <p className="mb-2 text-2xl font-semibold text-gray-800">
@@ -130,7 +104,7 @@ export default function MyPage() {
               <div className="relative h-[200px] w-full max-w-full overflow-hidden">
                 <WordCloud
                   keywords={allKeywords}
-                  popularKeywords={mockUser.popularGenres}
+                  popularKeywords={userProfile.popular_genres}
                 />
               </div>
             </div>
