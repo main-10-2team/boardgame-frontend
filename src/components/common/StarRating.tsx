@@ -32,7 +32,6 @@ const StarRating = ({ value, onChange }: StarRatingProps) => {
   const handleClick = (e: React.MouseEvent, index: number) => {
     const next = getClickValue(e, index);
     onChange(next);
-    console.log(`별점 ${next}점으로 설정됨`);
   };
 
   return (

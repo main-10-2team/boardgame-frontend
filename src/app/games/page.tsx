@@ -1,15 +1,20 @@
 'use client';
 import { gameListData } from '@/assets/mocks/gameListData';
 import Dropdown from '@/components/common/Dropdown';
-import FilterSidebar from '@/components/game/FilterSidebar';
 import GameList from '@/components/game/GameList';
-import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import Grid from '@/components/layout/Grid';
+import dynamic from 'next/dynamic';
 import { useState } from 'react';
 
-const Page = () => {
+const Breadcrumbs = dynamic(() => import('@/components/layout/Breadcrumbs'), {
+  ssr: false,
+});
+const FilterSidebar = dynamic(() => import('@/components/game/FilterSidebar'), {
+  ssr: false,
+});
+
+export default function Page() {
   const [sort, setSort] = useState('popular');
-  const [playTime, setPlayTime] = useState(60);
 
   const sortOptions = [
     { label: '인기순', value: 'popular' },
@@ -47,12 +52,10 @@ const Page = () => {
           <GameList
             games={gameListData.games}
             columnNumber={3}
-            imageRatio="square"
+            imageRatio="1:1"
           />
         </Grid.Item>
       </Grid>
     </div>
   );
-};
-
-export default Page;
+}

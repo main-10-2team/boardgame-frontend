@@ -13,7 +13,7 @@ export const gameListData = {
       playtime_minutes: 60,
       difficulty: 2.5,
       image_url:
-        'https://boardlife.co.kr/data/photo/2024/10/22/1729536364-200539_N_210x210_100_5_.jpg',
+        'https://images.unsplash.com/photo-1659480142923-0cd01191e0e9?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       rules_url: 'http://example.com/ru_rules',
       genre_name: '판타지',
       average_rating: 4.5,
@@ -32,7 +32,7 @@ export const gameListData = {
       playtime_minutes: 90,
       difficulty: 3.0,
       image_url:
-        'https://boardlife.co.kr/data/photo/2024/10/22/1729536364-200539_N_210x210_100_5_.jpg',
+        'https://images.unsplash.com/photo-1659480142923-0cd01191e0e9?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       rules_url: 'http://example.com/bo_rules',
       genre_name: '카드',
       average_rating: 4.2,
@@ -51,7 +51,7 @@ export const gameListData = {
       playtime_minutes: 90,
       difficulty: 3.0,
       image_url:
-        'https://boardlife.co.kr/data/photo/2024/10/22/1729536364-200539_N_210x210_100_5_.jpg',
+        'https://images.unsplash.com/photo-1659480142923-0cd01191e0e9?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       rules_url: 'http://example.com/bo_rules',
       genre_name: '카드',
       average_rating: 4.2,

@@ -2,29 +2,30 @@ import { GameListData } from '@/types/game/game';
 import { cn } from '@/utils/cn';
 import { formatDifficulty } from '@/utils/formatDifficulty';
 import { RiHeartFill, RiStarFill } from '@remixicon/react';
+import Image from 'next/image';
 import Link from 'next/link';
 import LikeButton from './LikeButton';
 
 interface GameItemProps {
   game: GameListData;
-  imageRatio: 'square' | 'portrait' | 'landscape'; // 비율: 1:1, 2:3, 16:9 등
+  imageRatio: '1:1' | '4:5' | '2:3'; // 비율: 1:1, 2:3, 16:9 등
   overlayInfo?: boolean;
   showLikeButton?: boolean;
   className?: string;
 }
 const ratioClasses = {
-  square: 'aspect-square',
-  portrait: 'aspect-[2/3]',
-  landscape: 'aspect-video',
+  '1:1': 'aspect-square',
+  '4:5': 'aspect-[4/5]',
+  '2:3': 'aspect-[2/3]',
 };
 
-const GameItem = ({
+export default function GameItem({
   game,
   imageRatio,
   overlayInfo = false,
   showLikeButton = true,
   className,
-}: GameItemProps) => {
+}: GameItemProps) {
   const {
     game_id,
     title,
@@ -54,9 +55,11 @@ const GameItem = ({
           ratioClasses[imageRatio]
         )}
       >
-        <img
+        <Image
           src={image_url}
           alt={title}
+          width={238}
+          height={357}
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
         />
 
@@ -93,5 +96,4 @@ const GameItem = ({
       </div>
     </Link>
   );
-};
-export default GameItem;
+}

@@ -5,14 +5,14 @@ import GameItem from './GameItem';
 interface GameListProps {
   games: GameListData[];
   columnNumber?: number;
-  imageRatio?: 'square' | 'portrait' | 'landscape';
+  imageRatio?: '1:1' | '4:5' | '2:3';
 }
 
-const GameList = ({
+export default function GameList({
   games,
   columnNumber = 3,
-  imageRatio = 'portrait',
-}: GameListProps) => {
+  imageRatio = '4:5',
+}: GameListProps) {
   return (
     <div
       className={cn(
@@ -28,6 +28,4 @@ const GameList = ({
       ))}
     </div>
   );
-};
-
-export default GameList;
+}

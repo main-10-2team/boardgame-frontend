@@ -12,7 +12,7 @@ const genreList = ['전략', '협동', '파티', '추리', '가족'];
 const playerOptions = ['1명', '2명', '3명', '4명', '5명', '6명+'];
 const ageGroups = ['전체', '8세+', '12세+'];
 
-const FilterSidebar = () => {
+export default function FilterSidebar() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -38,7 +38,7 @@ const FilterSidebar = () => {
 
     const ageParam = searchParams.get('age');
     if (ageParam) setAge(ageParam);
-  }, []);
+  }, [searchParams]);
 
   const toggleGenre = (genre: string) => {
     setGenres((prev) =>
@@ -160,6 +160,4 @@ const FilterSidebar = () => {
       </Button>
     </aside>
   );
-};
-
-export default FilterSidebar;
+}

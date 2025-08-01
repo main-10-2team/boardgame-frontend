@@ -6,13 +6,16 @@ interface LikeButtonProps {
   liked: boolean;
   gameId: number;
 }
-const LikeButton = ({ liked = false, gameId }: LikeButtonProps) => {
+
+export default function LikeButton({
+  liked = false,
+  gameId: _gameId,
+}: LikeButtonProps) {
   const [isLiked, setIsLiked] = useState(liked);
   const handleLikeClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
     setIsLiked((prev) => !prev);
-    console.log(`Game ${gameId} like status: ${!isLiked}`);
   };
 
   return (
@@ -27,6 +30,4 @@ const LikeButton = ({ liked = false, gameId }: LikeButtonProps) => {
       )}
     </button>
   );
-};
-
-export default LikeButton;
+}
