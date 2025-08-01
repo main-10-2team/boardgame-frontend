@@ -15,14 +15,18 @@ interface DropdownProps {
   options: Option[];
   selectedValue: string;
   onChange: (value: string) => void;
+  size?: 'default' | 'full';
+  className?: string;
 }
 
 export default function Dropdown({
   options,
   selectedValue,
+  size = 'default',
   onChange,
+  className,
 }: DropdownProps) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const selectedLabel =
@@ -33,21 +37,44 @@ export default function Dropdown({
   useEscapeKey(() => setIsOpen(false));
 
   return (
-    <div className="relative inline-block text-left" ref={dropdownRef}>
+    <div
+      className={cn(
+        'relative inline-block text-left',
+        size === 'full'
+          ? 'w-full rounded-lg border border-gray-400 px-4 py-2'
+          : '',
+        className
+      )}
+      ref={dropdownRef}
+    >
       <button
         type="button"
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         onClick={() => setIsOpen((prev) => !prev)}
         id="dropdown-button"
-        className="flex items-center gap-1 text-base font-medium text-black"
+        className={cn(
+          'flex cursor-pointer items-center gap-1 text-base font-medium text-black',
+          size === 'full' ? 'w-full justify-between' : 'justify-start'
+        )}
       >
         {selectedLabel}
-        <RiArrowDownSLine className="h-4 w-4" />
+        <RiArrowDownSLine
+          className={cn(
+            'h-4 w-4',
+            size === 'full' ? 'h-5 w-5 text-gray-400' : '',
+            isOpen ? 'rotate-180 transform' : ''
+          )}
+        />
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 z-50 mt-3 w-40 overflow-hidden rounded-2xl bg-white px-4 py-6 shadow-lg ring-1 ring-black/5">
+        <div
+          className={cn(
+            'absolute right-0 z-50 mt-3 w-40 overflow-hidden rounded-2xl bg-white px-4 py-6 shadow-lg ring-1 ring-black/5',
+            size === 'full' ? 'w-full' : ''
+          )}
+        >
           <ul
             role="listbox"
             aria-labelledby="dropdown-button"
