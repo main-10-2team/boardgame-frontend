@@ -50,11 +50,11 @@ export default function FindIdPage() {
             <form onSubmit={handleSubmit}>
               <div className="mb-0" style={{ paddingTop: '32px' }}>
                 <label className="mb-1 block text-sm font-medium text-gray-700">
-                  이름 <span className="text-pink-500">*</span>
+                  닉네임 <span className="text-pink-500">*</span>
                 </label>
                 <Input
                   type="text"
-                  placeholder="이름 입력"
+                  placeholder="닉네임 입력"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   inputSize="md"
@@ -84,7 +84,7 @@ export default function FindIdPage() {
                       type="button"
                       variant="secondary"
                       size="md"
-                      className="w-full"
+                      className="h-11 w-full items-center justify-center leading-none"
                       onClick={handleSendCode}
                       disabled={!name || !phone || isCodeSent}
                     >
@@ -112,7 +112,7 @@ export default function FindIdPage() {
                         type="button"
                         variant="secondary"
                         size="md"
-                        className="w-full"
+                        className="flex h-11 w-full items-center justify-center leading-none"
                         onClick={handleVerifyCode}
                         disabled={
                           !isCodeSent || !verificationCode || isCodeVerified

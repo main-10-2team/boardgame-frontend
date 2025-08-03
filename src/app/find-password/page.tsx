@@ -68,7 +68,7 @@ export default function FindPasswordPage() {
                 <label className="mb-1 block text-sm font-medium text-gray-700">
                   이메일주소 <span className="text-pink-500">*</span>
                 </label>
-                <div className="flex gap-2">
+                <div className="flex items-center gap-2">
                   <div className="flex-1">
                     <Input
                       type="email"
@@ -85,7 +85,7 @@ export default function FindPasswordPage() {
                       type="button"
                       variant="secondary"
                       size="md"
-                      className="w-full"
+                      className="h-11 w-full items-center justify-center leading-none"
                       onClick={handleSendCode}
                       disabled={!name || !email || isCodeSent}
                     >
@@ -95,7 +95,7 @@ export default function FindPasswordPage() {
                 </div>
 
                 <div style={{ marginTop: '12px' }}>
-                  <div className="flex gap-2">
+                  <div className="flex items-center gap-2">
                     <div className="flex-1">
                       <Input
                         type="text"
@@ -113,7 +113,7 @@ export default function FindPasswordPage() {
                         type="button"
                         variant="secondary"
                         size="md"
-                        className="w-full"
+                        className="flex h-11 w-full items-center justify-center leading-none"
                         onClick={handleVerifyCode}
                         disabled={
                           !isCodeSent || !verificationCode || isCodeVerified
@@ -136,6 +136,15 @@ export default function FindPasswordPage() {
                 >
                   비밀번호 찾기
                 </Button>
+              </div>
+
+              <div className="mt-4 text-center">
+                <Link
+                  href="/find-id"
+                  className="hover:text-primary-500 text-sm text-gray-600"
+                >
+                  아이디를 잊으셨나요?
+                </Link>
               </div>
             </form>
           </div>
