@@ -10,7 +10,6 @@ import KakaoIcon from '@/assets/icons/kakao.svg';
 import NaverIcon from '@/assets/icons/naver.svg';
 import Link from 'next/link';
 
-// 소셜 로그인 버튼 데이터
 const SOCIAL_LOGIN_BUTTONS = [
   {
     id: 'kakao',
@@ -34,7 +33,6 @@ const SOCIAL_LOGIN_BUTTONS = [
   },
 ] as const;
 
-// 링크 데이터
 const HELP_LINKS = [
   { href: '/find-id', text: '아이디 찾기' },
   { href: '/find-password', text: '비밀번호 찾기' },
@@ -47,13 +45,9 @@ export default function LoginPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // 로그인 API 호출
-    console.log({ email, password });
   };
 
-  const handleSocialLogin = (provider: 'kakao' | 'naver') => {
-    console.log(`${provider} 로그인`);
-  };
+  const handleSocialLogin = (provider: 'kakao' | 'naver') => {};
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -121,7 +115,6 @@ export default function LoginPage() {
             </div>
           </nav>
 
-          {/* 소셜 로그인 */}
           <section className="text-center">
             <p className="mb-4 text-sm text-gray-600">간편 로그인</p>
             <div className="space-y-3">
