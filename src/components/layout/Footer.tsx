@@ -1,3 +1,5 @@
+import { RiInstagramFill, RiYoutubeFill } from '@remixicon/react';
+
 export default function Footer() {
   return (
     <footer>
@@ -9,10 +11,16 @@ export default function Footer() {
             <br />
             당신의 저녁 라이프를 풍성하게 만들어보세요.
           </p>
-          <p className="mt-8 flex gap-6">
-            <span>이용약관</span>
-            <span>개인정보처리방침</span>
-          </p>
+          <div className="mt-8 flex items-center justify-between gap-6">
+            <p className="flex gap-6 whitespace-nowrap">
+              <span>이용약관</span>
+              <span>개인정보처리방침</span>
+            </p>
+            <p className="flex gap-3">
+              <RiYoutubeFill color="#bdbdbd" widths={22} />
+              <RiInstagramFill color="#bdbdbd" widths={19} />
+            </p>
+          </div>
           <div className="mt-8 text-gray-400">
             <p>
               대표자: 지정민 | 사업자 등록번호: 123-45-00678 | 통신판매업
