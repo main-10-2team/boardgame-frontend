@@ -57,7 +57,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             className={cn(
               'w-full rounded-lg border-2',
               'transition-colors duration-200 focus:outline-none',
-              'font-pretendard text-base placeholder:text-gray-400',
+              'text-base text-black placeholder:text-gray-400',
               INPUT_SIZES[inputSize],
               INPUT_VARIANTS[getVariant()],
               className
