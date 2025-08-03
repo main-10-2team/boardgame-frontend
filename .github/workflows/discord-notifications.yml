@@ -70,10 +70,10 @@ jobs:
                   MENTIONS="$MENTIONS <@1344112571330072626>"
                   ;;
                 "idubusomuch")
-                  MENTIONS="$MENTIONS <@DISCORD_ID_여기에_입력>"
+                  MENTIONS="$MENTIONS <@1331517321654833233>"
                   ;;
                 "Aprasaks")
-                  MENTIONS="$MENTIONS <@DISCORD_ID_여기에_입력>"
+                  MENTIONS="$MENTIONS <@1040900306764058704>"
                   ;;
                 *)
                   MENTIONS="$MENTIONS @$login"
