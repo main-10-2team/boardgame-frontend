@@ -50,8 +50,8 @@ export default function LoginPage() {
   const handleSocialLogin = (provider: 'kakao' | 'naver') => {};
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Grid className="pt-20">
+    <div className="inner">
+      <Grid className="pt-20 pb-30">
         <Grid.Item span="col-span-4 sm:col-start-3 sm:col-span-4 md:col-start-5 md:col-span-4">
           <header className="mb-8 text-center">
             <div className="mb-2 flex items-center justify-center">
@@ -97,7 +97,7 @@ export default function LoginPage() {
             </Button>
           </form>
 
-          <nav className="mb-6 text-center">
+          <nav className="mb-8 text-center">
             <div className="flex justify-center space-x-4 text-sm text-gray-600">
               {HELP_LINKS.map((link, index) => (
                 <div key={link.href} className="flex items-center">
@@ -116,7 +116,11 @@ export default function LoginPage() {
           </nav>
 
           <section className="text-center">
-            <p className="mb-4 text-sm text-gray-600">간편 로그인</p>
+            <div className="mb-8 flex items-center justify-center gap-4 text-sm text-gray-600">
+              <div className="h-px flex-1 bg-gray-300" />
+              <span className="whitespace-nowrap">간편 로그인</span>
+              <div className="h-px flex-1 bg-gray-300" />
+            </div>
             <div className="space-y-3">
               {SOCIAL_LOGIN_BUTTONS.map((button) => (
                 <button
