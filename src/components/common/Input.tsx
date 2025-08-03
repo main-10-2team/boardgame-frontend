@@ -43,7 +43,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className={cn('w-full', containerClassName)}>
         {label && (
-          <label className="mb-2 block text-sm font-medium text-black">
+          <label className="mb-2 block text-base font-medium text-black">
             {label}
             {required && <span className="ml-0.5 text-pink-500">*</span>}
           </label>

@@ -1,155 +1,120 @@
 'use client';
 
-import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 import Grid from '@/components/layout/Grid';
 import Link from 'next/link';
+import { useEmailValidation } from '@/hooks/useEmailValidation';
+
+interface FindPasswordFormData {
+  name: string;
+  email: string;
+  verificationCode: string;
+}
 
 export default function FindPasswordPage() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [verificationCode, setVerificationCode] = useState('');
-  const [isCodeSent, setIsCodeSent] = useState(false);
-  const [isCodeVerified, setIsCodeVerified] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FindPasswordFormData>({
+    mode: 'onChange',
+  });
 
-  const handleSendCode = () => {
-    if (email) {
-      console.log('인증번호 전송:', { name, email });
-      setIsCodeSent(true);
-      // 실제로는 여기서 API 호출
-    }
-  };
+  const { emailRules } = useEmailValidation();
 
-  const handleVerifyCode = () => {
-    if (verificationCode) {
-      console.log('인증번호 확인:', verificationCode);
-      setIsCodeVerified(true);
-      // 실제로는 여기서 API 호출
-    }
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (isCodeVerified) {
-      console.log('비밀번호 찾기 완료:', { name, email, verificationCode });
-      // 실제로는 비밀번호 재설정 페이지로 이동
-    }
+  const onSubmit = (_data: FindPasswordFormData) => {
+    // TODO: 비밀번호 찾기 API 호출
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="inner pt-20">
-        <div className="flex justify-center">
-          <div className="w-full max-w-md">
-            <header className="text-center">
-              <h1 className="text-2xl leading-[49px] font-extrabold text-gray-900">
-                비밀번호 찾기
-              </h1>
-            </header>
+    <div className="inner">
+      <Grid className="pt-20 pb-30">
+        <Grid.Item span="col-span-4 sm:col-start-3 sm:col-span-4 md:col-start-5 md:col-span-4">
+          <header className="mb-8 text-center">
+            <h1 className="text-2xl leading-[49px] font-extrabold text-gray-900">
+              비밀번호 찾기
+            </h1>
+          </header>
 
-            <form onSubmit={handleSubmit}>
-              <div className="mb-0" style={{ paddingTop: '32px' }}>
-                <label className="mb-1 block text-sm font-medium text-gray-700">
-                  이름 <span className="text-pink-500">*</span>
-                </label>
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+            <Input
+              type="text"
+              placeholder="이름 입력"
+              label="이름"
+              inputSize="md"
+              required
+              error={errors.name?.message}
+              {...register('name', { required: '이름을 입력해주세요' })}
+            />
+
+            <div className="space-y-3">
+              <div className="grid w-full grid-cols-[2fr_1fr] gap-x-2">
                 <Input
-                  type="text"
-                  placeholder="이름 입력"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  type="email"
+                  placeholder="이메일주소"
+                  label="이메일주소"
                   inputSize="md"
-                  variant="default"
                   required
+                  error={errors.email?.message}
+                  {...register('email', emailRules)}
                 />
-              </div>
-
-              <div className="mb-0" style={{ marginTop: '32px' }}>
-                <label className="mb-1 block text-sm font-medium text-gray-700">
-                  이메일주소 <span className="text-pink-500">*</span>
-                </label>
-                <div className="flex items-center gap-2">
-                  <div className="flex-1">
-                    <Input
-                      type="email"
-                      placeholder="이메일주소"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      inputSize="md"
-                      variant="default"
-                      required
-                    />
-                  </div>
-                  <div style={{ width: '140px' }}>
-                    <Button
-                      type="button"
-                      variant="secondary"
-                      size="md"
-                      className="h-11 w-full items-center justify-center leading-none"
-                      onClick={handleSendCode}
-                      disabled={!name || !email || isCodeSent}
-                    >
-                      {isCodeSent ? '전송완료' : '인증번호 전송'}
-                    </Button>
-                  </div>
-                </div>
-
-                <div style={{ marginTop: '12px' }}>
-                  <div className="flex items-center gap-2">
-                    <div className="flex-1">
-                      <Input
-                        type="text"
-                        placeholder="인증번호 입력"
-                        value={verificationCode}
-                        onChange={(e) => setVerificationCode(e.target.value)}
-                        inputSize="md"
-                        variant="default"
-                        required
-                        disabled={!isCodeSent}
-                      />
-                    </div>
-                    <div style={{ width: '140px' }}>
-                      <Button
-                        type="button"
-                        variant="secondary"
-                        size="md"
-                        className="flex h-11 w-full items-center justify-center leading-none"
-                        onClick={handleVerifyCode}
-                        disabled={
-                          !isCodeSent || !verificationCode || isCodeVerified
-                        }
-                      >
-                        {isCodeVerified ? '인증완료' : '인증 확인'}
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div style={{ marginTop: '40px' }}>
                 <Button
-                  type="submit"
-                  variant="primary"
-                  size="md"
-                  className="w-full"
-                  disabled={!isCodeVerified}
+                  type="button"
+                  variant="secondary"
+                  size="sm"
+                  className="mt-6 h-11 w-full font-semibold whitespace-nowrap"
                 >
-                  비밀번호 찾기
+                  인증번호 전송
                 </Button>
               </div>
 
-              <div className="mt-4 text-center">
-                <Link
-                  href="/find-id"
-                  className="hover:text-primary-500 text-sm text-gray-600"
+              <div className="grid w-full grid-cols-[2fr_1fr] gap-x-2">
+                <Input
+                  type="text"
+                  placeholder="인증번호 입력"
+                  inputSize="md"
+                  error={errors.verificationCode?.message}
+                  {...register('verificationCode', {
+                    required: '인증번호를 입력해주세요',
+                    minLength: {
+                      value: 6,
+                      message: '인증번호는 6자리입니다',
+                    },
+                  })}
+                />
+                <Button
+                  type="button"
+                  variant="secondary"
+                  size="sm"
+                  className="h-11 w-full font-semibold whitespace-nowrap"
                 >
-                  아이디를 잊으셨나요?
-                </Link>
+                  인증 확인
+                </Button>
               </div>
-            </form>
+            </div>
+
+            <Button
+              type="submit"
+              variant="primary"
+              size="lg"
+              className="w-full"
+            >
+              비밀번호 찾기
+            </Button>
+          </form>
+
+          <div className="mt-6 text-center">
+            <Link
+              href="/find-id"
+              className="hover:text-primary-500 text-sm text-gray-600"
+            >
+              아이디를 잊으셨나요?
+            </Link>
           </div>
-        </div>
-      </div>
+        </Grid.Item>
+      </Grid>
     </div>
   );
 }
