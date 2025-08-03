@@ -42,8 +42,8 @@ export default function PasswordChangeModal({
       <div className="flex flex-col gap-6">
         <div className="text-xl font-bold">비밀번호 변경</div>
         <Input
-          type="text"
-          label="이름"
+          type="password"
+          label="기존 비밀번호"
           inputSize="md"
           value={currentPassword}
           onChange={(e) => setCurrentPassword(e.target.value)}
@@ -51,7 +51,7 @@ export default function PasswordChangeModal({
         />
         <Input
           type="password"
-          label="휴대폰 번호"
+          label="새 비밀번호"
           value={newPassword}
           inputSize="md"
           onChange={(e) => setNewPassword(e.target.value)}

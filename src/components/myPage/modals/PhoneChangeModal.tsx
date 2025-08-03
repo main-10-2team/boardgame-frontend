@@ -49,7 +49,7 @@ export default function PhoneChangeModal({
           </label>
           <div className="mb-3 grid w-full grid-cols-[2fr_1fr] gap-x-2 gap-y-3">
             <Input
-              type="number"
+              type="text"
               placeholder="휴대폰번호 입력"
               value={phoneNum}
               inputSize="md"
@@ -64,7 +64,7 @@ export default function PhoneChangeModal({
               인증번호 전송
             </Button>
             <Input
-              type="password"
+              type="text"
               placeholder="인증번호 입력"
               value={confirmNum}
               inputSize="md"
