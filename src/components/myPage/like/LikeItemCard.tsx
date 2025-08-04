@@ -1,6 +1,7 @@
 import ConfirmModal from '@/components/common/modal/ConfirmModal';
 import { LikeItem } from '@/types/user/like';
 import { RiHeartFill, RiStarFill } from '@remixicon/react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -26,17 +27,19 @@ export default function LikeItemCard({ game }: LikeItemCardProps) {
     <>
       <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
         <button
-          className="absolute top-2 right-2 cursor-pointer"
+          className="absolute top-4 right-4 z-10 cursor-pointer"
           onClick={handleLikeClick}
         >
           <RiHeartFill size={22} className="text-primary-400" />
         </button>
         {/* 배경 이미지 */}
         <Link href={`/games/${game.game_id}`}>
-          <img
+          <Image
             src={game.image_url}
             alt={game.title}
-            className="size-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
+            width={238}
+            height={300}
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
           />
           <div className="absolute right-0 bottom-0 left-0 z-5 bg-gradient-to-t from-black/65 to-transparent px-3 pt-8 pb-3 text-white">
             <p className="font-semibold">{game.title}</p>

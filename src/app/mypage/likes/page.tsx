@@ -39,7 +39,13 @@ export default function ProfilePage() {
               onChange={setSort}
             />
           </div>
-          <LikeList games={likeList.likes} />
+          {likeList?.likes?.length ? (
+            <LikeList games={likeList.likes} />
+          ) : (
+            <p className="mt-10 text-center text-sm text-gray-500">
+              좋아요한 게임이 없습니다.
+            </p>
+          )}
         </Grid.Item>
       </Grid>
     </main>
