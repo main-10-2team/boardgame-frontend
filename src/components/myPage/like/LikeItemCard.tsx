@@ -1,7 +1,6 @@
 import ConfirmModal from '@/components/common/modal/ConfirmModal';
-import LikeCancelButton from '@/components/myPage/like/LikeCancelButton';
 import { LikeItem } from '@/types/user/like';
-import { RiStarFill } from '@remixicon/react';
+import { RiHeartFill, RiStarFill } from '@remixicon/react';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -26,9 +25,12 @@ export default function LikeItemCard({ game }: LikeItemCardProps) {
   return (
     <>
       <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
-        <div className="absolute top-12 right-2" onClick={handleLikeClick}>
-          <LikeCancelButton onClick={handleLikeClick} isLiked={true} />
-        </div>
+        <button
+          className="absolute top-2 right-2 cursor-pointer"
+          onClick={handleLikeClick}
+        >
+          <RiHeartFill size={22} className="text-primary-400" />
+        </button>
         {/* 배경 이미지 */}
         <Link href={`/games/${game.game_id}`}>
           <img
