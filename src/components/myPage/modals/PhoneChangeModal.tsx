@@ -23,7 +23,7 @@ export default function PhoneChangeModal({
       alert('모든 항목을 입력해주세요.');
       return;
     }
-    console.log({ name, phoneNum, confirmNum });
+    // console.log({ name, phoneNum, confirmNum });
     onClose();
   };
 

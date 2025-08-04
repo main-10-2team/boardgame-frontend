@@ -31,7 +31,7 @@ export default function WithdrawalModal({
       alert('탈퇴 사유를 선택해주세요.');
       return;
     }
-    console.log('탈퇴 요청', { selectedReason });
+    // console.log('탈퇴 요청', { selectedReason });
     setSelectedReason('');
     onClose();
   };
