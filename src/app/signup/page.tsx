@@ -63,7 +63,7 @@ export default function SignUpPage() {
             </p>
           </header>
 
-          <form onSubmit={handleSubmit} className="mb-6 space-y-8">
+          <form onSubmit={handleSubmit} className="mb-8 space-y-8">
             <div className="space-y-3">
               <Input
                 type="name"
@@ -74,6 +74,7 @@ export default function SignUpPage() {
                 variant="default"
                 label="이름"
                 required
+                className="mb-6"
               />
               <Input
                 type="email"
@@ -84,6 +85,7 @@ export default function SignUpPage() {
                 variant="default"
                 label="이메일"
                 required
+                className="mb-6"
               />
               <Input
                 type="text"
@@ -94,6 +96,7 @@ export default function SignUpPage() {
                 variant="default"
                 label="닉네임"
                 required
+                className="mb-6"
               />
               <Input
                 type="phone"
@@ -104,6 +107,7 @@ export default function SignUpPage() {
                 variant="default"
                 label="핸드폰 번호"
                 required
+                className="mb-6"
               />
               <Input
                 type="birth"
@@ -114,6 +118,7 @@ export default function SignUpPage() {
                 variant="default"
                 label="생년월일"
                 required
+                className="mb-6"
               />
 
               <Input
@@ -133,6 +138,7 @@ export default function SignUpPage() {
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 inputSize="md"
                 variant="default"
+                className="mb-6"
               />
             </div>
 
@@ -145,28 +151,6 @@ export default function SignUpPage() {
               가입하기
             </Button>
           </form>
-
-          <section className="text-center">
-            <div className="mb-8 flex items-center justify-center gap-4 text-sm text-gray-600">
-              <div className="h-px flex-1 bg-gray-300" />
-              <span className="whitespace-nowrap">간편 회원가입</span>
-              <div className="h-px flex-1 bg-gray-300" />
-            </div>
-            <div className="space-y-3">
-              {SOCIAL_LOGIN_BUTTONS.map((button) => (
-                <button
-                  key={button.id}
-                  type="button"
-                  onClick={() => handleSocialLogin(button.id)}
-                  style={button.style}
-                  className={`flex w-full items-center justify-center rounded-lg py-3 font-medium transition-all ${button.hoverStyle} `}
-                >
-                  <Icon icon={button.icon} size={20} className="mr-2" />
-                  {button.text}
-                </button>
-              ))}
-            </div>
-          </section>
         </Grid.Item>
       </Grid>
     </div>
