@@ -4,9 +4,9 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const MY_PAGE_MENUS = [
-  { label: '내 정보', href: '/mypage/profile' },
-  { label: '내 리뷰', href: '/mypage/reviews' },
-  { label: '좋아요', href: '/mypage/likes' },
+  { label: '내 정보', href: '/my-page/profile' },
+  { label: '내 리뷰', href: '/my-page/reviews' },
+  { label: '좋아요', href: '/my-page/likes' },
 ];
 
 function SideMenu({ isMobile }: { isMobile: boolean }) {

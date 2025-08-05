@@ -3,10 +3,10 @@
 import { userProfile } from '@/assets/mocks/userProfile';
 import Button from '@/components/common/Button';
 import Grid from '@/components/layout/Grid';
-import ProfileDetail from '@/components/myPage/profile/ProfileDetail';
-import ProfileInfoSection from '@/components/myPage/profile/ProfileInfoSection';
-import WithdrawalButton from '@/components/myPage/profile/WithdrawalButton';
-import MyPageSideMenu from '@/components/myPage/SideMenu';
+import ProfileDetail from '@/components/my-page/profile/ProfileDetail';
+import ProfileInfoSection from '@/components/my-page/profile/ProfileInfoSection';
+import WithdrawalButton from '@/components/my-page/profile/WithdrawalButton';
+import MyPageSideMenu from '@/components/my-page/SideMenu';
 import Link from 'next/link';
 
 export default function ProfilePage() {
@@ -25,7 +25,7 @@ export default function ProfilePage() {
           <section className="flex flex-col gap-8 rounded-xl border border-gray-200 p-6">
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-semibold">프로필</h2>
-              <Link href="/mypage/profile/edit">
+              <Link href="/my-page/profile/edit">
                 <Button size="sm" variant="secondary" className="font-semibold">
                   프로필 수정
                 </Button>

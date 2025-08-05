@@ -1,4 +1,4 @@
-import ReviewDetailModal from '@/components/myPage/review/ReviewDetailModal';
+import ReviewDetailModal from '@/components/my-page/review/ReviewDetailModal';
 import { ReviewItem } from '@/types/user/review';
 import { RiStarFill } from '@remixicon/react';
 import Image from 'next/image';

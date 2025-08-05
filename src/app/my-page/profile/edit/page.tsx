@@ -4,7 +4,7 @@ import { userProfile } from '@/assets/mocks/userProfile';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 import Grid from '@/components/layout/Grid';
-import MyPageSideMenu from '@/components/myPage/SideMenu';
+import MyPageSideMenu from '@/components/my-page/SideMenu';
 import { RiCamera2Fill } from '@remixicon/react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -34,7 +34,7 @@ export default function ProfileEditPage() {
     // // 유효성 검사 여기에 추가하기
     // console.log({ nickname, email });
     // 성공적으로 저장했다면 이동
-    router.push('/mypage/profile');
+    router.push('/my-page/profile');
   };
 
   return (

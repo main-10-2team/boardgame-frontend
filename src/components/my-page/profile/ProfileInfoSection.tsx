@@ -1,8 +1,8 @@
 'use client';
 
 import Button from '@/components/common/Button';
-import PasswordChangeModal from '@/components/myPage/modals/PasswordChangeModal';
-import PhoneChangeModal from '@/components/myPage/modals/PhoneChangeModal';
+import PasswordChangeModal from '@/components/my-page/modals/PasswordChangeModal';
+import PhoneChangeModal from '@/components/my-page/modals/PhoneChangeModal';
 import { User } from '@/types/user/user';
 import { useState } from 'react';
 

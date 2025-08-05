@@ -1,6 +1,6 @@
 import Modal from '@/components/common/modal/Modal';
-import ReviewDetailView from '@/components/myPage/review/ReviewDetailView';
-import ReviewEditForm from '@/components/myPage/review/ReviewEditForm';
+import ReviewDetailView from '@/components/my-page/review/ReviewDetailView';
+import ReviewEditForm from '@/components/my-page/review/ReviewEditForm';
 import { ReviewItem } from '@/types/user/review';
 import { useState } from 'react';
 
