@@ -28,7 +28,7 @@ export default function PasswordChangeModal({
       return;
     }
 
-    console.log({ currentPassword, newPassword, confirmPassword });
+    // console.log({ currentPassword, newPassword, confirmPassword });
     onClose();
   };
 

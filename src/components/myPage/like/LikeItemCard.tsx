@@ -1,0 +1,64 @@
+import ConfirmModal from '@/components/common/modal/ConfirmModal';
+import { LikeItem } from '@/types/user/like';
+import { RiHeartFill, RiStarFill } from '@remixicon/react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useState } from 'react';
+
+interface LikeItemCardProps {
+  game: LikeItem;
+}
+
+export default function LikeItemCard({ game }: LikeItemCardProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleLikeClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsModalOpen(true);
+  };
+
+  const handleConfirm = () => {
+    setIsModalOpen(false);
+    // 로직~~
+  };
+
+  return (
+    <>
+      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
+        <button
+          className="absolute top-4 right-4 z-10 cursor-pointer"
+          onClick={handleLikeClick}
+        >
+          <RiHeartFill size={22} className="text-primary-400" />
+        </button>
+        {/* 배경 이미지 */}
+        <Link href={`/games/${game.game_id}`}>
+          <Image
+            src={game.image_url}
+            alt={game.title}
+            width={238}
+            height={300}
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
+          />
+          <div className="absolute right-0 bottom-0 left-0 z-5 bg-gradient-to-t from-black/65 to-transparent px-3 pt-8 pb-3 text-white">
+            <p className="font-semibold">{game.title}</p>
+            <div className="mt-1 flex items-center gap-1 text-sm text-gray-200">
+              <RiStarFill size={12} />
+              {game.average_rating.toFixed(1)}
+            </div>
+          </div>
+        </Link>
+      </div>
+
+      <ConfirmModal
+        isOpen={isModalOpen}
+        modalId={`unlike-${game.game_id}`}
+        title="알림"
+        message="좋아요를 취소하시겠어요?"
+        onClose={() => setIsModalOpen(false)}
+        onConfirm={handleConfirm}
+      />
+    </>
+  );
+}

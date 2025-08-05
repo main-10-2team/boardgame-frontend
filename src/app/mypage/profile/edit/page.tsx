@@ -31,8 +31,8 @@ export default function ProfileEditPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault(); // 새로고침 방지
-    // 유효성 검사 여기에 추가하기
-    console.log({ nickname, email });
+    // // 유효성 검사 여기에 추가하기
+    // console.log({ nickname, email });
     // 성공적으로 저장했다면 이동
     router.push('/mypage/profile');
   };

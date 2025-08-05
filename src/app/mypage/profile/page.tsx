@@ -8,12 +8,8 @@ import ProfileInfoSection from '@/components/myPage/profile/ProfileInfoSection';
 import WithdrawalButton from '@/components/myPage/profile/WithdrawalButton';
 import MyPageSideMenu from '@/components/myPage/SideMenu';
 import Link from 'next/link';
-import { useState } from 'react';
 
 export default function ProfilePage() {
-  // 회원 탈퇴 모달
-  const [withdrawalModal, setWithdrawalModal] = useState(false);
-
   return (
     <main className="inner flex flex-1 flex-col py-10">
       <Grid>
