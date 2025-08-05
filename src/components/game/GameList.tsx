@@ -6,12 +6,17 @@ interface GameListProps {
   games: GameListData[];
   columnNumber?: number;
   imageRatio?: '1:1' | '4:5' | '2:3';
+  overlayInfo?: boolean;
+  showLikeButton?: boolean;
+  className?: string;
 }
 
 export default function GameList({
   games,
   columnNumber = 3,
   imageRatio = '4:5',
+  overlayInfo,
+  showLikeButton,
 }: GameListProps) {
   return (
     <div
@@ -24,7 +29,13 @@ export default function GameList({
       )}
     >
       {games.map((game) => (
-        <GameItem key={game.game_id} game={game} imageRatio={imageRatio} />
+        <GameItem
+          key={game.game_id}
+          game={game}
+          overlayInfo={overlayInfo}
+          imageRatio={imageRatio}
+          showLikeButton={showLikeButton}
+        />
       ))}
     </div>
   );
