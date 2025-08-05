@@ -1,4 +1,4 @@
-import LikeItemCard from '@/components/myPage/like/LikeItemCard';
+import LikeItemCard from '@/components/my-page/like/LikeItemCard';
 import { LikeItem } from '@/types/user/like';
 
 interface LikeListProps {

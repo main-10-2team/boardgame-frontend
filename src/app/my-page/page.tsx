@@ -1,8 +1,8 @@
 import { userProfile } from '@/assets/mocks/userProfile';
 import Button from '@/components/common/Button';
 import Grid from '@/components/layout/Grid';
-import MyPageSideMenu from '@/components/myPage/SideMenu';
-import WordCloud from '@/components/wordCloud/WordCloud';
+import MyPageSideMenu from '@/components/my-page/SideMenu';
+import WordCloud from '@/components/word-cloud/WordCloud';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -56,7 +56,7 @@ export default function MyPage() {
                 <p className="text-xl font-medium">{userProfile.nickname}</p>
                 <p className="text-sm text-gray-400">{userProfile.email}</p>
               </div>
-              <Link href="/mypage/profile/edit">
+              <Link href="/my-page/profile/edit">
                 <Button
                   size="sm"
                   variant="secondary"

@@ -1,7 +1,7 @@
 'use client';
 
 import Button from '@/components/common/Button';
-import WithdrawalModal from '@/components/myPage/modals/WithdrawalModal';
+import WithdrawalModal from '@/components/my-page/modals/WithdrawalModal';
 import { RiArrowRightSLine } from '@remixicon/react';
 import { useState } from 'react';
 

@@ -3,11 +3,11 @@
 import { likeList } from '@/assets/mocks/likeList';
 import Dropdown from '@/components/common/Dropdown';
 import Grid from '@/components/layout/Grid';
-import LikeList from '@/components/myPage/like/LikeList';
-import MyPageSideMenu from '@/components/myPage/SideMenu';
+import LikeList from '@/components/my-page/like/LikeList';
+import MyPageSideMenu from '@/components/my-page/SideMenu';
 import { useState } from 'react';
 
-export default function ProfilePage() {
+export default function LikePage() {
   const [sort, setSort] = useState('popular');
 
   const sortOptions = [
@@ -17,7 +17,7 @@ export default function ProfilePage() {
   ];
 
   return (
-    <main className="inner flex flex-1 flex-col pt-14 pb-30">
+    <main className="inner flex flex-1 flex-col pt-10 pb-30">
       <Grid>
         <Grid.Item span="col-span-12 md:col-span-3">
           <MyPageSideMenu />
