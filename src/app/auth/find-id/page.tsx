@@ -203,12 +203,12 @@ export default function FindIdPage() {
                     className={`bg-primary-500 hover:bg-primary-600 w-full text-white ${!isVerified ? 'cursor-not-allowed opacity-50' : ''}`}
                     disabled={!isVerified}
                   >
-                    아이디 찾기
+                    확인
                   </Button>
                 </form>
                 <div className="mt-6 text-center">
                   <Link
-                    href="/find-password"
+                    href="/auth/find-password"
                     className="hover:text-primary-500 text-sm text-gray-600"
                   >
                     비밀번호를 잊으셨나요?
