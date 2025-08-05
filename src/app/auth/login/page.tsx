@@ -34,9 +34,9 @@ const SOCIAL_LOGIN_BUTTONS = [
 ] as const;
 
 const HELP_LINKS = [
-  { href: '/find-id', text: '아이디 찾기' },
-  { href: '/find-password', text: '비밀번호 찾기' },
-  { href: '/signup', text: '회원가입' },
+  { href: '/auth/find-id', text: '아이디 찾기' },
+  { href: '/auth/find-password', text: '비밀번호 찾기' },
+  { href: '/auth/signup', text: '회원가입' },
 ] as const;
 
 export default function LoginPage() {
