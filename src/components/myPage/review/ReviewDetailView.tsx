@@ -53,7 +53,7 @@ export default function ReviewDetailView({
           <h3 className="font-semibold">{review.title}</h3>
           <p className="text-xs whitespace-pre-line">{review.content}</p>
           <span className="text-[10px] text-gray-400">
-            {new Date(review.created_at).toISOString().split('T')[0]}
+            {new Date(review.created_at).toLocaleDateString('ko-KR')}
           </span>
           <div className="flex cursor-pointer justify-end gap-2 text-gray-400">
             <button onClick={onEdit} aria-label="리뷰 수정">
