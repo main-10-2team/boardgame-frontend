@@ -47,7 +47,10 @@ export default function GameItem({
   return (
     <Link
       href={`/games/${game_id}`}
-      className={cn('group flex flex-col gap-2', className)}
+      className={cn(
+        'group relative flex flex-col gap-4 overflow-hidden rounded-xl',
+        className
+      )}
     >
       <div
         className={cn(
@@ -64,35 +67,71 @@ export default function GameItem({
         />
 
         {overlayInfo && (
-          <div className="absolute inset-0 flex flex-col justify-end bg-black/50 p-2 text-white">
+          <div className="">
             <h3 className="truncate text-sm font-semibold">{title}</h3>
           </div>
         )}
 
-        {showLikeButton && <LikeButton liked={is_liked} gameId={game_id} />}
+        {showLikeButton && (
+          <LikeButton
+            liked={is_liked}
+            gameId={game_id}
+            className={cn(
+              'absolute right-2 z-10',
+              overlayInfo ? 'top-2' : 'bottom-2'
+            )}
+          />
+        )}
       </div>
 
-      <h3 className="truncate text-sm font-medium">{title}</h3>
-      <div className="flex items-center gap-6 text-sm text-gray-500">
-        <div className="flex items-center gap-2">
-          <RiHeartFill className="h-4 w-4 text-gray-300" />
-          <span className="text-xs">{like_count ?? 0}</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <RiStarFill className="h-4 w-4 text-gray-300" />
-          <span className="text-xs">{average_rating?.toFixed(1) ?? '-'}</span>
-        </div>
-      </div>
-
-      <div className="mt-1 flex flex-wrap gap-1">
-        {tags.map((tag, idx) => (
-          <span
-            key={idx}
-            className="bg-primary-50 text-primary-500 rounded-full px-2 py-1 text-[10px] font-medium"
+      <div
+        className={
+          overlayInfo
+            ? 'absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/50 to-transparent p-4 text-white'
+            : ''
+        }
+      >
+        <h3 className="mb-2.5 truncate text-base font-semibold">{title}</h3>
+        {(like_count || average_rating) && (
+          <div
+            className={cn(
+              'mb-2 flex items-center gap-6 text-sm',
+              overlayInfo ? 'text-white' : 'text-gray-500'
+            )}
           >
-            #{tag}
-          </span>
-        ))}
+            {like_count && (
+              <div className="flex items-center gap-2">
+                <RiHeartFill className="h-4 w-4 text-gray-300" />
+                <span className="text-xs">{like_count ?? 0}</span>
+              </div>
+            )}
+            {average_rating && (
+              <div className="flex items-center gap-2">
+                <RiStarFill className="h-4 w-4 text-gray-300" />
+                <span className="text-xs">
+                  {average_rating?.toFixed(1) ?? '-'}
+                </span>
+              </div>
+            )}
+          </div>
+        )}
+        {tags.length > 0 && (
+          <div className="mt-1 flex flex-wrap gap-1">
+            {tags.map((tag, idx) => (
+              <span
+                key={idx}
+                className={cn(
+                  'rounded-full px-2 py-1 text-[10px] font-medium',
+                  overlayInfo
+                    ? 'bg-primary-500 text-white'
+                    : 'bg-primary-50 text-primary-500'
+                )}
+              >
+                #{tag}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
     </Link>
   );
