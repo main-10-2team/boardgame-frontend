@@ -3,14 +3,15 @@
 import Button from '@/components/common/Button';
 import StarRating from '@/components/common/StarRating';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
-import { ReviewItem } from '@/types/user/review';
+import { ReviewItem, ReviewWriteItem } from '@/types/user/review';
 import Image from 'next/image';
 import { useState } from 'react';
 
 interface ReviewEditFormProps {
-  review: ReviewItem;
+  review: ReviewItem | ReviewWriteItem;
   onSave: () => void; // (updated: ReviewItem)
   onClose: () => void;
+  isWriteMode?: boolean;
 }
 
 export default function ReviewEditForm({

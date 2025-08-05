@@ -55,11 +55,16 @@ export default function ReviewDetailView({
           <span className="text-[10px] text-gray-400">
             {new Date(review.created_at).toLocaleDateString('ko-KR')}
           </span>
-          <div className="flex cursor-pointer justify-end gap-2 text-gray-400">
-            <button onClick={onEdit} aria-label="리뷰 수정">
+          <div className="flex justify-end gap-2 text-gray-400">
+            <button
+              className="cursor-pointer"
+              onClick={onEdit}
+              aria-label="리뷰 수정"
+            >
               <RiPencilLine size={16} />
             </button>
             <button
+              className="cursor-pointer"
               onClick={() => setIsConfirmOpen(true)}
               aria-label="리뷰 삭제"
             >

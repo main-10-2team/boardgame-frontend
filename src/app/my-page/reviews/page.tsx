@@ -18,7 +18,7 @@ export default function ReviewPage() {
   ];
 
   return (
-    <main className="inner flex flex-1 flex-col pt-14 pb-30">
+    <main className="inner flex flex-1 flex-col pt-10 pb-30">
       <Grid>
         <Grid.Item span="col-span-12 md:col-span-3">
           <MyPageSideMenu />

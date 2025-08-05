@@ -13,6 +13,7 @@ export interface ReviewItem {
   };
 }
 
+export type ReviewWriteItem = Omit<ReviewItem, 'updated_at' | 'actions'>;
 export interface MyReviewListResponse {
   status: string;
   total_reviews: number;

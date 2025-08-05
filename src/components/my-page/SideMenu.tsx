@@ -49,7 +49,7 @@ function SideMenu({ isMobile }: { isMobile: boolean }) {
 export default function MyPageSideMenu() {
   return (
     <div className="flex flex-col">
-      <Link href={'/mypage'}>
+      <Link href={'/my-page'}>
         <div className="mb-6 text-4xl font-bold">마이페이지</div>
       </Link>
       <div>
