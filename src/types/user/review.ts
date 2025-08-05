@@ -1,0 +1,23 @@
+export interface ReviewItem {
+  review_id: number;
+  game_id: number;
+  title: string;
+  rating: number;
+  content: string;
+  created_at: string;
+  updated_at: string | null;
+  image_url: string;
+  actions: {
+    edit_url: string;
+    delete_url: string;
+  };
+}
+
+export interface MyReviewListResponse {
+  status: string;
+  total_reviews: number;
+  page: number;
+  limit: number;
+  total_pages: number;
+  reviews: ReviewItem[];
+}
