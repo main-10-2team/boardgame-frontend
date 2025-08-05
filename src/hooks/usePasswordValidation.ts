@@ -5,6 +5,11 @@ export function usePasswordValidation() {
       value: 8,
       message: '비밀번호는 8자리 이상 입력해주세요',
     },
+    pattern: {
+      value:
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      message: '영문 대소문자, 숫자, 특수문자를 모두 포함해야 합니다',
+    },
   };
 
   const confirmPasswordRules = (password: string) => ({
