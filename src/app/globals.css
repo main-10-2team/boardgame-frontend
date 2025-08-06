@@ -117,3 +117,10 @@ body {
 .animate-fade-down {
   animation: fade-down 1s ease-in-out infinite;
 }
+
+.game-detail-section {
+  @apply rounded-2xl border border-gray-200 px-4 py-6;
+}
+.game-detail-title {
+  @apply mb-6 text-2xl font-semibold text-gray-900;
+}
