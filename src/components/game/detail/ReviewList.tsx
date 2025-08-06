@@ -24,7 +24,10 @@ export default function ReviewList({
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <Image
-                  src={review.user.profile_image_url}
+                  src={
+                    review.user.profile_image_url ||
+                    '/images/defaultProfileImg.png'
+                  }
                   alt={review.user.username}
                   width={40}
                   height={40}

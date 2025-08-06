@@ -25,12 +25,12 @@ export interface MyReviewListResponse {
 
 export interface ReviewItem {
   review_id: number;
-  game_id: number;
-  title: string;
+  game_id?: number;
+  title?: string;
   content: string;
   rating: number;
   created_at: string;
-  updated_at: string | null;
+  updated_at?: string;
   user: {
     user_id: number;
     username: string;
