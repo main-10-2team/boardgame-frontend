@@ -1,8 +1,8 @@
-import { ReviewItem } from '@/types/user/review';
-import ReviewItemCard from './ReviewItemCard';
+import { MyReviewItem } from '@/types/user/review';
+import ReviewItemCard from './MyReviewItemCard';
 
 interface ReviewListProps {
-  reviews: ReviewItem[];
+  reviews: MyReviewItem[];
 }
 
 export default function ReviewList({ reviews }: ReviewListProps) {

@@ -1,18 +1,18 @@
 import ReviewDetailModal from '@/components/my-page/review/ReviewDetailModal';
-import { ReviewItem } from '@/types/user/review';
+import { MyReviewItem } from '@/types/user/review';
 import { RiStarFill } from '@remixicon/react';
 import Image from 'next/image';
 import { useState } from 'react';
 
-interface ReviewItemCardProps {
-  review: ReviewItem;
+interface MyReviewItemCardProps {
+  review: MyReviewItem;
   isFirst?: boolean;
 }
 
-export default function ReviewItemCard({
+export default function MyReviewItemCard({
   review,
   isFirst = false,
-}: ReviewItemCardProps) {
+}: MyReviewItemCardProps) {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>

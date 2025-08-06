@@ -1,7 +1,7 @@
 'use client';
 
 import { likeList } from '@/assets/mocks/likeList';
-import { myReviewList } from '@/assets/mocks/myReviewList';
+import { MY_REVIEW_LIST } from '@/assets/mocks/myReviewList';
 import Dropdown from '@/components/common/Dropdown';
 import Grid from '@/components/layout/Grid';
 import ReviewList from '@/components/my-page/review/ReviewList';
@@ -40,7 +40,7 @@ export default function ReviewPage() {
               onChange={setSort}
             />
           </div>
-          <ReviewList reviews={myReviewList.reviews} />
+          <ReviewList reviews={MY_REVIEW_LIST.reviews} />
         </Grid.Item>
       </Grid>
     </main>
