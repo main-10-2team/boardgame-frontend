@@ -6,9 +6,9 @@ import { usePathname } from 'next/navigation';
 
 const ORDER_TABS = [
   { label: '전체', href: '/ranking' },
-  { label: '좋아요', href: '/ranking/like' },
+  { label: '좋아요', href: '/ranking/likes' },
   { label: '평점', href: '/ranking/rating' },
-  { label: '리뷰 많은 순', href: '/ranking/review' },
+  { label: '리뷰 많은 순', href: '/ranking/reviews' },
 ];
 
 export default function RankingTab() {
