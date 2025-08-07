@@ -40,7 +40,7 @@ export default function GameDetailPage({ params }: GameDetailPageProps) {
         {game.title}
         <LikeButton
           liked={false}
-          gameId={0}
+          gameId={game.game_id}
           className="relative"
           lineColor="text-gray-300"
         />
