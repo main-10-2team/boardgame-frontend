@@ -7,6 +7,6 @@ export const CATEGORY_MENU_ITEMS = [
     ),
     href: '/today',
   },
-  { label: '보드큐 추천', href: '/recommend' },
+  { label: '보드큐 랭킹', href: '/ranking' },
   { label: '보드게임 찾기', href: '/games' },
 ];
