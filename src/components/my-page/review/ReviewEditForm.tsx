@@ -3,12 +3,12 @@
 import Button from '@/components/common/Button';
 import StarRating from '@/components/common/StarRating';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
-import { ReviewItem, ReviewWriteItem } from '@/types/user/review';
+import { MyReviewItem, MyReviewWriteItem } from '@/types/user/review';
 import Image from 'next/image';
 import { useState } from 'react';
 
 interface ReviewEditFormProps {
-  review: ReviewItem | ReviewWriteItem;
+  review: MyReviewItem | MyReviewWriteItem;
   onSave: () => void; // (updated: ReviewItem)
   onClose: () => void;
   isWriteMode?: boolean;

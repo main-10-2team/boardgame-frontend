@@ -1,7 +1,7 @@
 const MOCK_IMAGE_URL =
   'https://images.unsplash.com/photo-1659480142923-0cd01191e0e9?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
 
-export const myReviewList = {
+export const MY_REVIEW_LIST = {
   status: 'success',
   total_reviews: 5,
   page: 1,

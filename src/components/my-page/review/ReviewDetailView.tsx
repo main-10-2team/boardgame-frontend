@@ -1,13 +1,13 @@
 import ConfirmModal from '@/components/common/modal/ConfirmModal';
 import StarRating from '@/components/common/StarRating';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
-import { ReviewItem } from '@/types/user/review';
+import { MyReviewItem } from '@/types/user/review';
 import { RiDeleteBinLine, RiPencilLine } from '@remixicon/react';
 import Image from 'next/image';
 import { useState } from 'react';
 
 interface ReviewDetailViewProps {
-  review: ReviewItem;
+  review: MyReviewItem;
   onEdit: () => void;
   onClose: () => void;
 }

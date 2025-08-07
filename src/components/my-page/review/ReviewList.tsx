@@ -1,8 +1,8 @@
-import { ReviewItem } from '@/types/user/review';
-import ReviewItemCard from './ReviewItemCard';
+import { MyReviewItem } from '@/types/user/review';
+import MyReviewItemCard from './MyReviewItemCard';
 
 interface ReviewListProps {
-  reviews: ReviewItem[];
+  reviews: MyReviewItem[];
 }
 
 export default function ReviewList({ reviews }: ReviewListProps) {
@@ -12,7 +12,7 @@ export default function ReviewList({ reviews }: ReviewListProps) {
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
       {reviews.map((review, index) => (
-        <ReviewItemCard
+        <MyReviewItemCard
           key={review.review_id}
           review={review}
           isFirst={index === 0}

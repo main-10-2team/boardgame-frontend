@@ -7,12 +7,14 @@ interface LikeButtonProps {
   liked: boolean;
   gameId: number;
   className?: string;
+  lineColor?: string;
 }
 
 export default function LikeButton({
   liked = false,
   gameId: _gameId,
   className,
+  lineColor = 'text-white',
 }: LikeButtonProps) {
   const [isLiked, setIsLiked] = useState(liked);
   const handleLikeClick = (e: React.MouseEvent) => {
@@ -29,7 +31,7 @@ export default function LikeButton({
       {isLiked ? (
         <RiHeartFill className="text-primary-400 h-6 w-6" />
       ) : (
-        <RiHeartLine className="h-6 w-6 text-white" />
+        <RiHeartLine className={`h-6 w-6 ${lineColor}`} />
       )}
     </button>
   );
