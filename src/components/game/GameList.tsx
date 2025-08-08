@@ -1,9 +1,9 @@
-import { GameListData } from '@/types/game/game';
+import { GameData } from '@/types/game/game';
 import { cn } from '@/utils/cn';
 import GameItem from './GameItem';
 
 interface GameListProps {
-  games: GameListData[];
+  games: GameData[];
   columnNumber?: number;
   imageRatio?: '1:1' | '4:5' | '2:3';
   overlayInfo?: boolean;

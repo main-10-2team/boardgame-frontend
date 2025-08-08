@@ -3,12 +3,12 @@ import { RiHeartFill, RiStarFill } from '@remixicon/react';
 import Image from 'next/image';
 
 interface GameThumbnailSectionProps {
-  image_url: string;
+  thumbnail_url: string;
   like_count: number;
   average_rating?: number;
 }
 export default function GameThumbnailSection({
-  image_url,
+  thumbnail_url,
   like_count,
   average_rating,
 }: GameThumbnailSectionProps) {
@@ -16,7 +16,7 @@ export default function GameThumbnailSection({
     <>
       <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-gray-100 md:aspect-[4/5]">
         <Image
-          src={image_url || '/images/noImage.png'}
+          src={thumbnail_url || '/images/noImage.png'}
           alt="Filter Sidebar"
           width={238}
           height={400}
