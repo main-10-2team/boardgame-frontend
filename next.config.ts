@@ -10,13 +10,19 @@ const nextConfig: NextConfig = {
     return config;
   },
   images: {
-    domains: ['images.unsplash.com'],
+    domains: ['images.unsplash.com', 'boardlife.co.kr'],
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',
         port: '',
         pathname: '/photo-**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'boardlife.co.kr',
+        port: '',
+        pathname: '/data/photo/**',
       },
     ],
   },
