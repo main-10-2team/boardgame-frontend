@@ -64,7 +64,7 @@ export default function ReviewEditForm({
           <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            className="h-full resize-none rounded p-2 text-xs"
+            className="focus:outline-primary-400 h-full resize-none rounded p-2 text-xs"
             placeholder="이 게임에 대한 생각을 자유롭게 작성해주세요."
           />
         </div>
