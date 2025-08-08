@@ -124,3 +124,8 @@ body {
 .game-detail-title {
   @apply mb-6 text-2xl font-semibold text-gray-900;
 }
+
+.theme-button-next,
+.theme-button-prev {
+  @apply hover:bg-primary-500 border-primary-400 text-primary-500 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border transition-colors hover:text-white;
+}
