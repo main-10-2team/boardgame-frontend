@@ -1,6 +1,7 @@
 import GameThemeCuration from '@/components/main/GameThemeCuration';
 import MainBannerCarouselWrapper from '@/components/main/MainBannerCarouselWrapper';
-import RecommendedGameListWrapper from '@/components/main/RecommendedGameListWrapper';
+import NewAndHotGameSection from '@/components/main/NewAndHotGameSection';
+import RecommendedGameSection from '@/components/main/RecommendedGameSection';
 
 export default function Home() {
   return (
@@ -8,7 +9,8 @@ export default function Home() {
       <MainBannerCarouselWrapper />
       <div className="space-y-30">
         <GameThemeCuration />
-        <RecommendedGameListWrapper />
+        <RecommendedGameSection />
+        <NewAndHotGameSection />
       </div>
     </>
   );
