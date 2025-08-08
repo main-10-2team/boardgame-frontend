@@ -1,4 +1,4 @@
-import { GameListData } from '@/types/game/game';
+import { GameData } from '@/types/game/game';
 import { cn } from '@/utils/cn';
 import { formatDifficulty } from '@/utils/formatDifficulty';
 import { RiHeartFill, RiStarFill } from '@remixicon/react';
@@ -7,7 +7,7 @@ import Link from 'next/link';
 import LikeButton from './LikeButton';
 
 interface GameItemProps {
-  game: GameListData;
+  game: GameData;
   imageRatio: '1:1' | '4:5' | '2:3'; // 비율: 1:1, 2:3, 16:9 등
   overlayInfo?: boolean;
   showLikeButton?: boolean;
@@ -29,7 +29,7 @@ export default function GameItem({
   const {
     game_id,
     title,
-    image_url,
+    thumbnail_url,
     like_count,
     is_liked,
     average_rating,
@@ -59,7 +59,7 @@ export default function GameItem({
         )}
       >
         <Image
-          src={image_url}
+          src={thumbnail_url}
           alt={title}
           width={238}
           height={357}

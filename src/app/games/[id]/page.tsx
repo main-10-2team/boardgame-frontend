@@ -9,7 +9,7 @@ import SimilarGameList from '@/components/game/detail/SimilarGameList';
 import YoutubeVideoSection from '@/components/game/detail/YoutubeVideoSection';
 import GameTags from '@/components/game/GameTags';
 import Grid from '@/components/layout/Grid';
-import { Game } from '@/types/game/game';
+import { GameData } from '@/types/game/game';
 import dynamic from 'next/dynamic';
 import { use, useEffect, useState } from 'react';
 
@@ -22,11 +22,16 @@ interface GameDetailPageProps {
 }
 
 export default function GameDetailPage({ params }: GameDetailPageProps) {
-  const [game, setGame] = useState<Game>();
+  const [game, setGame] = useState<GameData>();
   const { id } = use(params);
 
   useEffect(() => {
-    setGame(gameListData.games.find((game) => game.game_id === parseInt(id)));
+    const foundGame = gameListData.games.find(
+      (game) => game.game_id === parseInt(id)
+    );
+    if (foundGame) {
+      setGame(foundGame);
+    }
   }, [game, id]);
 
   if (!game) {
@@ -49,7 +54,7 @@ export default function GameDetailPage({ params }: GameDetailPageProps) {
       <Grid className="mb-8 space-y-8 md:space-y-0 lg:mb-20">
         <Grid.Item span="col-span-8 md:col-span-4 lg:col-span-4">
           <GameThumbnailSection
-            image_url={game.image_url}
+            thumbnail_url={game.thumbnail_url}
             like_count={game.like_count}
             average_rating={game.average_rating}
           />
@@ -88,7 +93,7 @@ export default function GameDetailPage({ params }: GameDetailPageProps) {
             <GameReviewSection
               gameId={game.game_id}
               gameTitle={game.title}
-              imageUrl={game.image_url}
+              imageUrl={game.thumbnail_url}
             />
           </div>
         </Grid.Item>

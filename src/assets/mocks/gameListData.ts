@@ -13,9 +13,8 @@ export const gameListData = {
 총 4라운드가 끝났을 때 가장 많은 돈을 모은 플레이어가 승리합니다.`,
       min_players: 2,
       max_players: 4,
-      playtime_minutes: 60,
       difficulty: 2.5,
-      image_url:
+      thumbnail_url:
         'https://images.unsplash.com/photo-1659480142923-0cd01191e0e9?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       rules_url: 'http://example.com/ru_rules',
       genre_name: '판타지',
@@ -24,6 +23,9 @@ export const gameListData = {
       updated_at: '2024-07-24T10:00:00Z',
       like_count: 123,
       is_liked: true,
+      playtime_min_minutes: 30,
+      playtime_max_minutes: 120,
+      reviews_count: 10,
     },
     {
       game_id: 2,
@@ -32,9 +34,8 @@ export const gameListData = {
       description: '카드 게임입니다.',
       min_players: 3,
       max_players: 7,
-      playtime_minutes: 90,
       difficulty: 3.0,
-      image_url:
+      thumbnail_url:
         'https://images.unsplash.com/photo-1659480142923-0cd01191e0e9?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       rules_url: 'http://example.com/bo_rules',
       genre_name: '카드',
@@ -43,6 +44,9 @@ export const gameListData = {
       updated_at: '2024-07-23T15:30:00Z',
       like_count: 567,
       is_liked: false,
+      playtime_min_minutes: 30,
+      playtime_max_minutes: 120,
+      reviews_count: 10,
     },
     {
       game_id: 3,
@@ -53,7 +57,7 @@ export const gameListData = {
       max_players: 7,
       playtime_minutes: 90,
       difficulty: 3.0,
-      image_url:
+      thumbnail_url:
         'https://images.unsplash.com/photo-1659480142923-0cd01191e0e9?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       rules_url: 'http://example.com/bo_rules',
       genre_name: '카드',
@@ -62,6 +66,52 @@ export const gameListData = {
       updated_at: '2024-07-23T15:30:00Z',
       like_count: 567,
       is_liked: false,
+      playtime_min_minutes: 30,
+      playtime_max_minutes: 120,
+      reviews_count: 10,
+    },
+    {
+      game_id: 4,
+      age: 10,
+      title: '푸에르토리코',
+      description: '역할 선택으로 생산과 무역의 흐름을 주도하세요!',
+      min_players: 3,
+      max_players: 7,
+      difficulty: 3.0,
+      thumbnail_url:
+        'https://boardlife.co.kr/data/boardgame_strategy/2021/12/24/1640328882-556458_N_210x210_100_5_.jpg',
+      rules_url: 'http://example.com/bo_rules',
+      genre_name: '카드',
+      average_rating: 4.2,
+      created_at: '2024-07-23T15:30:00Z',
+      updated_at: '2024-07-23T15:30:00Z',
+      like_count: 567,
+      is_liked: false,
+      playtime_min_minutes: 30,
+      playtime_max_minutes: 120,
+      reviews_count: 10,
+    },
+    {
+      game_id: 5,
+      age: 10,
+      title: '윙스팬',
+      description:
+        '자연을 주제로 한 전략 카드 게임, 윙스팬에서 새를 수집하고 서식지를 확장하세요!',
+      min_players: 3,
+      max_players: 7,
+      difficulty: 3.0,
+      thumbnail_url:
+        'https://boardlife.co.kr/wys2/swf_upload/2022/01/13/1642061418457210_lg_N_210x210_100_5_.png',
+      rules_url: 'http://example.com/bo_rules',
+      genre_name: '카드',
+      average_rating: 4.2,
+      created_at: '2024-07-23T15:30:00Z',
+      updated_at: '2024-07-23T15:30:00Z',
+      like_count: 567,
+      is_liked: false,
+      playtime_min_minutes: 30,
+      playtime_max_minutes: 120,
+      reviews_count: 10,
     },
   ],
 };

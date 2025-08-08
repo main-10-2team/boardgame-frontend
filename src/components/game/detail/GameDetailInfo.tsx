@@ -1,16 +1,17 @@
 import StarRating from '@/components/common/StarRating';
-import { Game } from '@/types/game/game';
+import { GameData } from '@/types/game/game';
 import { formatDate } from '@/utils/formatDate';
 
 interface GameDetailInfoProps {
-  game: Game;
+  game: GameData;
 }
 export default function GameDetailInfo({ game }: GameDetailInfoProps) {
   const {
     min_players,
     max_players,
     difficulty,
-    playtime_minutes,
+    playtime_max_minutes,
+    playtime_min_minutes,
     genre_name,
     age,
     created_at,
@@ -27,7 +28,9 @@ export default function GameDetailInfo({ game }: GameDetailInfoProps) {
     },
     {
       label: '플레이 시간',
-      value: playtime_minutes ? `${playtime_minutes}분` : '알수없음',
+      value: playtime_min_minutes
+        ? `${playtime_min_minutes}분 ~ ${playtime_max_minutes}분`
+        : '알수없음',
     },
     {
       label: '장르',
