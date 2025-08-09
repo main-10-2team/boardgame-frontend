@@ -41,13 +41,13 @@ export default function RecommendedGameList({
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className="absolute top-1/2 left-1/2 z-20 flex w-full -translate-x-1/2 -translate-y-1/2 transform justify-between px-4 lg:w-[calc(100%+120px)] lg:px-0">
-        <div className="theme-button-prev">
+      <div className="pointer-events-none absolute top-1/2 left-1/2 z-20 flex w-full -translate-x-1/2 -translate-y-1/2 transform justify-between px-4 lg:w-[calc(100%+120px)] lg:px-0">
+        <button className="theme-button-prev pointer-events-auto">
           <RiArrowLeftLine className="text-2xl" />
-        </div>
-        <div className="theme-button-next">
+        </button>
+        <button className="theme-button-next pointer-events-auto">
           <RiArrowRightLine className="text-2xl" />
-        </div>
+        </button>
       </div>
     </div>
   );
