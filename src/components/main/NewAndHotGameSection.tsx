@@ -17,7 +17,7 @@ export default function NewAndHotGameSection() {
           <RiArrowRightLine className="w-4 transition-transform group-hover:translate-x-1" />
         </Link>
       </h2>
-      <div className="grid grid-cols-2 gap-6 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-15 md:grid-cols-2 md:gap-6">
         <RankItemList games={games} title="NEW" />
         <RankItemList games={games} title="HOT" />
       </div>
