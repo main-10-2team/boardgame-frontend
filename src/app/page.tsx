@@ -6,7 +6,7 @@ import TrendingReviewSection from '@/components/main/TrendingReviewSection';
 
 export default function Home() {
   return (
-    <>
+    <main>
       <MainBannerCarouselWrapper />
       <div className="space-y-30">
         <GameThemeCuration />
@@ -14,6 +14,6 @@ export default function Home() {
         <NewAndHotGameSection />
         <TrendingReviewSection />
       </div>
-    </>
+    </main>
   );
 }

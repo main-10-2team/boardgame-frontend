@@ -1,12 +1,10 @@
 import { gameListData } from '@/assets/mocks/gameListData';
+import { userProfile } from '@/assets/mocks/userProfile';
 import PreferenceSurveyCTA from '@/components/main/PreferenceSurveyCTA';
 import RecommendedGameListWrapper from '@/components/main/RecommendedGameListWrapper';
 
 export default function RecommendedGameSection() {
-  const user = {
-    id: 1,
-    nickname: '김유저',
-  } as const; // 예시 유저 데이터, 실제로는 사용자 인증 정보에서 가져와야 함
+  const user = userProfile;
 
   if (!user) {
     return (
