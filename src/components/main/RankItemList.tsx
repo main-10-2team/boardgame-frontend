@@ -20,14 +20,14 @@ export default function RankItemList({ games, title }: RankItemListProps) {
           <Link
             key={game.game_id}
             href={`/games/${game.game_id}`}
-            className="relative block overflow-hidden rounded-xl shadow-xl transition-transform hover:-translate-y-1"
+            className="relative block h-55 overflow-hidden rounded-xl shadow-xl transition-transform hover:-translate-y-1"
           >
             <Image
               src={game.thumbnail_url}
               alt={game.title}
-              width={360}
-              height={220}
-              className="h-55 w-full object-cover"
+              fill
+              priority={true}
+              className="object-cover"
             />
             <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/60 to-transparent p-4">
               <div className="text-6xl font-bold text-pink-400 italic">

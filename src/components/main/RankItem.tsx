@@ -16,7 +16,7 @@ export default function RankItem({ game, index }: RankItemProps) {
       href={`/games/${game.game_id}`}
       className="flex items-stretch gap-6 overflow-hidden rounded-xl bg-white shadow-xl transition-transform hover:-translate-y-1 lg:gap-8"
     >
-      <div className="relative aspect-square h-full max-h-30 shrink-0">
+      <div className="relative aspect-square h-full max-h-30 w-auto shrink-0">
         <Image
           src={game.thumbnail_url}
           alt={game.title}
@@ -58,7 +58,7 @@ export default function RankItem({ game, index }: RankItemProps) {
             min_players={game.min_players}
             max_players={game.max_players}
             difficulty={game.difficulty}
-            isLink={true}
+            isLink={false}
             size="md"
           />
         </div>
