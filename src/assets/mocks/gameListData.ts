@@ -156,6 +156,10 @@ export const reviewData = {
           'https://images.unsplash.com/photo-1659480142923-0cd01191e0e9?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
       rating: 4.5,
+      game_id: 1,
+      title: '윙스팬',
+      image_url:
+        'https://boardlife.co.kr/wys2/swf_upload/2022/01/13/1642061418457210_lg_N_210x210_100_5_.png',
       content:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dictum tellus eget turpis maximus vehicula. Sed euismod aliquam enim, et imperdiet metus auctor eu. Cras imperdiet, lorem in pellentesque posuere, velit mi iaculis erat, et porta lectus odio sit amet orci. Integer molestie ante a massa fermentum, quis finibus tellus lobortis. Sed in nulla dapibus, tincidunt diam et, hendrerit libero. Cras est sapien, viverra vitae tincidunt non, iaculis et risus. Pellentesque scelerisque in nulla et pellentesque. Proin accumsan mauris at libero pretium, nec porttitor nulla aliquam. Sed nec arcu pellentesque, molestie enim at, elementum nunc. Nunc mollis euismod ex, ac imperdiet nisi sollicitudin id. Nam at convallis sapien. Maecenas tincidunt faucibus lacinia. Sed nec neque vitae lectus cursus vulputate eu eget metus. Nulla porttitor ornare ultrices. Pellentesque rhoncus rhoncus est sit amet accumsan.',
       created_at: '2025-07-23T15:00:00Z',
@@ -169,6 +173,10 @@ export const reviewData = {
           'https://images.unsplash.com/photo-1659480142923-0cd01191e0e9?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
       rating: 3.0,
+      game_id: 1,
+      title: '윙스팬',
+      image_url:
+        'https://boardlife.co.kr/wys2/swf_upload/2022/01/13/1642061418457210_lg_N_210x210_100_5_.png',
       content: '게임은 좋지만 초보자에게는 약간 어려움.',
       created_at: '2025-07-22T09:30:00Z',
     },
@@ -181,6 +189,10 @@ export const reviewData = {
           'https://images.unsplash.com/photo-1659480142923-0cd01191e0e9?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
       rating: 3.0,
+      game_id: 1,
+      title: '윙스팬',
+      image_url:
+        'https://boardlife.co.kr/wys2/swf_upload/2022/01/13/1642061418457210_lg_N_210x210_100_5_.png',
       content: '게임은 좋지만 초보자에게는 약간 어려움.',
       created_at: '2025-07-22T09:30:00Z',
     },
@@ -193,6 +205,43 @@ export const reviewData = {
           'https://images.unsplash.com/photo-1659480142923-0cd01191e0e9?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
       rating: 3.0,
+      game_id: 1,
+      title: '윙스팬',
+      image_url:
+        'https://boardlife.co.kr/wys2/swf_upload/2022/01/13/1642061418457210_lg_N_210x210_100_5_.png',
+      content: '게임은 좋지만 초보자에게는 약간 어려움.',
+      created_at: '2025-07-22T09:30:00Z',
+    },
+    {
+      review_id: 5,
+      user: {
+        user_id: 456,
+        username: 'BoardGameFan',
+        profile_image_url:
+          'https://images.unsplash.com/photo-1659480142923-0cd01191e0e9?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      },
+      rating: 3.0,
+      game_id: 1,
+      title: '윙스팬',
+      image_url:
+        'https://boardlife.co.kr/wys2/swf_upload/2022/01/13/1642061418457210_lg_N_210x210_100_5_.png',
+
+      content: '게임은 좋지만 초보자에게는 약간 어려움.',
+      created_at: '2025-07-22T09:30:00Z',
+    },
+    {
+      review_id: 6,
+      user: {
+        user_id: 456,
+        username: 'BoardGameFan',
+        profile_image_url:
+          'https://images.unsplash.com/photo-1659480142923-0cd01191e0e9?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      },
+      rating: 3.0,
+      game_id: 1,
+      title: '윙스팬',
+      image_url:
+        'https://boardlife.co.kr/wys2/swf_upload/2022/01/13/1642061418457210_lg_N_210x210_100_5_.png',
       content: '게임은 좋지만 초보자에게는 약간 어려움.',
       created_at: '2025-07-22T09:30:00Z',
     },
