@@ -25,8 +25,8 @@ export interface MyReviewListResponse {
 
 export interface ReviewItem {
   review_id: number;
-  game_id?: number;
-  title?: string;
+  game_id: number;
+  title: string;
   content: string;
   rating: number;
   created_at: string;
@@ -36,4 +36,5 @@ export interface ReviewItem {
     username: string;
     profile_image_url: string | null;
   };
+  image_url?: string;
 }
