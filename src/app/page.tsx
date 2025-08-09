@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <main>
       <MainBannerCarouselWrapper />
-      <div className="space-y-30">
+      <div className="mb-20 space-y-30 lg:mb-40">
         <GameThemeCuration />
         <RecommendedGameSection />
         <NewAndHotGameSection />
