@@ -1,9 +1,9 @@
 import { gameListData } from '@/assets/mocks/gameListData';
-import { Game } from '@/types/game/game';
+import { GameData } from '@/types/game/game';
 import SimilarGameItem from './SimilarGameItem';
 
 interface SimilarGameListProps {
-  game: Game;
+  game: GameData;
 }
 export default function SimilarGameList({ game }: SimilarGameListProps) {
   const similarGames = gameListData.games
@@ -11,7 +11,7 @@ export default function SimilarGameList({ game }: SimilarGameListProps) {
     .map((g) => ({
       game_id: g.game_id,
       title: g.title,
-      image_url: g.image_url,
+      image_url: g.thumbnail_url,
       average_rating: g.average_rating,
     }));
   if (similarGames.length === 0) {
