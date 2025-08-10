@@ -1,10 +1,10 @@
 import Button from '@/components/common/Button';
 import GameTags from '@/components/game/GameTags';
+import { Result } from '@/types/preference/result';
 import { cn } from '@/utils/cn';
 import { RiArrowRightSLine } from '@remixicon/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Result } from './BoardPickResult';
 
 interface ResultCardProps {
   data: Result;
