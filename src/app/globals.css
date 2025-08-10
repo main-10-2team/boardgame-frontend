@@ -55,6 +55,14 @@
   @apply mx-auto w-full max-w-5xl px-4 lg:px-0;
 }
 
+@font-face {
+  font-family: 'KCC-Sonkeechung';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KCC-Sonkeechung.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   font-family:
     'Pretendard Variable',
@@ -72,6 +80,10 @@ body {
     'Segoe UI Emoji',
     'Segoe UI Symbol',
     sans-serif;
+}
+
+.font-handwriting {
+  font-family: 'KCC-Sonkeechung', sans-serif;
 }
 
 @keyframes fade-down {
