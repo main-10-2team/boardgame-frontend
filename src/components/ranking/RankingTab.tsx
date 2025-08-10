@@ -23,11 +23,15 @@ export default function RankingTab() {
   };
 
   return (
-    <div className="flex justify-center gap-2 py-4 text-sm font-medium whitespace-nowrap">
+    <div
+      className="flex justify-center gap-2 py-4 text-sm font-medium whitespace-nowrap"
+      role="tablist"
+      aria-label="정렬 기준"
+    >
       {ORDER_TABS.map((tab) => {
         const isActive = currentSort === tab.href;
         const tabStyle = cn(
-          'rounded-full px-4.5 py-2.5 text-sm transition-colors duration-300',
+          'rounded-full px-4.5 py-2.5 text-sm transition-colors duration-300 cursor-pointer',
           isActive
             ? 'bg-primary-400 text-white'
             : 'bg-gray-50 text-black hover:text-primary-400'
@@ -36,6 +40,10 @@ export default function RankingTab() {
         return (
           <button
             key={tab.href}
+            role="tab"
+            id={`tab-${tab.href}`}
+            aria-selected={isActive}
+            aria-controls={`tabpanel-${tab.href}`}
             onClick={() => handleClick(tab.href)}
             className={tabStyle}
           >
