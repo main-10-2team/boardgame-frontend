@@ -1,3 +1,4 @@
+import { DEFAULT_IMAGE, DEFAULT_PROFILE_IMAGE } from '@/constants/image';
 import { MyReviewItem, type ReviewItem } from '@/types/user/review';
 import { formatDate } from '@/utils/formatDate';
 import { RiStarFill } from '@remixicon/react';
@@ -22,9 +23,7 @@ export default function ReviewItem({
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Image
-              src={
-                review.user.profile_image_url || '/images/defaultProfileImg.png'
-              }
+              src={review.user.profile_image_url || DEFAULT_PROFILE_IMAGE}
               alt={review.user.username}
               width={40}
               height={40}
@@ -44,7 +43,7 @@ export default function ReviewItem({
           {isDisplayImage && (
             <div className="mr-4 aspect-[4/5] h-20 flex-shrink-0 overflow-hidden rounded border-gray-300">
               <Image
-                src={review.image_url || '/images/img_default.png'}
+                src={review.image_url || DEFAULT_IMAGE}
                 alt={review.title || 'Review Image'}
                 width={360}
                 height={200}

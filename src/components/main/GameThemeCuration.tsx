@@ -38,7 +38,6 @@ export default function GameThemeCuration() {
         {contents.map((content, index) => (
           <Link key={index} href={content.link} className="cursor-pointer">
             <div className="hover:border-primary-100 hover:drop-shadow-primary-200 flex items-center gap-4 rounded-2xl border border-transparent bg-white px-8 py-4 drop-shadow-xl drop-shadow-transparent transition-all md:flex-col md:flex-wrap md:gap-0 md:rounded-4xl">
-              {' '}
               <Image
                 src={content.imageUrl}
                 alt={`${content.title} Img`}

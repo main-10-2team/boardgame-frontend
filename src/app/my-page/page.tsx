@@ -3,6 +3,7 @@ import Button from '@/components/common/Button';
 import Grid from '@/components/layout/Grid';
 import MyPageSideMenu from '@/components/my-page/SideMenu';
 import WordCloud from '@/components/word-cloud/WordCloud';
+import { DEFAULT_PROFILE_IMAGE } from '@/constants/image';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -43,9 +44,7 @@ export default function MyPage() {
           <section className="flex flex-col gap-10 rounded-xl border border-gray-200 p-6 md:flex-row">
             <div className="flex flex-col items-center gap-6 md:items-start">
               <Image
-                src={
-                  userProfile.profile_image || '/images/defaultProfileImg.png'
-                }
+                src={userProfile.profile_image || DEFAULT_PROFILE_IMAGE}
                 alt="기본 프로필 이미지"
                 width={100}
                 height={100}
