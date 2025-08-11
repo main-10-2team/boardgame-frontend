@@ -1,11 +1,12 @@
 'use client';
 
-import DoneSection from '@/components/board-pick/DoneSection';
 import IntroSection from '@/components/board-pick/IntroSection';
 import SurveySection from '@/components/board-pick/SurveySection';
 import { useBoardPickSurvey } from '@/hooks/useBoardPickSurvey';
 import { Question } from '@/types/board-pick/boardPick';
+import { useRouter } from 'next/navigation';
 
+const RESULT_PATH = '/preference/result';
 const questions: Question[] = [
   {
     key: 'players',
@@ -32,35 +33,61 @@ const questions: Question[] = [
   },
 ];
 
-export default function TodayPage() {
-  const survey = useBoardPickSurvey(questions);
+export default function BoardPickPage() {
+  // 라우터 & 전환 상태 (전환 동안 버튼 상태/중복 클릭 방지 등에 사용 가능)
+  const router = useRouter();
 
-  if (survey.phase === 'intro') return <IntroSection onStart={survey.start} />;
+  // 설문 상태/로직 훅 (현재 단계, 답변, 다음/이전 이동 등)
+  const survey = useBoardPickSurvey(questions);
+  // 마지막 단계 여부 (UI/전환 분기 용)
+  const isLast = survey.step === survey.total;
+
+  const submitAndGo = async () => {
+    // TODO: API 연동 시 여기서 POST -> OK 면 결과 페이지로
+    router.push(RESULT_PATH);
+  };
+
+  if (survey.phase === 'intro')
+    return (
+      <GradientLayout>
+        <IntroSection onStart={survey.start} />
+      </GradientLayout>
+    );
 
   if (survey.phase === 'survey' && survey.current) {
     const q = survey.current;
     const v = survey.answers[q.key];
 
     return (
-      <SurveySection
-        step={survey.step}
-        total={survey.total}
-        question={q}
-        value={v}
-        onSelectSingle={(id: number) => survey.setSingle(q.key, id)}
-        onToggleMulti={(id: number) => survey.toggleMulti(q.key, id)}
-        onNext={survey.goNext}
-        canNext={survey.canNext}
-        onPrev={survey.goPrev}
-      />
+      <GradientLayout>
+        <SurveySection
+          step={survey.step}
+          total={survey.total}
+          question={q}
+          value={v}
+          onSelectSingle={(id: number) => survey.setSingle(q.key, id)}
+          onToggleMulti={(id: number) => survey.toggleMulti(q.key, id)}
+          onPrev={survey.goPrev}
+          onNext={async () => {
+            if (!isLast) {
+              survey.goNext();
+            } else {
+              await submitAndGo();
+            }
+          }}
+          canNext={survey.canNext}
+        />
+      </GradientLayout>
     );
   }
 
+  return null;
+}
+
+export function GradientLayout({ children }: { children: React.ReactNode }) {
   return (
-    <DoneSection
-      onGoResult={() => {
-        /* router.push('/today/result') */
-      }}
-    />
+    <div className="min-h-[100dvh] bg-[linear-gradient(to_bottom,_#5a5a5a,_#17171B)] text-white">
+      {children}
+    </div>
   );
 }

@@ -5,7 +5,7 @@ import SurveyNav from '@/components/board-pick/SurveyNav';
 import ProgressBar from '@/components/common/ProgressBar';
 import type { Question } from '@/types/board-pick/boardPick';
 
-interface Props {
+interface SurveySectionProps {
   step: number;
   total: number;
   question: Question;
@@ -27,7 +27,7 @@ export default function SurveySection({
   onPrev,
   onNext,
   canNext,
-}: Props) {
+}: SurveySectionProps) {
   return (
     <div className="mx-auto flex max-w-[500px] flex-col gap-10 py-20 text-white">
       <ProgressBar current={step} total={total} />
