@@ -6,7 +6,7 @@ import { useBoardPickSurvey } from '@/hooks/useBoardPickSurvey';
 import { Question } from '@/types/board-pick/boardPick';
 import { useRouter } from 'next/navigation';
 
-const RESULT_PATH = '/preference/result';
+const RESULT_PATH = '/today/result';
 const questions: Question[] = [
   {
     key: 'players',
