@@ -3,7 +3,7 @@ import CategoryMenu from '@/components/layout/Header/CategoryMenu';
 import Logo from '@/components/layout/Header/Logo';
 import MobileMenu from '@/components/layout/Header/MobileMenu';
 import { SearchInput } from '@/components/layout/Header/SearchInput';
-import { RiSearchLine } from '@remixicon/react';
+import { MobileSearchIcon } from './MobileSearchIcon';
 
 export default function Header() {
   return (
@@ -18,7 +18,7 @@ export default function Header() {
           </div>
         </div>
         <div className="flex cursor-pointer gap-6 lg:hidden">
-          <RiSearchLine />
+          <MobileSearchIcon />
           <MobileMenu />
         </div>
       </div>
