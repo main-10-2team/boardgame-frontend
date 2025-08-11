@@ -10,7 +10,7 @@ export function GameTag({ tagLabel, isOverlay, size = 'sm' }: GameTagProps) {
       className={cn(
         'rounded-full font-medium',
         size === 'sm' && 'text-2.5 px-2 py-1',
-        size === 'md' && 'text-md px-3 py-1.5',
+        size === 'md' && 'text-md px-2 py-1 md:px-3 md:py-1.5 md:text-base',
         size === 'lg' && 'px-4 py-2 text-base',
         isOverlay
           ? 'bg-primary-500 text-white'
