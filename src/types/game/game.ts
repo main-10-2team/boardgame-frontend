@@ -20,15 +20,23 @@ export interface Game {
   updated_at: string;
 }
 
-export interface GameListData {
+export interface GameData {
   game_id: number;
+  age: number;
   title: string;
-  image_url: string;
-  like_count: number;
-  is_liked: boolean;
-  average_rating: number;
-  genre_name: string;
+  description: string;
   min_players: number;
   max_players: number;
+  playtime_min_minutes: number;
+  playtime_max_minutes: number;
   difficulty: number;
+  thumbnail_url: string;
+  rules_url: string;
+  genre_name: string;
+  average_rating: number;
+  created_at: string;
+  updated_at: string;
+  like_count: number;
+  reviews_count: number;
+  is_liked: boolean;
 }

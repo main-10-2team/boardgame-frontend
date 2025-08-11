@@ -1,7 +1,19 @@
+import GameThemeCuration from '@/components/main/GameThemeCuration';
+import MainBannerCarouselWrapper from '@/components/main/MainBannerCarouselWrapper';
+import NewAndHotGameSection from '@/components/main/NewAndHotGameSection';
+import RecommendedGameSection from '@/components/main/RecommendedGameSection';
+import TrendingReviewSection from '@/components/main/TrendingReviewSection';
+
 export default function Home() {
   return (
-    <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-sans sm:p-20">
-      메인페이지
-    </div>
+    <main>
+      <MainBannerCarouselWrapper />
+      <div className="mb-20 space-y-30 lg:mb-40">
+        <GameThemeCuration />
+        <RecommendedGameSection />
+        <NewAndHotGameSection />
+        <TrendingReviewSection />
+      </div>
+    </main>
   );
 }

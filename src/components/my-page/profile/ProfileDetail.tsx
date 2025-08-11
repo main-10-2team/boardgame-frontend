@@ -1,3 +1,4 @@
+import { DEFAULT_PROFILE_IMAGE } from '@/constants/image';
 import { User } from '@/types/user/user';
 import Image from 'next/image';
 
@@ -10,7 +11,7 @@ export default function ProfileDetail({ user }: ProfileDetailProps) {
     <div className="grid grid-cols-[1fr_3fr] items-center gap-y-6 text-sm whitespace-nowrap">
       <span className="self-start text-gray-600">이미지</span>
       <Image
-        src={user.profile_image || '/images/defaultProfileImg.png'}
+        src={user.profile_image || DEFAULT_PROFILE_IMAGE}
         alt="기본 프로필 이미지"
         width={108}
         height={108}

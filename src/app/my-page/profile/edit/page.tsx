@@ -5,6 +5,7 @@ import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 import Grid from '@/components/layout/Grid';
 import MyPageSideMenu from '@/components/my-page/SideMenu';
+import { DEFAULT_PROFILE_IMAGE } from '@/constants/image';
 import { RiCamera2Fill } from '@remixicon/react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -60,7 +61,7 @@ export default function ProfileEditPage() {
                       ? image
                       : userProfile.profile_image?.trim()
                         ? userProfile.profile_image
-                        : '/images/defaultProfileImg.png'
+                        : DEFAULT_PROFILE_IMAGE
                   }
                   alt="프로필 이미지"
                   fill
