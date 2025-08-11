@@ -29,7 +29,7 @@ export default function SurveySection({
   canNext,
 }: SurveySectionProps) {
   return (
-    <div className="mx-auto flex max-w-[500px] flex-col gap-10 py-20 text-white">
+    <div className="mx-auto flex max-w-[500px] flex-col gap-10 px-4 py-20 text-white">
       <ProgressBar current={step} total={total} />
       <QuestionCard
         question={question}
