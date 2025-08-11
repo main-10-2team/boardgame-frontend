@@ -1,13 +1,13 @@
 'use client';
 
-import { Game } from '@/types/game/game';
+import { GameData } from '@/types/game/game';
 import { Result } from '@/types/preference/result';
 import ResultCard from './ResultCard';
 import SimilarGameSection from './SimilarGameSection';
 
 interface BoardPickResultProps {
   result: Result[];
-  similar: Game[];
+  similar: GameData[];
 }
 
 export default function BoardPickResult({
