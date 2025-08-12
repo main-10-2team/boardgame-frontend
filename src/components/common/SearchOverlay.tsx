@@ -18,6 +18,7 @@ const SearchOverlay = ({ isOpen, onClose }: SearchOverlayProps) => {
 
   useEscapeKey(isOpen ? onClose : () => {});
 
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (isOpen) {
       resetSearch();
