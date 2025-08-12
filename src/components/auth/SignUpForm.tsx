@@ -7,7 +7,7 @@ import Input from '@/components/common/Input';
 import Grid from '@/components/layout/Grid';
 import { FORM_CONFIG, PLACEHOLDERS } from '@/constants/form';
 import { Toast } from '@/components/common/Toast';
-import { useSignUpForm } from '@/hooks/useSignUpForm';
+import { useSignUpForm } from '@/hooks/auth/useSignUpForm';
 import EmailVerification from './EmailVerification';
 import PhoneVerification from './PhoneVerification';
 
@@ -15,9 +15,9 @@ const SignUpForm = () => {
   const signUpForm = useSignUpForm();
 
   const isFormValid =
-    signUpForm.isValid &&
-    signUpForm.isEmailVerified &&
-    signUpForm.isPhoneVerified;
+    signUpForm.form.isValid &&
+    signUpForm.state.isEmailVerified &&
+    signUpForm.state.isPhoneVerified;
 
   return (
     <>
@@ -34,106 +34,106 @@ const SignUpForm = () => {
           </header>
 
           <form
-            onSubmit={signUpForm.handleSubmit(signUpForm.onSubmit)}
+            onSubmit={signUpForm.form.handleSubmit(
+              signUpForm.handlers.onSubmit
+            )}
             className="mb-8 space-y-6"
           >
-            {/* 이름 */}
             <Input
-              {...signUpForm.register('name', {
+              {...signUpForm.form.register('name', {
                 required: '이름을 입력해주세요',
               })}
               type="text"
               placeholder={PLACEHOLDERS.NAME}
               inputSize={FORM_CONFIG.INPUT_SIZE}
               label="이름"
-              error={signUpForm.errors.name?.message}
+              error={signUpForm.form.errors.name?.message}
               required
             />
 
-            {/* 이메일 인증 */}
             <EmailVerification
-              register={signUpForm.register}
-              errors={signUpForm.errors}
-              emailRules={signUpForm.emailRules}
-              isEmailSent={signUpForm.isEmailSent}
-              isEmailVerified={signUpForm.isEmailVerified}
-              onSendCode={signUpForm.handleEmailVerification}
-              onConfirmCode={signUpForm.handleEmailVerificationConfirm}
+              register={signUpForm.form.register}
+              errors={signUpForm.form.errors}
+              emailRules={signUpForm.rules.emailRules}
+              isEmailSent={signUpForm.state.isEmailSent}
+              isEmailVerified={signUpForm.state.isEmailVerified}
+              onSendCode={signUpForm.handlers.handleEmailVerification}
+              onConfirmCode={signUpForm.handlers.handleEmailVerificationConfirm}
             />
 
-            {/* 닉네임 */}
             <Input
-              {...signUpForm.register('nickname', signUpForm.nicknameRules)}
+              {...signUpForm.form.register(
+                'nickname',
+                signUpForm.rules.nicknameRules
+              )}
               type="text"
               placeholder={PLACEHOLDERS.NICKNAME}
               inputSize={FORM_CONFIG.INPUT_SIZE}
               label="닉네임"
-              error={signUpForm.errors.nickname?.message}
+              error={signUpForm.form.errors.nickname?.message}
               required
             />
 
-            {/* 휴대폰 인증 */}
             <PhoneVerification
-              register={signUpForm.register}
-              errors={signUpForm.errors}
-              phoneRules={signUpForm.phoneRules}
-              isPhoneSent={signUpForm.isPhoneSent}
-              isPhoneVerified={signUpForm.isPhoneVerified}
-              onSendCode={signUpForm.handlePhoneVerification}
-              onConfirmCode={signUpForm.handlePhoneVerificationConfirm}
+              register={signUpForm.form.register}
+              errors={signUpForm.form.errors}
+              phoneRules={signUpForm.rules.phoneRules}
+              isPhoneSent={signUpForm.state.isPhoneSent}
+              isPhoneVerified={signUpForm.state.isPhoneVerified}
+              onSendCode={signUpForm.handlers.handlePhoneVerification}
+              onConfirmCode={signUpForm.handlers.handlePhoneVerificationConfirm}
             />
 
-            {/* 생년월일 */}
             <Input
-              {...signUpForm.register('birth', signUpForm.birthRules)}
+              {...signUpForm.form.register(
+                'birth',
+                signUpForm.rules.birthRules
+              )}
               type="text"
               placeholder="생년월일 8자리 (예: 19920930)"
               inputSize={FORM_CONFIG.INPUT_SIZE}
               label="생년월일"
-              error={signUpForm.errors.birth?.message}
+              error={signUpForm.form.errors.birth?.message}
               required
             />
 
-            {/* 비밀번호 */}
             <Input
-              {...signUpForm.register('password', signUpForm.passwordRules)}
+              {...signUpForm.form.register(
+                'password',
+                signUpForm.rules.passwordRules
+              )}
               type="password"
               placeholder={PLACEHOLDERS.PASSWORD}
               inputSize={FORM_CONFIG.INPUT_SIZE}
               label="비밀번호"
-              error={signUpForm.errors.password?.message}
+              error={signUpForm.form.errors.password?.message}
               success={
-                signUpForm.watchPassword &&
-                signUpForm.validatePassword(signUpForm.watchPassword) &&
-                !signUpForm.errors.password
+                signUpForm.watch.password && !signUpForm.form.errors.password
                   ? '비밀번호가 올바릅니다'
                   : false
               }
               required
             />
 
-            {/* 비밀번호 확인 */}
             <Input
-              {...signUpForm.register(
+              {...signUpForm.form.register(
                 'confirmPassword',
-                signUpForm.confirmPasswordRules(signUpForm.watchPassword)
+                signUpForm.rules.confirmPasswordRules(signUpForm.watch.password)
               )}
               type="password"
               placeholder={PLACEHOLDERS.CONFIRM_PASSWORD}
               inputSize={FORM_CONFIG.INPUT_SIZE}
               label="비밀번호 확인"
-              error={signUpForm.errors.confirmPassword?.message}
+              error={signUpForm.form.errors.confirmPassword?.message}
               success={
-                signUpForm.watchConfirmPassword &&
-                signUpForm.isPasswordMatch(signUpForm.watchConfirmPassword) &&
-                !signUpForm.errors.confirmPassword
+                signUpForm.watch.confirmPassword &&
+                !signUpForm.form.errors.confirmPassword
                   ? '비밀번호가 일치합니다'
                   : false
               }
               required
             />
 
-            {/* 가입하기 버튼 */}
             <Button
               type="submit"
               variant="primary"

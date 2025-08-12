@@ -1,16 +1,16 @@
 // src/components/auth/PhoneVerification.tsx
 
-import React from 'react';
 import { UseFormRegister, FieldErrors, RegisterOptions } from 'react-hook-form';
+
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 import { FORM_CONFIG, PLACEHOLDERS } from '@/constants/form';
-import { ExtendedSignUpFormData } from '@/types/auth/signup';
+import { UnifiedSignUpFormData } from '@/types/auth/signup';
 
 interface PhoneVerificationProps {
-  register: UseFormRegister<ExtendedSignUpFormData>;
-  errors: FieldErrors<ExtendedSignUpFormData>;
-  phoneRules: RegisterOptions<ExtendedSignUpFormData, 'phone'>;
+  register: UseFormRegister<UnifiedSignUpFormData>;
+  errors: FieldErrors<UnifiedSignUpFormData>;
+  phoneRules: RegisterOptions<UnifiedSignUpFormData, 'phone'>;
   isPhoneSent: boolean;
   isPhoneVerified: boolean;
   onSendCode: () => void;
@@ -31,6 +31,7 @@ const PhoneVerification = ({
       <label className="mb-1 block text-sm font-medium text-gray-700">
         휴대폰 번호 <span className="text-primary-500">*</span>
       </label>
+
       <div className={`grid w-full ${FORM_CONFIG.GRID_COLS} gap-x-2 gap-y-3`}>
         <Input
           {...register('phone', phoneRules)}

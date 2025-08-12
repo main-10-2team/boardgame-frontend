@@ -1,16 +1,16 @@
 // src/components/auth/EmailVerification.tsx
 
-import React from 'react';
 import { UseFormRegister, FieldErrors, RegisterOptions } from 'react-hook-form';
+
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 import { FORM_CONFIG, PLACEHOLDERS } from '@/constants/form';
-import { ExtendedSignUpFormData } from '@/types/auth/signup';
+import { UnifiedSignUpFormData } from '@/types/auth/signup';
 
 interface EmailVerificationProps {
-  register: UseFormRegister<ExtendedSignUpFormData>;
-  errors: FieldErrors<ExtendedSignUpFormData>;
-  emailRules: RegisterOptions<ExtendedSignUpFormData, 'email'>;
+  register: UseFormRegister<UnifiedSignUpFormData>;
+  errors: FieldErrors<UnifiedSignUpFormData>;
+  emailRules: RegisterOptions<UnifiedSignUpFormData, 'email'>;
   isEmailSent: boolean;
   isEmailVerified: boolean;
   onSendCode: () => void;
@@ -31,6 +31,7 @@ const EmailVerification = ({
       <label className="mb-1 block text-sm font-medium text-gray-700">
         이메일 <span className="text-primary-500">*</span>
       </label>
+
       <div className={`grid w-full ${FORM_CONFIG.GRID_COLS} gap-x-2 gap-y-3`}>
         <Input
           {...register('email', emailRules)}

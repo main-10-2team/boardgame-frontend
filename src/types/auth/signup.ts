@@ -8,12 +8,9 @@ export interface SignUpFormData {
   confirmPassword: string;
 }
 
-export interface ExtendedSignUpFormData extends SignUpFormData {
+export interface UnifiedSignUpFormData extends SignUpFormData {
   emailVerificationCode: string;
   phoneVerificationCode: string;
-}
-
-export interface SignUpVerificationState {
   isEmailSent: boolean;
   isEmailVerified: boolean;
   isPhoneSent: boolean;
