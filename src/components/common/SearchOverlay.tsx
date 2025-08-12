@@ -1,73 +1,27 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { RiSearchLine, RiCloseLine } from '@remixicon/react';
-import { cn } from '@/utils/cn';
-import { gameListData } from '@/assets/mocks/gameListData';
-
-interface SearchResult {
-  id: string;
-  title: string;
-  image: string;
-  category: string;
-}
+import { useSearch } from '@/hooks/useSearch';
 
 interface SearchOverlayProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const SEARCH_DEBOUNCE_DELAY = 300;
-const SEARCH_PLACEHOLDER = '보드게임을 찾아보세요!';
-
 const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose }) => {
-  const [query, setQuery] = useState('');
-  const [results, setResults] = useState<SearchResult[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(-1);
-
+  const { query, results, isLoading, setQuery, resetSearch } = useSearch();
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // 열릴 때 초기화
   useEffect(() => {
-    if (isOpen && inputRef.current) {
-      inputRef.current.focus();
-      setQuery('');
-      setResults([]);
-      setSelectedIndex(-1);
+    if (isOpen) {
+      resetSearch();
+      setTimeout(() => {
+        inputRef.current?.focus();
+      }, 0);
     }
-  }, [isOpen]);
-
-  // 디바운스 검색
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      if (query.trim() !== '') {
-        setIsLoading(true); // 검색 시작 시 로딩 상태로 변경
-        // 목데이터 → SearchResult[] 변환
-        const searchResults: SearchResult[] = gameListData.games
-          .filter((g) => g.title.toLowerCase().includes(query.toLowerCase()))
-          .map((g) => ({
-            id: String(g.game_id),
-            title: g.title,
-            image: g.thumbnail_url ?? '',
-            category: g.genre_name ?? '',
-          }));
-
-        setResults(searchResults);
-        setIsLoading(false); // 검색 완료 후 로딩 상태 해제
-      } else {
-        setResults([]);
-      }
-
-      setSelectedIndex(-1);
-    }, SEARCH_DEBOUNCE_DELAY);
-
-    return () => clearTimeout(timeoutId);
-  }, [query]);
-
-  // Link 컴포넌트를 사용하므로 이 함수는 더 이상 필요 없습니다.
-  // const handleResultClick = (result: SearchResult) => { ... };
+  }, [isOpen, resetSearch]);
 
   const handleBackdropClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) onClose();
@@ -92,7 +46,7 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose }) => {
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder={SEARCH_PLACEHOLDER}
+              placeholder="보드게임을 찾아보세요!"
               className="w-full rounded-2xl bg-gray-100 py-4 pr-16 pl-12 text-base placeholder:text-gray-400 focus:bg-white focus:ring-2 focus:ring-blue-200 focus:outline-none"
             />
 
@@ -117,32 +71,25 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose }) => {
             </div>
           ) : results.length > 0 ? (
             <div className="py-2">
-              {results.map((result, index) => (
+              {results.map((game) => (
                 <Link
-                  key={result.id}
-                  href={`/games/${result.id}`}
+                  key={game.id}
+                  href={`/games/${game.id}`}
                   onClick={onClose}
                 >
-                  <div
-                    className={cn(
-                      'flex cursor-pointer items-center gap-4 px-6 py-4',
-                      selectedIndex === index
-                        ? 'bg-blue-50'
-                        : 'hover:bg-gray-50'
-                    )}
-                  >
+                  <div className="flex cursor-pointer items-center gap-4 px-6 py-4 hover:bg-gray-50">
                     <img
-                      src={result.image}
-                      alt={result.title}
+                      src={game.image}
+                      alt={game.title}
                       className="h-12 w-12 rounded-lg bg-gray-200 object-cover"
                     />
                     <div className="min-w-0 flex-1">
                       <h3 className="truncate font-medium text-gray-900">
-                        {result.title}
+                        {game.title}
                       </h3>
-                      {result.category && (
+                      {game.category && (
                         <p className="mt-1 text-sm text-gray-500">
-                          {result.category}
+                          {game.category}
                         </p>
                       )}
                     </div>
@@ -150,11 +97,11 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose }) => {
                 </Link>
               ))}
             </div>
-          ) : query === '' ? (
+          ) : (
             <div className="flex items-center justify-center py-8 text-gray-400">
               검색어를 입력해주세요.
             </div>
-          ) : null}
+          )}
         </div>
       </div>
     </div>
