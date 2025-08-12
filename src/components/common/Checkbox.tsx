@@ -15,8 +15,8 @@ const Checkbox = ({ onToggle, children, ...props }: CheckboxProps) => {
         onChange={onToggle}
         {...props}
       />
-      <span className="peer-checked:bg-primary-400 peer-checked:border-primary-400 flex h-5 w-5 items-center justify-center rounded border border-gray-400 transition-colors">
-        <RiCheckLine className="text-white" />
+      <span className="peer-checked:bg-primary-400 peer-checked:border-primary-400 flex h-5 w-5 items-center justify-center rounded border border-gray-400 text-transparent transition-colors peer-checked:text-white">
+        <RiCheckLine />
       </span>
       {children}
     </label>
