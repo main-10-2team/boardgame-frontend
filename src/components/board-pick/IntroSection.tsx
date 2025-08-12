@@ -5,7 +5,7 @@ import { RiArrowRightLine } from '@remixicon/react';
 
 export default function IntroSection({ onStart }: { onStart: () => void }) {
   return (
-    <div className="flex h-full flex-col items-center justify-center px-6">
+    <div className="absolute inset-0 flex h-full flex-col items-center justify-center px-6">
       <h1 className="mb-4 text-4xl font-bold">오늘의 게임은?</h1>
       <p className="mb-10 text-sm">
         상황에 맞게 오늘 플레이할 게임을 딱 정해드릴게요!
