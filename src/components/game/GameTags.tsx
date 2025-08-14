@@ -5,8 +5,8 @@ import { GameTag } from './GameTag';
 /** 구버전(v1) props */
 interface GameTagsV1Props {
   genre_name: string;
-  min_players: number;
-  max_players: number;
+  min_players?: number;
+  max_players?: number;
   difficulty: number | null;
   isOverlay?: boolean;
   isLink?: boolean;

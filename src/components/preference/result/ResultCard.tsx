@@ -86,7 +86,6 @@ export default function ResultCard({
           <div className="flex flex-wrap gap-2">
             <GameTags
               genre_name={data.genre_name}
-              playtime_minutes={data.playtime_minutes}
               difficulty={data.difficulty}
               isLink={false}
               size="md"

@@ -1,9 +1,9 @@
 import { GameData } from '@/types/game/game';
 import { cn } from '@/utils/cn';
-import { formatDifficulty } from '@/utils/formatDifficulty';
 import { RiHeartFill, RiStarFill } from '@remixicon/react';
 import Image from 'next/image';
 import Link from 'next/link';
+import GameTags from './GameTags';
 import LikeButton from './LikeButton';
 
 interface GameItemProps {
@@ -38,11 +38,6 @@ export default function GameItem({
     max_players,
     difficulty,
   } = game;
-  const tags = [
-    genre_name,
-    `${min_players}~${max_players}인용`,
-    `난이도_${difficulty ? formatDifficulty(difficulty) : '알수없음'}`,
-  ];
 
   return (
     <Link
@@ -115,23 +110,14 @@ export default function GameItem({
             )}
           </div>
         )}
-        {tags.length > 0 && (
-          <div className="mt-1 flex flex-wrap gap-1">
-            {tags.map((tag, idx) => (
-              <span
-                key={idx}
-                className={cn(
-                  'rounded-full px-2 py-1 text-[10px] font-medium',
-                  overlayInfo
-                    ? 'bg-primary-500 text-white'
-                    : 'bg-primary-50 text-primary-500'
-                )}
-              >
-                #{tag}
-              </span>
-            ))}
-          </div>
-        )}
+        <div className="mt-1 flex flex-wrap gap-1">
+          <GameTags
+            genre_name={genre_name}
+            min_players={min_players}
+            max_players={max_players}
+            difficulty={difficulty}
+          />
+        </div>
       </div>
     </Link>
   );
