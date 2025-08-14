@@ -2,6 +2,7 @@ import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header/Header';
 import type { Metadata } from 'next';
 import './globals.css';
+import Providers from './providers';
 
 export const metadata: Metadata = {
   title: '보드큐',
@@ -22,10 +23,12 @@ export default function RootLayout({
         href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
       />
       <body className={`flex min-h-screen flex-col antialiased`}>
-        <Header />
-        {children}
-        <Footer />
-        <div id="modal" />
+        <Providers>
+          <Header />
+          {children}
+          <Footer />
+          <div id="modal" />
+        </Providers>
       </body>
     </html>
   );
