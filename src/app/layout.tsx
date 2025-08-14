@@ -2,7 +2,7 @@ import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header/Header';
 import type { Metadata } from 'next';
 import './globals.css';
-import Providers from './provider';
+import Providers from './providers';
 
 export const metadata: Metadata = {
   title: '보드큐',
