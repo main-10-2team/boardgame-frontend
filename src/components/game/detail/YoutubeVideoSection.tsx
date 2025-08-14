@@ -12,7 +12,7 @@ export default function YoutubeVideoSection({
   useEffect(() => {
     const fetchYoutubeVideos = async () => {
       try {
-        const apiKey = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
+        const apiKey = process.env.YOUTUBE_API_KEY;
         const response = await axios.get(
           'https://www.googleapis.com/youtube/v3/search',
           {
