@@ -1,3 +1,4 @@
+'use client';
 import { RiShareLine } from '@remixicon/react';
 
 export default function ShareButton() {
