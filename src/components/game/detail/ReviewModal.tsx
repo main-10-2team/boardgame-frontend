@@ -1,7 +1,7 @@
+import DateTime from '@/components/common/DateTime';
 import Modal from '@/components/common/modal/Modal';
 import { DEFAULT_PROFILE_IMAGE } from '@/constants/image';
 import { ReviewItem } from '@/types/user/review';
-import { formatDate } from '@/utils/formatDate';
 import { RiStarFill } from '@remixicon/react';
 import Image from 'next/image';
 
@@ -49,7 +49,7 @@ export default function ReviewModal({
           {review.title && <h3 className="font-semibold">{review.title}</h3>}
           <p className="whitespace-pre-line">{review.content}</p>
           <span className="text-sm text-gray-400">
-            {formatDate(review.created_at)}
+            <DateTime date={review.created_at} />
           </span>
         </div>
       </div>
