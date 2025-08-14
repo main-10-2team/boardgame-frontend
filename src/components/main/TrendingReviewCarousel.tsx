@@ -6,8 +6,8 @@ import 'swiper/css/pagination';
 import { Autoplay, Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import ReviewItem from '@/components/game/detail/ReviewItem';
 import { type ReviewItem as ReviewItemType } from '@/types/user/review';
-import ReviewItem from '../game/detail/ReviewItem';
 interface TrendingReviewCarouselProps {
   reviews: ReviewItemType[];
   handleReviewClick: (review: ReviewItemType) => void;

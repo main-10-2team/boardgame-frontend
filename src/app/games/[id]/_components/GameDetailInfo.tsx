@@ -1,18 +1,18 @@
-import StarRating from '@/components/common/StarRating';
-import { GameData } from '@/types/game/game';
+'use client';
+import { GameDetail } from '@/types/game/game';
 import { formatDate } from '@/utils/formatDate';
+import { formatDifficulty } from '@/utils/formatDifficulty';
 
 interface GameDetailInfoProps {
-  game: GameData;
+  game: GameDetail;
 }
 export default function GameDetailInfo({ game }: GameDetailInfoProps) {
   const {
     min_players,
     max_players,
     difficulty,
-    playtime_max_minutes,
-    playtime_min_minutes,
-    genre_name,
+    playtime_minutes,
+    genre,
     age,
     created_at,
   } = game;
@@ -24,21 +24,19 @@ export default function GameDetailInfo({ game }: GameDetailInfoProps) {
     },
     {
       label: '난이도',
-      value: difficulty || '알수없음',
+      value: formatDifficulty(difficulty),
     },
     {
       label: '플레이 시간',
-      value: playtime_min_minutes
-        ? `${playtime_min_minutes}분 ~ ${playtime_max_minutes}분`
-        : '알수없음',
+      value: playtime_minutes ? `${playtime_minutes}분` : '알수없음',
     },
     {
       label: '장르',
-      value: genre_name || '알수없음',
+      value: genre || '알수없음',
     },
     {
       label: '권장 연령',
-      value: `${age}세 이상` || '알수없음',
+      value: age ? `${age}세 이상` : '알수없음',
     },
     {
       label: '출시년도',
@@ -56,7 +54,15 @@ export default function GameDetailInfo({ game }: GameDetailInfoProps) {
           <span className="text-gray-600">{info.label}</span>
 
           {info.label === '난이도' ? (
-            <StarRating value={info.value as number} readOnly={true} />
+            <div className="flex items-center gap-1">
+              {[...Array(3)].map((_, index) => (
+                <span
+                  key={index}
+                  className={`h-4 w-4 rounded-full ${index < Number(info.value) ? 'bg-primary-500' : 'border-primary-200 border bg-white'} `}
+                />
+              ))}
+              <span className="text-md ml-2 font-medium">{difficulty}</span>
+            </div>
           ) : (
             <span className="text-lg font-medium text-gray-900">
               {info.value}

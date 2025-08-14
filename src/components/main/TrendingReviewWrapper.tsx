@@ -1,8 +1,8 @@
 'use client';
+import ReviewModal from '@/components/game/detail/ReviewModal';
+import TrendingReviewCarousel from '@/components/main/TrendingReviewCarousel';
 import { type ReviewItem as ReviewItemType } from '@/types/user/review';
 import { useState } from 'react';
-import ReviewModal from '../game/detail/ReviewModal';
-import TrendingReviewCarousel from './TrendingReviewCarousel';
 interface TrendingReviewWrapperProps {
   reviews: ReviewItemType[];
 }

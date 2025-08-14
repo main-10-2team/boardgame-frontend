@@ -1,6 +1,6 @@
+import DateTime from '@/components/common/DateTime';
 import { DEFAULT_IMAGE, DEFAULT_PROFILE_IMAGE } from '@/constants/image';
 import { MyReviewItem, type ReviewItem } from '@/types/user/review';
-import { formatDate } from '@/utils/formatDate';
 import { RiStarFill } from '@remixicon/react';
 import Image from 'next/image';
 
@@ -63,7 +63,7 @@ export default function ReviewItem({
             </p>
             {isDisplayDate && (
               <span className="text-xs text-gray-400">
-                {formatDate(review.created_at)}
+                <DateTime date={review.created_at} />
               </span>
             )}
           </div>
@@ -92,7 +92,7 @@ export default function ReviewItem({
           {review.content}
         </p>
         <span className="text-xs text-gray-400">
-          {formatDate(review.created_at)}
+          <DateTime date={review.created_at} />
         </span>
       </div>
     );

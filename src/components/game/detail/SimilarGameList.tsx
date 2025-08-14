@@ -1,19 +1,25 @@
-import { gameListData } from '@/assets/mocks/gameListData';
-import { GameData } from '@/types/game/game';
+import { fetcher } from '@/lib/fetcher';
+import { GameListItem } from '@/types/game/game';
 import SimilarGameItem from './SimilarGameItem';
 
 interface SimilarGameListProps {
-  game: GameData;
+  genre: string;
 }
-export default function SimilarGameList({ game }: SimilarGameListProps) {
-  const similarGames = gameListData.games
-    .filter((g) => g.game_id !== game.game_id)
-    .map((g) => ({
-      game_id: g.game_id,
-      title: g.title,
-      image_url: g.thumbnail_url,
-      average_rating: g.average_rating,
-    }));
+interface GameListResponse {
+  count: number;
+  next: number | null;
+  previous: number | null;
+  results: GameListItem[];
+}
+
+async function getSimilarGames(genre = '전략') {
+  const response = await fetcher<GameListResponse>(`/games/?genres=${genre}`);
+  console.log('similar', response);
+  return response.results;
+}
+export default async function SimilarGameList({ genre }: SimilarGameListProps) {
+  const similarGames = await getSimilarGames(genre);
+
   if (similarGames.length === 0) {
     return <p className="text-sm text-gray-500">비슷한 게임이 없습니다.</p>;
   }
@@ -22,10 +28,10 @@ export default function SimilarGameList({ game }: SimilarGameListProps) {
       {similarGames.map((item) => (
         <SimilarGameItem
           key={item.game_id}
-          game_id={item.game_id}
+          gameId={item.game_id}
           title={item.title}
-          image_url={item.image_url}
-          average_rating={item.average_rating}
+          thumbnailUrl={item.thumbnail_url}
+          averageRating={item.average_rating}
         />
       ))}
     </>
