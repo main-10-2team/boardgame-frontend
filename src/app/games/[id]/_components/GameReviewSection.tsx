@@ -1,10 +1,11 @@
+'use client';
 import { reviewData } from '@/assets/mocks/gameListData';
 import Button from '@/components/common/Button';
+import ReviewList from '@/components/game/detail/ReviewList';
+import ReviewModal from '@/components/game/detail/ReviewModal';
 import ReviewDetailModal from '@/components/my-page/review/ReviewDetailModal';
 import { ReviewItem } from '@/types/user/review';
 import { useEffect, useState } from 'react';
-import ReviewList from './ReviewList';
-import ReviewModal from './ReviewModal';
 
 interface GameReviewSectionProps {
   gameId: number;
