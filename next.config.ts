@@ -24,6 +24,11 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/data/photo/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'cf.geekdo-images.com',
+        port: '',
+      },
     ],
   },
 };

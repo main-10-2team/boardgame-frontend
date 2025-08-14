@@ -1,13 +1,13 @@
 'use client';
 
+import Button from '@/components/common/Button';
+import Checkbox from '@/components/common/Checkbox';
+import Radio from '@/components/common/Radio';
+import RangeSlider from '@/components/common/RangeSlider';
+import StarRating from '@/components/common/StarRating';
 import { RiResetRightLine } from '@remixicon/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import Button from '../common/Button';
-import Checkbox from '../common/Checkbox';
-import Radio from '../common/Radio';
-import RangeSlider from '../common/RangeSlider';
-import StarRating from '../common/StarRating';
 
 const genreList = ['전략', '협동', '파티', '추리', '가족'];
 const playerOptions = ['1명', '2명', '3명', '4명', '5명', '6명+'];
