@@ -1,10 +1,10 @@
 import GameList from '@/components/game/GameList';
-import { GameListItem } from '@/types/game/game';
+import { GameData } from '@/types/game/game';
 import SortDropdown from './SortDropdown';
 
 interface GameListSectionProps {
   total: number;
-  gameListData: GameListItem[];
+  gameListData: GameData[];
 }
 export default function GameListSection({
   total,
