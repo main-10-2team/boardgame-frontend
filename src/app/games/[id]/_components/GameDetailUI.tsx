@@ -10,8 +10,6 @@ interface GameDetailPageProps {
 }
 
 export default function GameDetailUI({ game }: GameDetailPageProps) {
-  console.log('game', game);
-
   if (!game) {
     notFound();
   }
