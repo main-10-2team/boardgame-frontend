@@ -10,11 +10,8 @@ export interface SignUpFormData {
 
 export interface UnifiedSignUpFormData extends SignUpFormData {
   emailVerificationCode: string;
-  phoneVerificationCode: string;
   isEmailSent: boolean;
   isEmailVerified: boolean;
-  isPhoneSent: boolean;
-  isPhoneVerified: boolean;
 }
 
 // api 전송데이터
