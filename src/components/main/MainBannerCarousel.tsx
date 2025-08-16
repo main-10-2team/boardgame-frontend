@@ -1,7 +1,11 @@
 'use client';
 import { mainBannerList } from '@/assets/mocks/mainBannerList';
 import Button from '@/components/common/Button';
-import { RiArrowRightLine } from '@remixicon/react';
+import {
+  RiArrowLeftSLine,
+  RiArrowRightLine,
+  RiArrowRightSLine,
+} from '@remixicon/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import 'swiper/css';
@@ -52,10 +56,14 @@ export default function MainBannerCarousel() {
           loop={true}
           modules={[Navigation, Autoplay]}
           spaceBetween={8}
-          autoplay={{ delay: 3000, disableOnInteraction: false }} // 자동 슬라이드 설정
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+          }}
           navigation={{
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
+            nextEl: '.main-button-next',
+            prevEl: '.main-button-prev',
           }}
           breakpoints={{
             768: {
@@ -73,7 +81,7 @@ export default function MainBannerCarousel() {
             <SwiperSlide key={index}>
               <Link
                 href={`/games/${banner.gameId}`}
-                className="relative block aspect-square w-full overflow-hidden rounded-xl"
+                className="group relative block aspect-square w-full overflow-hidden rounded-xl"
               >
                 <Image
                   src={banner.src}
@@ -83,7 +91,7 @@ export default function MainBannerCarousel() {
                   className="absolute inset-0 h-full w-full object-cover"
                   priority={index === 0}
                 />
-                <div className="absolute right-0 bottom-0 left-0 bg-gradient-to-t from-black to-transparent px-6 py-8">
+                <div className="absolute right-0 bottom-0 left-0 bg-gradient-to-t from-black to-transparent px-6 py-8 transition-all group-hover:h-full group-hover:from-[#00000087] group-hover:to-[#00000087]">
                   <h3 className="line-clamp-2 text-2xl font-bold text-white">
                     {banner.title}
                   </h3>
@@ -94,15 +102,13 @@ export default function MainBannerCarousel() {
               </Link>
             </SwiperSlide>
           ))}
-          <div className="absolute top-1/2 left-1/2 z-20 flex w-full -translate-x-1/2 -translate-y-1/2 transform justify-between px-6 xl:w-[calc(50%+100px)]">
-            <div
-              className="swiper-button-next after:text-2xl!"
-              style={{ color: 'white' }}
-            ></div>
-            <div
-              className="swiper-button-prev after:text-2xl!"
-              style={{ color: 'white' }}
-            ></div>
+          <div className="pointer-events-none absolute top-1/2 left-1/2 z-20 flex w-full -translate-x-1/2 -translate-y-1/2 transform justify-between px-6 xl:w-[calc(50%+10rem)]">
+            <div className="main-button-prev">
+              <RiArrowLeftSLine className="h-10 w-10" />
+            </div>
+            <div className="main-button-next">
+              <RiArrowRightSLine className="h-10 w-10" />
+            </div>
           </div>
         </Swiper>
       </div>
