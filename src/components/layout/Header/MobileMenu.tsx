@@ -12,10 +12,18 @@ import {
   RiMenuLine,
   RiUserLine,
 } from '@remixicon/react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
-export default function MobileMenu() {
+interface MobileMenuProps {
+  user: {
+    nickname: string;
+    profile_image?: string | null;
+  } | null;
+}
+
+export default function MobileMenu({ user }: MobileMenuProps) {
   // 메뉴바 상태
   const [isOpen, setIsOpen] = useState(false);
   // 메뉴바 닫기 함수
@@ -52,27 +60,60 @@ export default function MobileMenu() {
         style={{ zIndex: Z_INDEX.MOBILE_MENU + 1 }}
       >
         <div className="flex h-full flex-col gap-4 p-6">
-          <div className="mb-2 flex items-center justify-between">
-            <div className={cn('flex items-center gap-1 px-0')}>
-              <RiUserLine size={20} />
-              <Link href="/login" className="ml-2">
-                로그인
+          {user ? (
+            <div onClick={handleClose}>
+              <div className="mb-2 flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <Image
+                    src={
+                      user.profile_image
+                        ? `https://boardq.o-r.kr/media/${user.profile_image}`
+                        : '/images/defaultProfileImg.png'
+                    }
+                    alt="프로필"
+                    width={32}
+                    height={32}
+                    priority
+                    className="rounded-full"
+                  />
+                  <span className="text-lg">{user.nickname}</span>
+                </div>
+                <div className="cursor-pointer" onClick={handleClose}>
+                  <RiCloseLine />
+                </div>
+              </div>
+
+              <Link href={'/my-page'}>
+                <Button className="mt-4 w-full">마이페이지</Button>
               </Link>
-              <RiArrowRightSLine size={20} />
             </div>
-            <div className="cursor-pointer" onClick={handleClose}>
-              <RiCloseLine />
-            </div>
-          </div>
-          <div className="flex flex-col">
-            <Button
-              className="bg-gray-400 text-white"
-              variant="primary"
-              size="md"
-            >
-              <Link href="/signup">회원가입</Link>
-            </Button>
-          </div>
+          ) : (
+            <>
+              <div className="mb-2 flex items-center justify-between">
+                <div className="flex items-center gap-1">
+                  <RiUserLine size={20} />
+                  <Link href="/auth/login" onClick={handleClose}>
+                    로그인
+                  </Link>
+                  <RiArrowRightSLine size={20} />
+                </div>
+                <div className="cursor-pointer" onClick={handleClose}>
+                  <RiCloseLine />
+                </div>
+              </div>
+              <div className="flex flex-col">
+                <Button
+                  className="bg-gray-400 text-white"
+                  variant="primary"
+                  size="md"
+                  onClick={handleClose}
+                >
+                  <Link href="/auth/signup">회원가입</Link>
+                </Button>
+              </div>
+            </>
+          )}
+
           <div className="my-1 border border-gray-200"></div>
 
           {/* 메뉴 항목들 */}
@@ -83,6 +124,13 @@ export default function MobileMenu() {
               </Link>
             </div>
           ))}
+          {user && (
+            <div className="mt-auto flex">
+              <form action="/logout" method="post">
+                <Button variant="transparent">로그아웃</Button>
+              </form>
+            </div>
+          )}
         </div>
       </aside>
     </>

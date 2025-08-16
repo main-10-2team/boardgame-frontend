@@ -38,7 +38,7 @@ export default function BoardPickPage() {
   const router = useRouter();
 
   // 설문 상태/로직 훅 (현재 단계, 답변, 다음/이전 이동 등)
-  const survey = useBoardPickSurvey(questions);
+  const survey = useBoardPickSurvey();
   // 마지막 단계 여부 (UI/전환 분기 용)
   const isLast = survey.step === survey.total;
 
@@ -62,7 +62,7 @@ export default function BoardPickPage() {
       <GradientLayout>
         <SurveySection
           step={survey.step}
-          total={survey.total}
+          total={survey.total ?? 0}
           question={q}
           value={v}
           onSelectSingle={(id: number) => survey.setSingle(q.key, id)}

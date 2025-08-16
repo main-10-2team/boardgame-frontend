@@ -1,11 +1,21 @@
+export const dynamic = 'force-dynamic';
 import { AuthButtons } from '@/components/layout/Header/AuthButtons';
 import CategoryMenu from '@/components/layout/Header/CategoryMenu';
 import Logo from '@/components/layout/Header/Logo';
 import MobileMenu from '@/components/layout/Header/MobileMenu';
 import { SearchInput } from '@/components/layout/Header/SearchInput';
+import { UserMenu } from '@/components/layout/Header/UserMenu';
+import { fetchUserInfo } from '@/lib/auth';
+import { cookies } from 'next/headers';
 import { MobileSearchIcon } from './MobileSearchIcon';
 
-export default function Header() {
+export default async function Header() {
+  const cookieStore = cookies();
+  const accessToken = (await cookieStore).get('accessToken')?.value;
+  const user = accessToken ? await fetchUserInfo(accessToken) : null;
+
+  console.log(user);
+
   return (
     <header className="relative z-50 bg-white whitespace-nowrap shadow">
       <div className="mx-auto flex max-w-[1140px] items-center justify-between px-8 py-4">
@@ -14,12 +24,12 @@ export default function Header() {
           <CategoryMenu />
           <div className="items-center gap-8 lg:flex">
             <SearchInput />
-            <AuthButtons />
+            {user ? <UserMenu user={user} /> : <AuthButtons />}
           </div>
         </div>
-        <div className="flex cursor-pointer gap-6 lg:hidden">
+        <div className="flex gap-6 lg:hidden">
           <MobileSearchIcon />
-          <MobileMenu />
+          <MobileMenu user={user} />
         </div>
       </div>
     </header>

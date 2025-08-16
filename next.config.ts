@@ -29,6 +29,12 @@ const nextConfig: NextConfig = {
         hostname: 'cf.geekdo-images.com',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'boardq.o-r.kr',
+        port: '',
+        pathname: '/media/**',
+      },
     ],
   },
 };

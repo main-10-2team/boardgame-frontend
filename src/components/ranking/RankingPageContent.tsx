@@ -2,6 +2,7 @@
 
 import { gameRankingData } from '@/assets/mocks/gameRankingData';
 import RankingList from '@/components/ranking/RankingList';
+import { GameRankingItem } from '@/types/game/gameRanking';
 import dynamic from 'next/dynamic';
 
 const Breadcrumbs = dynamic(() => import('@/components/layout/Breadcrumbs'), {
@@ -11,7 +12,11 @@ const RankingTab = dynamic(() => import('@/components/ranking/RankingTab'), {
   ssr: false,
 });
 
-export default function RankingPageContent() {
+interface RankingPageContentProps {
+  games: GameRankingItem[];
+}
+
+export default function RankingPageContent({ games }: RankingPageContentProps) {
   return (
     <main className="inner flex flex-1 flex-col gap-6 pt-6 pb-40 text-center">
       <Breadcrumbs />
