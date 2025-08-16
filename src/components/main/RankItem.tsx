@@ -59,7 +59,6 @@ export default function RankItem({ game, index }: RankItemProps) {
             max_players={game.max_players}
             difficulty={game.difficulty}
             isLink={false}
-            size="md"
           />
         </div>
       </div>
