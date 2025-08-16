@@ -86,7 +86,7 @@ export default function BoardPickPage() {
 
 function GradientLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-[100dvh] bg-[linear-gradient(to_bottom,_#5a5a5a,_#17171B)] text-white">
+    <div className="relative min-h-[100dvh] bg-[linear-gradient(to_bottom,_#5a5a5a,_#17171B)] text-white">
       {children}
     </div>
   );

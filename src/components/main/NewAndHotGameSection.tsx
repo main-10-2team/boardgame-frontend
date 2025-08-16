@@ -8,9 +8,9 @@ export default function NewAndHotGameSection() {
   return (
     <div className="inner">
       <h2 className="mb-8 flex items-center justify-between text-2xl font-bold md:text-3xl">
-        NEW & HOT
+        보드큐 랭킹
         <Link
-          href="/rank"
+          href="/ranking"
           className="group flex items-center gap-1 p-1 text-sm text-gray-900 hover:underline"
         >
           전체보기
@@ -18,8 +18,8 @@ export default function NewAndHotGameSection() {
         </Link>
       </h2>
       <div className="grid grid-cols-1 gap-15 md:grid-cols-2 md:gap-6">
-        <RankItemList games={games} title="NEW" />
-        <RankItemList games={games} title="HOT" />
+        <RankItemList games={games} title="전체" />
+        <RankItemList games={games} title="평점순" />
       </div>
     </div>
   );

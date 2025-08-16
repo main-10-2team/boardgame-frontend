@@ -1,4 +1,3 @@
-import { RiCheckLine } from '@remixicon/react';
 import { InputHTMLAttributes } from 'react';
 
 interface RadioProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -15,9 +14,7 @@ const Radio = ({ onToggle, children, ...props }: RadioProps) => {
         onChange={onToggle}
         {...props}
       />
-      <span className="peer-checked:border-primary-400 flex h-5 w-5 items-center justify-center rounded-full border border-gray-400 transition-all peer-checked:border-6">
-        <RiCheckLine className="text-white" />
-      </span>
+      <span className="peer-checked:border-primary-400 flex h-5 w-5 items-center justify-center rounded-full border border-gray-400 transition-all peer-checked:border-6" />
       {children}
     </label>
   );

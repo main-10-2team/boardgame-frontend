@@ -121,6 +121,7 @@ export default function FilterSidebar() {
         <RangeSlider
           min={15}
           max={120}
+          unit="분"
           step={5}
           value={playTime}
           onChange={setPlayTime}
