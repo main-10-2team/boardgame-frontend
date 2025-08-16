@@ -10,6 +10,20 @@ interface ProfileInfoSectionprops {
   user: User;
 }
 
+export const convertToLocalPhone = (phone: string) => {
+  if (phone.startsWith('+82')) {
+    const local = '0' + phone.slice(3); // +82 → 0
+    if (local.length === 11) {
+      return local.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+    }
+    if (local.length === 10) {
+      return local.replace(/(\d{2,3})(\d{3,4})(\d{4})/, '$1-$2-$3');
+    }
+    return local;
+  }
+  return phone;
+};
+
 export default function ProfileInfoSection({ user }: ProfileInfoSectionprops) {
   const [modals, setModals] = useState({
     pwd: false,
@@ -43,7 +57,7 @@ export default function ProfileInfoSection({ user }: ProfileInfoSectionprops) {
         {/* 휴대폰번호 변경 모달 */}
         <span className="text-gray-600">휴대폰 번호</span>
         <span className="flex items-center">
-          010-1234-5678
+          {convertToLocalPhone(user.phone_number)}
           <Button
             onClick={() => setModals((prev) => ({ ...prev, phone: true }))}
             size="sm"
@@ -57,12 +71,8 @@ export default function ProfileInfoSection({ user }: ProfileInfoSectionprops) {
             onClose={() => setModals((prev) => ({ ...prev, phone: false }))}
           />
         </span>
-
-        <span className="text-gray-600">성별</span>
-        <span>남자</span>
-
         <span className="text-gray-600">생년월일</span>
-        <span>2000.00.00</span>
+        <span>{user.birth.replace(/-/g, '.')}</span>
       </div>
     </>
   );

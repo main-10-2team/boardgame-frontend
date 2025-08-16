@@ -1,6 +1,5 @@
 // 'use client';
 
-import { userProfile } from '@/assets/mocks/userProfile';
 import Button from '@/components/common/Button';
 import Grid from '@/components/layout/Grid';
 import ProfileDetail from '@/components/my-page/profile/ProfileDetail';
@@ -11,7 +10,7 @@ import { getUser } from '@/lib/auth';
 import Link from 'next/link';
 
 export default async function ProfilePage() {
-  const user = await getUser();
+  const userProfile = await getUser();
 
   return (
     <main className="inner flex flex-1 flex-col py-10">

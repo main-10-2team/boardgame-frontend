@@ -18,6 +18,9 @@ export function useBoardPickSurvey() {
   const fetchQuestion = useCallback(async (step: number) => {
     try {
       const res = await fetch(`/api/v1/today/question/${step}`);
+      if (!res.ok) {
+        throw new Error(`질문 ${step}번 API 에러: ${res.status}`);
+      }
       const data: Question & { total: number } = await res.json();
 
       setCurrent(data);

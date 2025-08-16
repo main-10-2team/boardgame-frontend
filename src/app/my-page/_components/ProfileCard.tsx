@@ -12,6 +12,7 @@ interface ProfileCardProps {
 }
 
 export default function ProfileCard({ userProfile }: ProfileCardProps) {
+  console.log(userProfile.profile_image);
   return (
     <div className="flex flex-col items-center gap-6 md:items-start">
       <ImageWithFallback

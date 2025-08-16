@@ -13,10 +13,12 @@ interface WithdrawalModalProps {
 
 const withdrawalReasons = [
   { label: '선택', value: '' },
-  { label: '콘텐츠가 부족해요', value: 'lack_of_content' },
-  { label: '사용이 불편해요', value: 'inconvenient_ui' },
-  { label: '자주 사용하지 않아요', value: 'not_using' },
-  { label: '다른 서비스로 이동', value: 'moved_to_other' },
+  { label: '서비스에 만족하지 않음', value: 'DISSATISFIED' },
+  { label: '원하는 기능이 존재하지 않음', value: 'NO_FEATURES' },
+  { label: '사용에 불편함이 있거나 오류가 많음', value: 'TOO_MANY_ERRORS' },
+  { label: '더 이상 사용할 일이 없음', value: 'NO_LONGER_NEEDED' },
+  { label: '계정을 중복으로 생성함', value: 'DUPLICATE_ACCOUNT' },
+  { label: '기타 (직접 입력)', value: 'OTHER' },
 ];
 
 export default function WithdrawalModal({
@@ -41,7 +43,7 @@ export default function WithdrawalModal({
       modalId="deleteMemberModal"
       isOpen={isOpen}
       onClose={onClose}
-      className="w-[480px]"
+      className="w-full max-w-[480px]"
     >
       <div className="flex flex-col gap-8">
         <div className="text-xl font-semibold">회원 탈퇴</div>
