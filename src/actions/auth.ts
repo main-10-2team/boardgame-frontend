@@ -69,7 +69,7 @@ export async function login(
   const password = formData.get('password') as string;
 
   try {
-    const data = await fetcher<EmailLoginResponse>('/api/v1/auth/login/', {
+    const data = await fetcher<EmailLoginResponse>('/auth/login/', {
       method: 'POST',
       body: JSON.stringify({ email, password }),
     });
@@ -95,7 +95,7 @@ export async function sendEmailCode(
   email: string
 ): Promise<EmailVerificationState> {
   try {
-    const data = await fetcher<SendCodeApiResponse>('/api/v1/auth/send-code/', {
+    const data = await fetcher<SendCodeApiResponse>('/auth/send-code/', {
       method: 'POST',
       body: JSON.stringify({
         email,
@@ -126,17 +126,14 @@ export async function verifyEmailCode(
   verificationCode: string
 ): Promise<EmailVerificationState> {
   try {
-    const data = await fetcher<VerifyCodeApiResponse>(
-      '/api/v1/auth/verify-code/',
-      {
-        method: 'POST',
-        body: JSON.stringify({
-          email,
-          verification_code: verificationCode,
-          purpose: 'signup',
-        }),
-      }
-    );
+    const data = await fetcher<VerifyCodeApiResponse>('/auth/verify-code/', {
+      method: 'POST',
+      body: JSON.stringify({
+        email,
+        verification_code: verificationCode,
+        purpose: 'signup',
+      }),
+    });
 
     return {
       success: true,
@@ -161,7 +158,7 @@ export async function signUp(
   formData: FormData
 ): Promise<SignUpState> {
   try {
-    const data = await fetcher<SignUpApiResponse>('/api/v1/auth/signup/', {
+    const data = await fetcher<SignUpApiResponse>('/auth/signup/', {
       method: 'POST',
       body: formData, // FormData 그대로 전송
     });
