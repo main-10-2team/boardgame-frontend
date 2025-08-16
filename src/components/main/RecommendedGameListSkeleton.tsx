@@ -22,11 +22,11 @@ export default function RecommendedGameListSkeleton() {
               />
             ))}
           </div>
-          <div className="absolute top-1/2 left-1/2 z-20 flex w-full -translate-x-1/2 -translate-y-1/2 transform justify-between px-4 lg:w-[calc(100%+120px)] lg:px-0">
-            <div className="theme-button-prev pointer-events-none opacity-50">
+          <div className="pointer-events-none absolute top-1/2 left-1/2 z-20 flex w-full -translate-x-1/2 -translate-y-1/2 transform justify-between px-4 lg:w-[calc(100%+120px)] lg:px-0">
+            <div className="theme-button-prev">
               <RiArrowLeftLine className="text-2xl" />
             </div>
-            <div className="theme-button-next pointer-events-none opacity-50">
+            <div className="theme-button-next">
               <RiArrowRightLine className="text-2xl" />
             </div>
           </div>

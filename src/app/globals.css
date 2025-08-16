@@ -139,5 +139,10 @@ body {
 
 .theme-button-next,
 .theme-button-prev {
-  @apply hover:bg-primary-500 border-primary-400 text-primary-500 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border transition-colors hover:text-white;
+  @apply hover:bg-primary-500 border-primary-400 text-primary-500 pointer-events-auto flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border transition-colors hover:text-white;
+}
+
+.main-button-next,
+.main-button-prev {
+  @apply hover:bg-primary-500 text-primary-500 pointer-events-auto flex h-12 w-12 cursor-pointer items-center justify-center rounded-full transition-colors hover:text-white;
 }
