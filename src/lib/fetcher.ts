@@ -1,6 +1,6 @@
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-class ApiError extends Error {
+export class ApiError extends Error {
   status: number;
   info: unknown;
 
@@ -16,10 +16,15 @@ export async function fetcher<T>(
   options?: RequestInit,
   accessToken?: string // SSR일 경우 직접 전달
 ): Promise<T> {
+  const isFormData = options?.body instanceof FormData;
+
   const res = await fetch(`${API_BASE_URL}${endpoint}`, {
     ...options,
     headers: {
-      ...(options?.method !== 'GET' && { 'Content-Type': 'application/json' }),
+      // FormData일 때는 Content-Type을 설정하지 않음 (브라우저가 자동으로 multipart/form-data 설정)
+      ...(!isFormData &&
+        options?.method !== 'GET' &&
+        options?.body && { 'Content-Type': 'application/json' }),
       ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
       ...options?.headers,
     },

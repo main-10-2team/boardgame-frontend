@@ -1,6 +1,3 @@
-// src/hooks/auth/useSignUpForm.ts
-
-import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { useToast } from '@/hooks/useToast';
 import { useEmailValidation } from '@/hooks/useEmailValidation';
@@ -8,10 +5,10 @@ import { usePhoneValidation } from '@/hooks/usePhoneValidation';
 import { usePasswordValidation } from '@/hooks/usePasswordValidation';
 import { useNicknameValidation } from '@/hooks/useNicknameValidation';
 import { useBirthValidation } from '@/hooks/useBirthValidation';
-import { UnifiedSignUpFormData, SignUpApiData } from '@/types/auth/signup';
+import { UnifiedSignUpFormData } from '@/types/auth/signup';
+import { sendEmailCode, verifyEmailCode, signUp } from '@/actions/auth';
 
 export const useSignUpForm = () => {
-  const router = useRouter();
   const { toasts, success, error } = useToast();
 
   const { emailRules } = useEmailValidation();
@@ -31,12 +28,9 @@ export const useSignUpForm = () => {
       password: '',
       confirmPassword: '',
       emailVerificationCode: '',
-      phoneVerificationCode: '',
 
       isEmailSent: false,
       isEmailVerified: false,
-      isPhoneSent: false,
-      isPhoneVerified: false,
     },
   });
 
@@ -51,43 +45,41 @@ export const useSignUpForm = () => {
   const watchPassword = watch('password');
   const watchConfirmPassword = watch('confirmPassword');
   const watchEmail = watch('email');
-  const watchPhone = watch('phone');
   const watchEmailCode = watch('emailVerificationCode');
-  const watchPhoneCode = watch('phoneVerificationCode');
 
   const isEmailSent = watch('isEmailSent');
   const isEmailVerified = watch('isEmailVerified');
-  const isPhoneSent = watch('isPhoneSent');
-  const isPhoneVerified = watch('isPhoneVerified');
 
-  const onSubmit = (data: UnifiedSignUpFormData) => {
+  const onSubmit = async (data: UnifiedSignUpFormData) => {
     if (!data.isEmailVerified) {
       error('이메일 인증을 완료해주세요');
       return;
     }
 
-    if (!data.isPhoneVerified) {
-      error('휴대폰 인증을 완료해주세요');
-      return;
+    try {
+      // FormData 생성 (서버 액션은 FormData를 받음)
+      const formData = new FormData();
+      formData.append('name', data.name);
+      formData.append('email', data.email);
+      formData.append('nickname', data.nickname);
+      formData.append('phone_number', convertToInternational(data.phone)); // phone_number로 변경
+      formData.append('birth', formatBirthForSave(data.birth));
+      formData.append('password', data.password);
+      formData.append('email_verification_code', data.emailVerificationCode);
+
+      // 서버 액션 호출 - signUp은 redirect를 포함하므로 성공하면 페이지 이동됨
+      const result = await signUp({ success: false, error: null }, formData);
+
+      // 만약 에러가 있다면 (redirect되지 않은 경우)
+      if (result && !result.success) {
+        error(result.error || '회원가입 중 오류가 발생했습니다');
+      }
+    } catch {
+      error('회원가입 처리 중 오류가 발생했습니다');
     }
-
-    const signUpData: SignUpApiData = {
-      name: data.name,
-      email: data.email,
-      nickname: data.nickname,
-      phone: convertToInternational(data.phone),
-      birth: formatBirthForSave(data.birth),
-      password: data.password,
-    };
-
-    success('회원가입이 완료되었습니다!');
-
-    setTimeout(() => {
-      router.push('/preference');
-    }, 1500);
   };
 
-  const handleEmailVerification = () => {
+  const handleEmailVerification = async () => {
     if (!watchEmail) {
       error('이메일을 입력해주세요');
       return;
@@ -98,46 +90,40 @@ export const useSignUpForm = () => {
       return;
     }
 
-    success('이메일 인증번호가 전송되었습니다!');
-    setValue('isEmailSent', true);
-    setValue('isEmailVerified', false);
+    try {
+      const result = await sendEmailCode(watchEmail);
+
+      if (result.success) {
+        success(result.message || '이메일 인증번호가 전송되었습니다!');
+        setValue('isEmailSent', true);
+        setValue('isEmailVerified', false);
+      } else {
+        error(result.error || '인증번호 전송에 실패했습니다');
+      }
+    } catch {
+      error('인증번호 전송 중 오류가 발생했습니다');
+    }
   };
 
   // 이메일 인증번호 확인
-  const handleEmailVerificationConfirm = () => {
+  const handleEmailVerificationConfirm = async () => {
     if (!watchEmailCode?.trim()) {
       error('인증번호를 입력해주세요');
       return;
     }
 
-    success('이메일 인증이 완료되었습니다!');
-    setValue('isEmailVerified', true);
-  };
+    try {
+      const result = await verifyEmailCode(watchEmail, watchEmailCode);
 
-  const handlePhoneVerification = () => {
-    if (!watchPhone) {
-      error('휴대폰 번호를 입력해주세요');
-      return;
+      if (result.success) {
+        success(result.message || '이메일 인증이 완료되었습니다!');
+        setValue('isEmailVerified', true);
+      } else {
+        error(result.error || '인증번호가 올바르지 않습니다');
+      }
+    } catch {
+      error('인증번호 확인 중 오류가 발생했습니다');
     }
-
-    if (!phoneRules.pattern.value.test(watchPhone.replace(/[^0-9]/g, ''))) {
-      error('올바른 휴대폰 번호 형식으로 입력해주세요');
-      return;
-    }
-
-    success('휴대폰 인증번호가 전송되었습니다!');
-    setValue('isPhoneSent', true);
-    setValue('isPhoneVerified', false);
-  };
-
-  const handlePhoneVerificationConfirm = () => {
-    if (!watchPhoneCode?.trim()) {
-      error('인증번호를 입력해주세요');
-      return;
-    }
-
-    success('휴대폰 인증이 완료되었습니다!');
-    setValue('isPhoneVerified', true);
   };
 
   return {
@@ -156,8 +142,6 @@ export const useSignUpForm = () => {
     state: {
       isEmailSent,
       isEmailVerified,
-      isPhoneSent,
-      isPhoneVerified,
     },
 
     rules: {
@@ -173,8 +157,6 @@ export const useSignUpForm = () => {
       onSubmit,
       handleEmailVerification,
       handleEmailVerificationConfirm,
-      handlePhoneVerification,
-      handlePhoneVerificationConfirm,
     },
 
     toasts,
