@@ -5,16 +5,15 @@ import Logo from '@/components/layout/Header/Logo';
 import MobileMenu from '@/components/layout/Header/MobileMenu';
 import { SearchInput } from '@/components/layout/Header/SearchInput';
 import { UserMenu } from '@/components/layout/Header/UserMenu';
-import { fetchUserInfo } from '@/lib/auth';
-import { cookies } from 'next/headers';
+import { getUser } from '@/lib/auth';
 import { MobileSearchIcon } from './MobileSearchIcon';
 
 export default async function Header() {
-  const cookieStore = cookies();
-  const accessToken = (await cookieStore).get('accessToken')?.value;
-  const user = accessToken ? await fetchUserInfo(accessToken) : null;
+  // const cookieStore = await cookies();
+  // const accessToken = cookieStore.get('access_token')?.value;
+  // const user = accessToken ? await fetchUserInfo(accessToken) : null;
 
-  console.log(user);
+  const user = await getUser();
 
   return (
     <header className="relative z-50 bg-white whitespace-nowrap shadow">

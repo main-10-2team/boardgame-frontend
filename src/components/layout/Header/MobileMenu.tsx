@@ -1,6 +1,8 @@
 'use client';
 
+import { logout } from '@/actions/auth';
 import Button from '@/components/common/Button';
+import { ImageWithFallback } from '@/components/common/ImageWithFallback';
 import { CATEGORY_MENU_ITEMS } from '@/constants/category/menuItems';
 import { Z_INDEX } from '@/constants/zIndex';
 import { useEscapeKey } from '@/hooks/useEscapeKey';
@@ -12,7 +14,6 @@ import {
   RiMenuLine,
   RiUserLine,
 } from '@remixicon/react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -63,21 +64,18 @@ export default function MobileMenu({ user }: MobileMenuProps) {
           {user ? (
             <div onClick={handleClose}>
               <div className="mb-2 flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <Image
-                    src={
-                      user.profile_image
-                        ? `https://boardq.o-r.kr/media/${user.profile_image}`
-                        : '/images/defaultProfileImg.png'
-                    }
-                    alt="프로필"
-                    width={32}
-                    height={32}
-                    priority
-                    className="rounded-full"
-                  />
-                  <span className="text-lg">{user.nickname}</span>
-                </div>
+                <Link href={'/my-page/profile'}>
+                  <div className="flex items-center gap-4">
+                    <ImageWithFallback
+                      src={`https://boardq.o-r.kr/media/${user.profile_image}`}
+                      alt="프로필"
+                      width={32}
+                      height={32}
+                      className="rounded-full"
+                    />
+                    <span className="text-lg">{user.nickname}</span>
+                  </div>
+                </Link>
                 <div className="cursor-pointer" onClick={handleClose}>
                   <RiCloseLine />
                 </div>
@@ -90,13 +88,13 @@ export default function MobileMenu({ user }: MobileMenuProps) {
           ) : (
             <>
               <div className="mb-2 flex items-center justify-between">
-                <div className="flex items-center gap-1">
-                  <RiUserLine size={20} />
-                  <Link href="/auth/login" onClick={handleClose}>
-                    로그인
-                  </Link>
-                  <RiArrowRightSLine size={20} />
-                </div>
+                <Link href="/auth/login" onClick={handleClose}>
+                  <div className="flex items-center">
+                    <RiUserLine size={20} />
+                    <span className="ml-2">로그인</span>
+                    <RiArrowRightSLine size={20} />
+                  </div>
+                </Link>
                 <div className="cursor-pointer" onClick={handleClose}>
                   <RiCloseLine />
                 </div>
@@ -127,7 +125,15 @@ export default function MobileMenu({ user }: MobileMenuProps) {
           {user && (
             <div className="mt-auto flex">
               <form action="/logout" method="post">
-                <Button variant="transparent">로그아웃</Button>
+                <Button
+                  variant="transparent"
+                  onClick={async () => {
+                    await logout();
+                    window.location.href = '/';
+                  }}
+                >
+                  로그아웃
+                </Button>
               </form>
             </div>
           )}

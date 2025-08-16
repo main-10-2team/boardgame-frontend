@@ -13,15 +13,12 @@ export default async function ProtectedLayout({
   const access = cookieStore.get('access_token')?.value;
 
   if (!access) {
-    console.log('no token, redirect');
     redirect(`/auth/login?next=${encodeURIComponent(nextBase)}`);
   }
 
   const me = await fetchUserInfo(access);
-  console.log('user info >>>', me);
 
   if (!me) {
-    console.log('fetchUserInfo failed, redirect');
     redirect(`/auth/login?next=${encodeURIComponent(nextBase)}`);
   }
 
