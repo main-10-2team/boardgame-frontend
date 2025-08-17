@@ -1,4 +1,4 @@
-import ReviewDetailModal from '@/app/my-page/reviews/_components/ReviewDetailModal';
+import ReviewDetailModal from '@/components/my-page/review/ReviewDetailModal';
 import { ReviewItem } from '@/types/user/review';
 import { RiStarFill } from '@remixicon/react';
 import Image from 'next/image';
@@ -21,7 +21,7 @@ export default function ReviewItemCard({
         onClick={() => setIsOpen(true)}
       >
         <Image
-          src={review.image_url}
+          src={review.image_url || '/images/defaultReviewImg.png'}
           alt={`${review.title}에 대한 리뷰`}
           width={80}
           height={120}

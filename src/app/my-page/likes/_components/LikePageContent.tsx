@@ -63,7 +63,6 @@ export default function LikePageContent() {
       setLikes((prev) => prev.filter((like) => like.game_id !== gameId));
       setTotalCount((prev) => prev - 1);
     } catch (err) {
-      console.error('좋아요 삭제 에러:', err);
       alert('좋아요 삭제 중 문제가 발생했어요.');
     }
   };
