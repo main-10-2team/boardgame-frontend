@@ -1,8 +1,8 @@
 import GameItem from '@/components/game/GameItem';
-import { GameData } from '@/types/game/game';
+import { GameListItem } from '@/types/game/game';
 
 interface SimilarGameSectionProps {
-  similar: GameData[];
+  similar: GameListItem[];
 }
 
 export default function SimilarGameSection({

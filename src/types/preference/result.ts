@@ -1,12 +1,13 @@
 export type Result = {
   game_id: number;
   title: string;
-  imageUrl: string;
-  rating: number;
-  genre_name: string;
-  playtime_minutes: number;
-  difficulty: number;
+  difficulty: string;
+  thumbnail_url: string;
+  average_rating: number;
+  like_count: number;
+  genre: string;
+  category: string;
   quote?: string;
   reviewer?: string;
-  summary: string;
+  description?: string;
 };
