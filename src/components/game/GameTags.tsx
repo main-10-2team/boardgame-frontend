@@ -1,5 +1,5 @@
-// GameTags.tsx
-import Link from 'next/link';
+'use client';
+import { useRouter } from 'next/navigation';
 import { GameTag } from './GameTag';
 
 /** 구버전(v1) props */
@@ -42,7 +42,7 @@ function buildTags(props: GameTagsProps): Tag[] {
     return [
       {
         label: genre ? `${genre}` : '',
-        href: `/games?genre=${encodeURIComponent(genre)}`,
+        href: `/games?genres=${encodeURIComponent(genre)}`,
       },
       {
         label: category ? `${category}` : '',
@@ -81,7 +81,7 @@ function buildTags(props: GameTagsProps): Tag[] {
   return [
     {
       label: genre_name || '',
-      href: `/games?genre=${encodeURIComponent(genre_name || '')}`,
+      href: `/games?genres=${encodeURIComponent(genre_name || '')}`,
     },
     {
       label: playersLabel,
@@ -95,19 +95,27 @@ function buildTags(props: GameTagsProps): Tag[] {
 }
 
 export default function GameTags(props: GameTagsProps) {
+  const router = useRouter();
+
   const isOverlay = props.isOverlay ?? false;
   const isLink = props.isLink ?? false;
   const size = (props.size ?? 'sm') as 'sm' | 'md' | 'lg';
-
   const tags = buildTags(props).filter((t) => t.label && t.label.length > 0);
 
   if (isLink) {
     return (
       <>
         {tags.map((tag, idx) => (
-          <Link href={tag.href} key={`tag-${idx}`}>
+          <button
+            key={`tag-${idx}`}
+            className="cursor-pointer"
+            onClick={(e) => {
+              e.stopPropagation();
+              router.push(tag.href);
+            }}
+          >
             <GameTag tagLabel={tag.label} isOverlay={isOverlay} size={size} />
-          </Link>
+          </button>
         ))}
       </>
     );
