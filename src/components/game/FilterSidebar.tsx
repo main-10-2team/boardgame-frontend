@@ -92,7 +92,7 @@ export default function FilterSidebar() {
   };
 
   return (
-    <aside className="w-[238px] rounded-2xl border border-gray-200 px-4 py-6">
+    <aside className="w-full rounded-2xl border border-gray-200 px-4 py-6">
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-lg font-semibold">필터</h2>
         <Button
@@ -136,7 +136,7 @@ export default function FilterSidebar() {
         </Accordion>
 
         <Accordion title="인원수">
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-3 gap-2 pb-1">
             {playerOptions.map((p) => (
               <Button
                 key={p.value}
