@@ -86,29 +86,29 @@ export default function GameItem({
         }
       >
         <h3 className="mb-2.5 truncate text-base font-semibold">{title}</h3>
-        {(like_count || average_rating) && (
+        {like_count != null || average_rating != null ? (
           <div
             className={cn(
               'mb-2 flex items-center gap-6 text-sm',
               overlayInfo ? 'text-white' : 'text-gray-500'
             )}
           >
-            {like_count && (
+            {like_count != null ? (
               <div className="flex items-center gap-2">
                 <RiHeartFill className="h-4 w-4 text-gray-300" />
                 <span className="text-xs">{like_count ?? 0}</span>
               </div>
-            )}
-            {average_rating && (
+            ) : null}
+            {average_rating != null ? (
               <div className="flex items-center gap-2">
                 <RiStarFill className="h-4 w-4 text-gray-300" />
                 <span className="text-xs">
                   {average_rating?.toFixed(1) ?? '-'}
                 </span>
               </div>
-            )}
+            ) : null}
           </div>
-        )}
+        ) : null}
         <div className="mt-1 flex flex-wrap gap-1">
           <GameTags
             category={category}
