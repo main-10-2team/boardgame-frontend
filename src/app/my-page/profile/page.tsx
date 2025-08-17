@@ -1,5 +1,3 @@
-// 'use client';
-
 import Button from '@/components/common/Button';
 import Grid from '@/components/layout/Grid';
 import ProfileDetail from '@/components/my-page/profile/ProfileDetail';

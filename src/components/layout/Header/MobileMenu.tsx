@@ -2,7 +2,7 @@
 
 import { logout } from '@/actions/auth';
 import Button from '@/components/common/Button';
-import { ImageWithFallback } from '@/components/common/ImageWithFallback';
+import { ProfileImage } from '@/components/common/ProfileImage';
 import { CATEGORY_MENU_ITEMS } from '@/constants/category/menuItems';
 import { Z_INDEX } from '@/constants/zIndex';
 import { useEscapeKey } from '@/hooks/useEscapeKey';
@@ -66,13 +66,16 @@ export default function MobileMenu({ user }: MobileMenuProps) {
               <div className="mb-2 flex items-center justify-between">
                 <Link href={'/my-page/profile'}>
                   <div className="flex items-center gap-4">
-                    <ImageWithFallback
-                      src={`https://boardq.o-r.kr/media/${user.profile_image}`}
-                      alt="프로필"
-                      width={32}
-                      height={32}
-                      className="rounded-full"
-                    />
+                    <div className="relative size-8 overflow-hidden rounded-full">
+                      <ProfileImage
+                        src={user.profile_image}
+                        alt="프로필 이미지"
+                        sizes={'32px'}
+                        priority
+                        fill
+                        className="rounded-full object-cover"
+                      />
+                    </div>
                     <span className="text-lg">{user.nickname}</span>
                   </div>
                 </Link>

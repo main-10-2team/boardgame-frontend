@@ -9,10 +9,6 @@ import { getUser } from '@/lib/auth';
 import { MobileSearchIcon } from './MobileSearchIcon';
 
 export default async function Header() {
-  // const cookieStore = await cookies();
-  // const accessToken = cookieStore.get('access_token')?.value;
-  // const user = accessToken ? await fetchUserInfo(accessToken) : null;
-
   const user = await getUser();
 
   return (

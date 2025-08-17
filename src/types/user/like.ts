@@ -6,8 +6,15 @@ export interface LikeItem {
   created_at: string;
 }
 
-export interface LikeListResponse {
-  status: 'success' | 'error';
-  total_count: number;
+export interface LikeListResults {
+  status: 'success';
+  user_like_count: number;
   likes: LikeItem[];
+}
+
+export interface LikeListResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: LikeListResults;
 }

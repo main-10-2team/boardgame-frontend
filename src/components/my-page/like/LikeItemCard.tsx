@@ -43,10 +43,6 @@ export default function LikeItemCard({ game }: LikeItemCardProps) {
           />
           <div className="absolute right-0 bottom-0 left-0 z-5 bg-gradient-to-t from-black/65 to-transparent px-3 pt-8 pb-3 text-white">
             <p className="font-semibold">{game.title}</p>
-            <div className="mt-1 flex items-center gap-1 text-sm text-gray-200">
-              <RiStarFill size={12} />
-              {game.average_rating.toFixed(1)}
-            </div>
           </div>
         </Link>
       </div>
