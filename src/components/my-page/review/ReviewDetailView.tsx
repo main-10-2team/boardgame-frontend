@@ -1,13 +1,13 @@
 import ConfirmModal from '@/components/common/modal/ConfirmModal';
 import StarRating from '@/components/common/StarRating';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
-import { MyReviewItem } from '@/types/user/review';
+import { MyReviewItem, ReviewItem } from '@/types/user/review';
 import { RiDeleteBinLine, RiPencilLine } from '@remixicon/react';
 import Image from 'next/image';
 import { useState } from 'react';
 
 interface ReviewDetailViewProps {
-  review: MyReviewItem;
+  review: ReviewItem | MyReviewItem;
   onEdit: () => void;
   onClose: () => void;
 }
@@ -32,7 +32,7 @@ export default function ReviewDetailView({
       <div className="flex gap-6">
         <div className="flex flex-col justify-center gap-4">
           <Image
-            src={review.image_url}
+            src={review.image_url || '/images/defaultReviewImg.png'}
             alt={review.content}
             width={200}
             height={250}

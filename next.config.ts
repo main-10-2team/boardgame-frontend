@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
     return config;
   },
   images: {
-    domains: ['images.unsplash.com', 'boardlife.co.kr'],
+    domains: ['images.unsplash.com', 'boardlife.co.kr', 'boardq.o-r.kr'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -28,6 +28,12 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'cf.geekdo-images.com',
         port: '',
+      },
+      {
+        protocol: 'https',
+        hostname: 'kr.object.ncloudstorage.com',
+        port: '',
+        pathname: '/boardq/**',
       },
     ],
   },

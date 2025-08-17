@@ -1,13 +1,13 @@
 'use server';
 
-import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
 import { fetcher } from '@/lib/fetcher'; // 실제 경로에 맞게 수정
 import {
   SendCodeApiResponse,
-  VerifyCodeApiResponse,
   SignUpApiResponse,
+  VerifyCodeApiResponse,
 } from '@/types/auth/signup';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
 type EmailLoginResponse = {
   access_token: string;
@@ -176,4 +176,10 @@ export async function signUp(
   }
 
   redirect('/preference');
+}
+
+export async function logout() {
+  const cookieStore = await cookies();
+  cookieStore.delete('access_token');
+  cookieStore.delete('refresh_token');
 }

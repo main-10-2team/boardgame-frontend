@@ -3,12 +3,12 @@
 import Button from '@/components/common/Button';
 import StarRating from '@/components/common/StarRating';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
-import { MyReviewItem, MyReviewWriteItem } from '@/types/user/review';
+import { MyReviewWriteItem, ReviewItem } from '@/types/user/review';
 import Image from 'next/image';
 import { useState } from 'react';
 
 interface ReviewEditFormProps {
-  review: MyReviewItem | MyReviewWriteItem;
+  review: ReviewItem | MyReviewWriteItem;
   onSave: () => void; // (updated: ReviewItem)
   onClose: () => void;
   isWriteMode?: boolean;
@@ -40,7 +40,7 @@ export default function ReviewEditForm({
       <div className="flex gap-4">
         <div className="flex flex-col justify-center gap-4">
           <Image
-            src={review.image_url}
+            src={review.image_url || '/images/defaultReviewImg.png'}
             alt={review.content}
             width={200}
             height={250}
