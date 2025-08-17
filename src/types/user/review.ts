@@ -1,4 +1,4 @@
-export interface MyReviewItem {
+export interface ReviewItem {
   review_id: number;
   game_id: number;
   title: string;
@@ -13,28 +13,13 @@ export interface MyReviewItem {
   };
 }
 
-export type MyReviewWriteItem = Omit<MyReviewItem, 'updated_at' | 'actions'>;
+export type MyReviewWriteItem = Omit<ReviewItem, 'updated_at' | 'actions'>;
 export interface MyReviewListResponse {
   status: string;
+  message: string;
   total_reviews: number;
   page: number;
   limit: number;
   total_pages: number;
-  reviews: MyReviewItem[];
-}
-
-export interface ReviewItem {
-  review_id: number;
-  game_id: number;
-  title: string;
-  content: string;
-  rating: number;
-  created_at: string;
-  updated_at?: string;
-  user: {
-    user_id: number;
-    username: string;
-    profile_image_url: string | null;
-  };
-  image_url?: string;
+  reviews: ReviewItem[];
 }

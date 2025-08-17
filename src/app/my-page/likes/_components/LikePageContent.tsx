@@ -5,8 +5,6 @@ import { LikeListSkeleton } from '@/app/my-page/likes/_components/LikeListSkelet
 import NoLikes from '@/app/my-page/likes/_components/NoLikes';
 import Button from '@/components/common/Button';
 import Dropdown from '@/components/common/Dropdown';
-import Grid from '@/components/layout/Grid';
-import MyPageSideMenu from '@/components/my-page/SideMenu';
 import { LikeItem, LikeListResponse } from '@/types/user/like';
 import { useEffect, useState } from 'react';
 
@@ -34,7 +32,6 @@ export default function LikePageContent() {
       setLikes((prev) => (pageNum === 1 ? newLikes : [...prev, ...newLikes]));
       setHasNextPage((pageNum - 1) * 12 + newLikes.length < data.count);
     } catch (err) {
-      console.error('like fetch error:', err);
     } finally {
       setLoading(false);
     }
@@ -44,6 +41,7 @@ export default function LikePageContent() {
     setPage(1);
     fetchLikes(1);
   }, [sort]);
+
   const handleLoadMore = () => {
     const nextPage = page + 1;
     setPage(nextPage);
@@ -77,45 +75,37 @@ export default function LikePageContent() {
   ];
 
   return (
-    <main className="inner flex flex-1 flex-col pt-10 pb-30">
-      <Grid>
-        <Grid.Item span="col-span-12 md:col-span-3">
-          <MyPageSideMenu />
-        </Grid.Item>
+    <>
+      <h1 className="text-3xl font-semibold">좋아요</h1>
+      <div className="flex justify-between">
+        <span className="text-base">
+          총<span className="ml-0.5 font-semibold">{totalCount}</span>개
+        </span>
+        <Dropdown
+          options={sortOptions}
+          selectedValue={sort}
+          onChange={setSort}
+        />
+      </div>
+      {loading && page === 1 ? (
+        <LikeListSkeleton />
+      ) : likes.length > 0 ? (
+        <>
+          <LikeList games={likes} onRemove={handleRemoveLike} />
 
-        <Grid.Item span="col-span-12 md:col-span-9 md:pt-18 flex flex-col gap-6">
-          <h1 className="text-3xl font-semibold">좋아요</h1>
-          <div className="flex justify-between">
-            <span className="text-base">
-              총<span className="ml-0.5 font-semibold">{totalCount}</span>개
-            </span>
-            <Dropdown
-              options={sortOptions}
-              selectedValue={sort}
-              onChange={setSort}
-            />
-          </div>
-          {loading && page === 1 ? (
-            <LikeListSkeleton />
-          ) : likes.length > 0 ? (
-            <>
-              <LikeList games={likes} onRemove={handleRemoveLike} />
+          {/* 다음 페이지 로딩 중이면 아래쪽에 스켈레톤 */}
+          {loading && page > 1 && <LikeListSkeleton />}
 
-              {/* 다음 페이지 로딩 중이면 아래쪽에 스켈레톤 */}
-              {loading && page > 1 && <LikeListSkeleton />}
-
-              {/* 다음 페이지가 있으면 더보기 버튼 */}
-              {!loading && hasNextPage && (
-                <Button className="mx-auto w-fit" onClick={handleLoadMore}>
-                  더보기
-                </Button>
-              )}
-            </>
-          ) : (
-            <NoLikes />
+          {/* 다음 페이지가 있으면 더보기 버튼 */}
+          {!loading && hasNextPage && (
+            <Button className="mx-auto w-fit" onClick={handleLoadMore}>
+              더보기
+            </Button>
           )}
-        </Grid.Item>
-      </Grid>
-    </main>
+        </>
+      ) : (
+        <NoLikes />
+      )}
+    </>
   );
 }

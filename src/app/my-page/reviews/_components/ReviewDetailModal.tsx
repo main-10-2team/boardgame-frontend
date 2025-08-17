@@ -1,7 +1,7 @@
+import ReviewDetailView from '@/app/my-page/reviews/_components/ReviewDetailView';
+import ReviewEditForm from '@/app/my-page/reviews/_components/ReviewEditForm';
 import Modal from '@/components/common/modal/Modal';
-import ReviewDetailView from '@/components/my-page/review/ReviewDetailView';
-import ReviewEditForm from '@/components/my-page/review/ReviewEditForm';
-import { MyReviewItem, MyReviewWriteItem } from '@/types/user/review';
+import { MyReviewWriteItem, ReviewItem } from '@/types/user/review';
 import { useEffect, useMemo, useState } from 'react';
 
 type ReviewMode = 'view' | 'edit' | 'write';
@@ -12,7 +12,7 @@ interface BaseProps {
 }
 
 interface ViewEditProps extends BaseProps {
-  review: MyReviewItem;
+  review: ReviewItem;
   isNew?: false;
 }
 
@@ -42,7 +42,7 @@ export default function ReviewDetailModal(props: ReviewDetailModalProps) {
     }
   }, [props.isOpen, isWriteMode]);
 
-  const reviewData = useMemo<MyReviewItem | MyReviewWriteItem>(() => {
+  const reviewData = useMemo<ReviewItem | MyReviewWriteItem>(() => {
     if (isWriteMode) {
       return {
         review_id: -1,
@@ -67,7 +67,7 @@ export default function ReviewDetailModal(props: ReviewDetailModalProps) {
       <h2 className="mb-8 text-xl font-bold">{REVIEW_MODAL_TITLE_MAP[mode]}</h2>
       {mode === 'view' ? (
         <ReviewDetailView
-          review={reviewData as MyReviewItem}
+          review={reviewData as ReviewItem}
           onClose={props.onClose}
           onEdit={() => setMode('edit')}
         />
