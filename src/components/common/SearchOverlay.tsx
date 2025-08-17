@@ -5,6 +5,7 @@ import { useSearch } from '@/hooks/useSearch';
 import { RiCloseLine, RiSearchLine } from '@remixicon/react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useRef } from 'react';
 
 interface SearchOverlayProps {
@@ -15,6 +16,7 @@ interface SearchOverlayProps {
 const SearchOverlay = ({ isOpen, onClose }: SearchOverlayProps) => {
   const { query, results, isLoading, setQuery, resetSearch } = useSearch();
   const inputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
 
   useEscapeKey(isOpen ? onClose : () => {});
 
@@ -40,6 +42,15 @@ const SearchOverlay = ({ isOpen, onClose }: SearchOverlayProps) => {
     onClose();
   }, [onClose]);
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!query.trim()) return;
+    const params = new URLSearchParams();
+    params.set('keyword', query);
+    router.push(`/games?${params.toString()}`);
+    handleResultClick();
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -57,17 +68,19 @@ const SearchOverlay = ({ isOpen, onClose }: SearchOverlayProps) => {
               <RiSearchLine size={20} className="text-gray-400" />
             </div>
 
-            <input
-              ref={inputRef}
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="보드게임을 찾아보세요!"
-              className="w-full rounded-2xl bg-gray-100 py-4 pr-16 pl-12 text-base transition-all duration-200 placeholder:text-gray-400 focus:bg-white focus:ring-2 focus:ring-blue-200 focus:outline-none"
-              aria-label="보드게임 검색"
-              autoComplete="off"
-              spellCheck="false"
-            />
+            <form onSubmit={handleSubmit}>
+              <input
+                ref={inputRef}
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="보드게임을 찾아보세요!"
+                className="w-full rounded-2xl bg-gray-100 py-4 pr-16 pl-12 text-base transition-all duration-200 placeholder:text-gray-400 focus:bg-white focus:ring-2 focus:ring-blue-200 focus:outline-none"
+                aria-label="보드게임 검색"
+                autoComplete="off"
+                spellCheck="false"
+              />
+            </form>
 
             <button
               onClick={onClose}
