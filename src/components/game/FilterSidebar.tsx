@@ -82,6 +82,7 @@ export default function FilterSidebar() {
   };
 
   const handleReset = () => {
+    setCategories([]);
     setGenres([]);
     setPlayers(null);
     setPlayTime(0);
