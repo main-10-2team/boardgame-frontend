@@ -1,4 +1,5 @@
-import { gameListData } from '@/assets/mocks/gameListData';
+import { fetcher } from '@/lib/fetcher';
+import { GameListResponse } from '@/types/game/game';
 import { useCallback, useEffect, useState } from 'react';
 import { useDebounce } from './useDebounce';
 
@@ -16,19 +17,28 @@ export const useSearch = () => {
 
   const debouncedQuery = useDebounce(query, 300);
 
-  const performSearch = useCallback((searchQuery: string): SearchResult[] => {
+  const performSearch = useCallback(async (searchQuery: string) => {
     if (!searchQuery.trim()) return [];
 
     const normalizedQuery = searchQuery.toLowerCase();
-    return gameListData.games
-      .filter((game) => game.title.toLowerCase().includes(normalizedQuery))
-      .slice(0, 10)
-      .map((game) => ({
+    try {
+      const res = await fetcher<GameListResponse>(
+        `/games?keyword=${encodeURIComponent(normalizedQuery)}&page=1&page_size=6`
+      );
+
+      const searchResults: SearchResult[] = res.results.map((game) => ({
         id: String(game.game_id),
         title: game.title,
         image: game.thumbnail_url || '',
         category: game.category || '',
       }));
+      setResults(searchResults);
+    } catch (error) {
+      console.error('Error during search:', error);
+      setResults([]);
+    } finally {
+      setIsLoading(false);
+    }
   }, []);
 
   const resetSearch = useCallback(() => {
@@ -38,14 +48,7 @@ export const useSearch = () => {
   }, []);
 
   useEffect(() => {
-    if (debouncedQuery.trim()) {
-      setIsLoading(true);
-      const searchResults = performSearch(debouncedQuery);
-      setResults(searchResults);
-      setIsLoading(false);
-    } else {
-      setResults([]);
-    }
+    performSearch(debouncedQuery);
   }, [debouncedQuery, performSearch]);
 
   return {
