@@ -1,4 +1,4 @@
-import { cookies } from 'next/headers';
+import { getAccessToken } from '@/lib/getAccessToken';
 
 export async function fetchUserInfo(token: string) {
   try {
@@ -18,8 +18,7 @@ export async function fetchUserInfo(token: string) {
 }
 
 export async function getUser() {
-  const cookieStore = await cookies();
-  const token = cookieStore.get('access_token')?.value;
+  const token = await getAccessToken();
 
   if (!token) return null;
   return fetchUserInfo(token);

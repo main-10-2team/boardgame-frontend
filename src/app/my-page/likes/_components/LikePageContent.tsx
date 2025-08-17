@@ -1,23 +1,80 @@
 'use client';
 
-import { likeList } from '@/assets/mocks/likeList';
+import LikeList from '@/app/my-page/likes/_components/LikeList';
+import { LikeListSkeleton } from '@/app/my-page/likes/_components/LikeListSkeleton';
+import NoLikes from '@/app/my-page/likes/_components/NoLikes';
+import Button from '@/components/common/Button';
 import Dropdown from '@/components/common/Dropdown';
 import Grid from '@/components/layout/Grid';
-import LikeList from '@/components/my-page/like/LikeList';
 import MyPageSideMenu from '@/components/my-page/SideMenu';
-import { LikeListResponse } from '@/types/user/like';
-import { useState } from 'react';
+import { LikeItem, LikeListResponse } from '@/types/user/like';
+import { useEffect, useState } from 'react';
 
-export default function LikePageContent({ data }: { data: LikeListResponse }) {
+export default function LikePageContent() {
+  const [likes, setLikes] = useState<LikeItem[]>([]);
+  const [page, setPage] = useState(1);
   const [sort, setSort] = useState('popular');
+  const [hasNextPage, setHasNextPage] = useState(true);
+  const [totalCount, setTotalCount] = useState(0);
+  const [loading, setLoading] = useState(false);
+
+  const fetchLikes = async (pageNum: number) => {
+    setLoading(true);
+    try {
+      const res = await fetch(`/api/likes?page=${pageNum}&page_size=12`);
+      if (!res.ok) throw new Error('Failed to fetch');
+      const data: LikeListResponse = await res.json();
+
+      if (!data.results || data.results.status !== 'success')
+        throw new Error('Invalid response');
+
+      const newLikes = data.results.likes;
+      setTotalCount(data.count);
+
+      setLikes((prev) => (pageNum === 1 ? newLikes : [...prev, ...newLikes]));
+      setHasNextPage((pageNum - 1) * 12 + newLikes.length < data.count);
+    } catch (err) {
+      console.error('like fetch error:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    setPage(1);
+    fetchLikes(1);
+  }, [sort]);
+  const handleLoadMore = () => {
+    const nextPage = page + 1;
+    setPage(nextPage);
+    fetchLikes(nextPage);
+  };
+
+  const handleRemoveLike = async (gameId: number) => {
+    try {
+      const res = await fetch('/api/likes/remove', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ game_id: gameId }),
+      });
+
+      if (!res.ok) {
+        throw new Error(`서버 오류: ${res.status}`);
+      }
+
+      setLikes((prev) => prev.filter((like) => like.game_id !== gameId));
+      setTotalCount((prev) => prev - 1);
+    } catch (err) {
+      console.error('좋아요 삭제 에러:', err);
+      alert('좋아요 삭제 중 문제가 발생했어요.');
+    }
+  };
 
   const sortOptions = [
     { label: '인기순', value: 'popular' },
     { label: '최근에 담은 순', value: 'recent' },
     { label: '평점순', value: 'rating' },
   ];
-  const totalCount = data.count ?? 0;
-  const games = data.results.likes ?? [];
 
   return (
     <main className="inner flex flex-1 flex-col pt-10 pb-30">
@@ -38,12 +95,24 @@ export default function LikePageContent({ data }: { data: LikeListResponse }) {
               onChange={setSort}
             />
           </div>
-          {likeList?.likes?.length ? (
-            <LikeList games={games} />
+          {loading && page === 1 ? (
+            <LikeListSkeleton />
+          ) : likes.length > 0 ? (
+            <>
+              <LikeList games={likes} onRemove={handleRemoveLike} />
+
+              {/* 다음 페이지 로딩 중이면 아래쪽에 스켈레톤 */}
+              {loading && page > 1 && <LikeListSkeleton />}
+
+              {/* 다음 페이지가 있으면 더보기 버튼 */}
+              {!loading && hasNextPage && (
+                <Button className="mx-auto w-fit" onClick={handleLoadMore}>
+                  더보기
+                </Button>
+              )}
+            </>
           ) : (
-            <p className="mt-10 text-center text-sm text-gray-500">
-              좋아요한 게임이 없습니다.
-            </p>
+            <NoLikes />
           )}
         </Grid.Item>
       </Grid>

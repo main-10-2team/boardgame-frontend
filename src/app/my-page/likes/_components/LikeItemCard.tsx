@@ -1,15 +1,16 @@
 import ConfirmModal from '@/components/common/modal/ConfirmModal';
 import { LikeItem } from '@/types/user/like';
-import { RiHeartFill, RiStarFill } from '@remixicon/react';
+import { RiHeartFill } from '@remixicon/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
 interface LikeItemCardProps {
   game: LikeItem;
+  onRemove: (gameId: number) => void;
 }
 
-export default function LikeItemCard({ game }: LikeItemCardProps) {
+export default function LikeItemCard({ game, onRemove }: LikeItemCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleLikeClick = (e: React.MouseEvent) => {
@@ -20,7 +21,7 @@ export default function LikeItemCard({ game }: LikeItemCardProps) {
 
   const handleConfirm = () => {
     setIsModalOpen(false);
-    // 로직~~
+    onRemove(game.game_id);
   };
 
   return (
