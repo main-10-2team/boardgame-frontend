@@ -4,7 +4,6 @@ import Accordion from '@/components/common/Accordian';
 import Button from '@/components/common/Button';
 import Checkbox from '@/components/common/Checkbox';
 import Radio from '@/components/common/Radio';
-import RangeSlider from '@/components/common/RangeSlider';
 import {
   ageGroups,
   categoryList,
@@ -15,6 +14,7 @@ import {
 import { RiResetRightLine } from '@remixicon/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import DualRangeSlider from '../common/DualRangeSlider';
 
 export default function FilterSidebar() {
   const router = useRouter();
@@ -23,8 +23,9 @@ export default function FilterSidebar() {
   const [genres, setGenres] = useState<string[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [players, setPlayers] = useState<string | null>(null);
-  const [playTime, setPlayTime] = useState<number>(0);
-  const [difficulty, setDifficulty] = useState<string>(''); // 1~5
+  const [minPlayTime, setMinPlayTime] = useState<number>(0);
+  const [maxPlayTime, setMaxPlayTime] = useState<number>(0);
+  const [difficulty, setDifficulty] = useState<string>('');
   const [age, setAge] = useState<number | null>(null);
   const [keyword, setKeyword] = useState<string>('');
 
@@ -39,8 +40,10 @@ export default function FilterSidebar() {
     const playersParam = searchParams.get('players');
     if (playersParam) setPlayers(playersParam);
 
-    const timeParam = searchParams.get('playtime_min_minutes');
-    if (timeParam) setPlayTime(Number(timeParam));
+    const minTimeParam = searchParams.get('playtime_min_minutes');
+    const maxTimeParam = searchParams.get('playtime_max_minutes');
+    if (minTimeParam) setMinPlayTime(Number(minTimeParam));
+    if (maxTimeParam) setMaxPlayTime(Number(maxTimeParam));
 
     const diffParam = searchParams.get('difficulty');
     if (diffParam) setDifficulty(diffParam);
@@ -72,7 +75,10 @@ export default function FilterSidebar() {
     if (categories.length) params.set('categories', categories.join(','));
     if (genres.length) params.set('genres', genres.join(','));
     if (players) params.set('players', players);
-    if (playTime > 0) params.set('playtime_min_minutes', String(playTime));
+    if (minPlayTime > 0)
+      params.set('playtime_min_minutes', String(minPlayTime));
+    if (maxPlayTime > 0)
+      params.set('playtime_max_minutes', String(maxPlayTime));
     if (difficulty && difficulty !== '0')
       params.set('difficulty', String(difficulty));
     if (age !== null) params.set('age', String(age));
@@ -85,7 +91,8 @@ export default function FilterSidebar() {
     setCategories([]);
     setGenres([]);
     setPlayers(null);
-    setPlayTime(0);
+    setMinPlayTime(0);
+    setMaxPlayTime(0);
     setDifficulty('');
     setAge(null);
     setKeyword('');
@@ -166,14 +173,18 @@ export default function FilterSidebar() {
         </Accordion>
 
         <div>
-          <h3 className="mb-2 font-medium">최소 플레이 시간</h3>
-          <RangeSlider
-            min={15}
+          <h3 className="mb-2 font-medium">플레이 시간</h3>
+          <DualRangeSlider
+            min={0}
             max={120}
             unit="분"
             step={5}
-            value={playTime}
-            onChange={setPlayTime}
+            initialMin={minPlayTime}
+            initialMax={maxPlayTime}
+            onChange={({ min, max }) => {
+              setMinPlayTime(min);
+              setMaxPlayTime(max);
+            }}
           />
         </div>
 
