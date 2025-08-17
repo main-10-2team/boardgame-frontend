@@ -50,7 +50,7 @@ export default function ResultCard({
           className={`relative aspect-[4/5] w-2/5 max-w-60 shrink-0 overflow-hidden rounded-xl ${align === 'right' ? 'order-1' : ''}`}
         >
           <Image
-            src={data.imageUrl}
+            src={data.thumbnail_url}
             alt={data.title}
             fill
             sizes="(max-width:768px) 70vw, 220px"
@@ -85,7 +85,8 @@ export default function ResultCard({
 
           <div className="flex flex-wrap gap-2">
             <GameTags
-              genre_name={data.genre_name}
+              genre={data.genre}
+              category={data.category}
               difficulty={data.difficulty}
               isLink={false}
               size="md"
@@ -101,7 +102,9 @@ export default function ResultCard({
       </div>
 
       <p className="z-99 mt-1 rounded-xl bg-white/40 px-3 py-2 text-base text-gray-700 md:px-6 md:py-8 md:text-lg">
-        {data.summary}
+        {data.description || (
+          <span className="text-gray-500">설명이 없습니다.</span>
+        )}
       </p>
     </Link>
   );

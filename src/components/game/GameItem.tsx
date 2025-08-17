@@ -1,4 +1,4 @@
-import { GameData } from '@/types/game/game';
+import { GameListItem } from '@/types/game/game';
 import { cn } from '@/utils/cn';
 import { RiHeartFill, RiStarFill } from '@remixicon/react';
 import Image from 'next/image';
@@ -7,7 +7,7 @@ import GameTags from './GameTags';
 import LikeButton from './LikeButton';
 
 interface GameItemProps {
-  game: GameData;
+  game: GameListItem;
   imageRatio: '1:1' | '4:5' | '2:3'; // 비율: 1:1, 2:3, 16:9 등
   overlayInfo?: boolean;
   showLikeButton?: boolean;
@@ -30,12 +30,11 @@ export default function GameItem({
     game_id,
     title,
     thumbnail_url,
+    genre,
+    category,
     like_count,
     is_liked,
     average_rating,
-    genre_name,
-    min_players,
-    max_players,
     difficulty,
   } = game;
 
@@ -87,35 +86,35 @@ export default function GameItem({
         }
       >
         <h3 className="mb-2.5 truncate text-base font-semibold">{title}</h3>
-        {(like_count || average_rating) && (
+        {like_count != null || average_rating != null ? (
           <div
             className={cn(
               'mb-2 flex items-center gap-6 text-sm',
               overlayInfo ? 'text-white' : 'text-gray-500'
             )}
           >
-            {like_count && (
+            {like_count != null ? (
               <div className="flex items-center gap-2">
                 <RiHeartFill className="h-4 w-4 text-gray-300" />
                 <span className="text-xs">{like_count ?? 0}</span>
               </div>
-            )}
-            {average_rating && (
+            ) : null}
+            {average_rating != null ? (
               <div className="flex items-center gap-2">
                 <RiStarFill className="h-4 w-4 text-gray-300" />
                 <span className="text-xs">
                   {average_rating?.toFixed(1) ?? '-'}
                 </span>
               </div>
-            )}
+            ) : null}
           </div>
-        )}
+        ) : null}
         <div className="mt-1 flex flex-wrap gap-1">
           <GameTags
-            genre_name={genre_name}
-            min_players={min_players}
-            max_players={max_players}
+            category={category}
+            genre={genre}
             difficulty={difficulty}
+            isLink={true}
           />
         </div>
       </div>

@@ -27,6 +27,12 @@ export interface GameDetail extends GameBase {
   updated_at: string;
 }
 
+export interface GameListResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: GameListItem[];
+}
 export interface GameData {
   game_id: number;
   age: number;

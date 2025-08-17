@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback } from 'react';
 import { gameListData } from '@/assets/mocks/gameListData';
+import { useCallback, useEffect, useState } from 'react';
 import { useDebounce } from './useDebounce';
 
 interface SearchResult {
@@ -27,7 +27,7 @@ export const useSearch = () => {
         id: String(game.game_id),
         title: game.title,
         image: game.thumbnail_url || '',
-        category: game.genre_name || '',
+        category: game.category || '',
       }));
   }, []);
 
