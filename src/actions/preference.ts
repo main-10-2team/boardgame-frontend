@@ -19,7 +19,7 @@ export async function getSurveyChoices(): Promise<SurveyChoicesResponse> {
 
   try {
     const data = await fetcher<SurveyChoicesResponse>(
-      '/api/v1/survey/choices',
+      '/survey/choices',
       {
         method: 'GET',
         signal: controller.signal,
@@ -60,7 +60,7 @@ export async function submitSurvey(
 
   try {
     const data = await fetcher<SurveySubmitResponse>(
-      '/api/v1/survey/submit',
+      '/survey/submit',
       {
         method: 'POST',
         body: JSON.stringify({ liked_games: likedGames }),
