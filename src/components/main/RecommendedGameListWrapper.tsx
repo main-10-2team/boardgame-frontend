@@ -1,5 +1,5 @@
 'use client';
-import { GameData } from '@/types/game/game';
+import { GameListItem } from '@/types/game/game';
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 import RecommendedGameListSkeleton from './RecommendedGameListSkeleton';
@@ -8,7 +8,7 @@ const RecommendedGameList = dynamic(() => import('./RecommendedGameList'), {
 });
 
 interface RecommendedGameListWrapperProps {
-  games: GameData[];
+  games: GameListItem[];
 }
 export default function RecommendedGameListWrapper({
   games,

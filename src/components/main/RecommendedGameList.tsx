@@ -1,6 +1,6 @@
 'use client';
 import GameItem from '@/components/game/GameItem';
-import { GameData } from '@/types/game/game';
+import { GameListItem } from '@/types/game/game';
 import { RiArrowLeftLine, RiArrowRightLine } from '@remixicon/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -9,7 +9,7 @@ import { Autoplay, Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 interface RecommendedGameListProps {
-  games: GameData[];
+  games: GameListItem[];
 }
 export default function RecommendedGameList({
   games,

@@ -1,12 +1,15 @@
-import { GameData } from '@/types/game/game';
+import { GameListItem } from '@/types/game/game';
 import { cn } from '@/utils/cn';
 import { RiHeartFill, RiStarFill } from '@remixicon/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import GameTags from '../game/GameTags';
 
+type RankItem = GameListItem & {
+  description?: string;
+};
 interface RankItemProps {
-  game: GameData;
+  game: RankItem;
   index: number;
 }
 export default function RankItem({ game, index }: RankItemProps) {
@@ -54,9 +57,8 @@ export default function RankItem({ game, index }: RankItemProps) {
         </div>
         <div className="mt-1 flex flex-wrap gap-1 text-xs text-white">
           <GameTags
-            genre_name={game.genre_name}
-            min_players={game.min_players}
-            max_players={game.max_players}
+            genre={game.genre}
+            category={game.category}
             difficulty={game.difficulty}
             isLink={false}
           />

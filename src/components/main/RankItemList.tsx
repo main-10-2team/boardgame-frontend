@@ -1,12 +1,15 @@
 'use client';
 
-import { GameData } from '@/types/game/game';
+import { GameListItem } from '@/types/game/game';
 import Image from 'next/image';
 import Link from 'next/link';
 import RankItem from './RankItem';
 
+type RankItem = GameListItem & {
+  description?: string;
+};
 interface RankItemListProps {
-  games: GameData[];
+  games: RankItem[];
   title: string;
 }
 export default function RankItemList({ games, title }: RankItemListProps) {
