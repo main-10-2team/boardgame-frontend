@@ -1,12 +1,21 @@
-import RankingPageContent from '@/components/ranking/RankingPageContent';
+import RankingPageContent from '@/app/ranking/_components/RankingPageContent';
 import { fetcher } from '@/lib/fetcher';
-import { GameRankingItem } from '@/types/game/gameRanking';
+import { GameListResponse } from '@/types/game/gameRanking';
 
-async function getRankingGames(sortBy: string) {
-  return await fetcher<GameRankingItem[]>(`/games?sort_by=${sortBy}`);
+interface RankingPageProp {
+  searchParams: Promise<{ sort?: string | string[] }>;
 }
 
-export default async function RankingPage() {
-  const rankingGames = await getRankingGames('rating');
-  return <RankingPageContent games={rankingGames} />;
+export default async function RankingPage({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  const params = await searchParams;
+  const sort = typeof params.sort === 'string' ? params.sort : 'popularity';
+  const endpoint = `/games?sort_by=${sort}&page_size=10`;
+  const res = await fetcher<GameListResponse>(endpoint, { cache: 'no-store' });
+  const games = res.results;
+
+  return <RankingPageContent games={games} />;
 }

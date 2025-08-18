@@ -5,7 +5,6 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 const ORDER_TABS = [
   { label: '전체', href: 'popularity' },
-  { label: '좋아요', href: 'like' },
   { label: '평점', href: 'rating' },
   { label: '리뷰 많은 순', href: 'review' },
 ];

@@ -9,7 +9,7 @@ interface RankingItemProps {
   game: GameRankingItem;
 }
 
-const rankColorMap: Record<number, string> = {
+export const rankColorMap: Record<number, string> = {
   1: 'text-primary-400',
   2: 'text-primary-600',
   3: 'text-primary-800',
@@ -20,7 +20,7 @@ export default function RankingItem({ rank, game }: RankingItemProps) {
   return (
     <>
       <div className={cn('py-4 text-5xl sm:text-right', rankClass)}>{rank}</div>
-      <Link href={`/game/${game.game_id}`}>
+      <Link href={`/games/${game.game_id}`}>
         <div className="flex items-center gap-4 py-4">
           <Image
             src={game.thumbnail_url}

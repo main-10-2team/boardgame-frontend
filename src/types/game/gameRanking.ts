@@ -19,10 +19,12 @@ export interface GameRankingItem {
   is_liked: boolean;
 }
 
-export const VALID_SORTS = [
-  'popularity',
-  'likes',
-  'rating',
-  'reviews',
-] as const;
+export const VALID_SORTS = ['popularity', 'rating', 'reviews'] as const;
 export type ValidSort = (typeof VALID_SORTS)[number];
+
+export interface GameListResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: GameRankingItem[];
+}
