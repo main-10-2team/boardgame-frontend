@@ -1,6 +1,6 @@
+import RankingItem from '@/app/ranking/_components/RankingItem';
 import { GameRankingItem } from '@/types/game/gameRanking';
 import { cn } from '@/utils/cn';
-import RankingItem from './RankingItem';
 
 interface RankingListProps {
   games: GameRankingItem[];
