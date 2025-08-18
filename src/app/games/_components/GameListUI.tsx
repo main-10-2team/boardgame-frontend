@@ -1,15 +1,19 @@
 'use client';
 import GameListSection from '@/app/games/_components/GameListSection';
+import BreadcrumbsSkeleton from '@/components/layout/BreadcrumbsSkeleton';
 import Grid from '@/components/layout/Grid';
 import { GameListResponse } from '@/types/game/game';
 import dynamic from 'next/dynamic';
+import FilterSidebarSkeleton from './FilterSidebarSkeleton';
 
 const Breadcrumbs = dynamic(() => import('@/components/layout/Breadcrumbs'), {
+  loading: () => <BreadcrumbsSkeleton />,
   ssr: false,
 });
 const FilterSidebar = dynamic(
   () => import('@/app/games/_components/FilterSidebar'),
   {
+    loading: () => <FilterSidebarSkeleton />,
     ssr: false,
   }
 );
