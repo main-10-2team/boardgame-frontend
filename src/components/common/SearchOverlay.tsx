@@ -14,7 +14,10 @@ interface SearchOverlayProps {
 }
 
 const SearchOverlay = ({ isOpen, onClose }: SearchOverlayProps) => {
-  const { query, results, isLoading, setQuery, resetSearch } = useSearch();
+  const { query, results, isLoading, setQuery, loadMore, resetSearch, isNext } =
+    useSearch();
+  const loadMoreRef = useRef<HTMLDivElement>(null);
+
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
@@ -33,6 +36,26 @@ const SearchOverlay = ({ isOpen, onClose }: SearchOverlayProps) => {
       document.body.style.overflow = 'unset';
     };
   }, [isOpen]);
+
+  useEffect(() => {
+    if (!loadMoreRef.current) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (
+          entries[0].isIntersecting &&
+          !isLoading &&
+          results.length > 0 &&
+          isNext
+        ) {
+          loadMore(); // useSearch 훅의 loadMore 실행
+        }
+      },
+      { threshold: 1 }
+    );
+
+    observer.observe(loadMoreRef.current);
+    return () => observer.disconnect();
+  }, [loadMore]);
 
   const handleBackdropClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) onClose();
@@ -93,63 +116,78 @@ const SearchOverlay = ({ isOpen, onClose }: SearchOverlayProps) => {
           </div>
         </div>
 
-        <div className="max-h-96 overflow-y-auto">
-          {isLoading ? (
-            <div
-              className="flex items-center justify-center py-8"
-              role="status"
-              aria-live="polite"
-            >
-              <div className="h-6 w-6 animate-spin rounded-full border-2 border-blue-500 border-t-transparent"></div>
-              <span className="ml-2 text-gray-600">검색 중...</span>
-            </div>
-          ) : query && results.length === 0 ? (
-            <div
-              className="flex items-center justify-center py-8 text-gray-500"
-              role="status"
-            >
-              검색 결과가 없습니다.
-            </div>
-          ) : results.length > 0 ? (
-            <div className="py-2" role="listbox" aria-label="검색 결과">
-              {results.map((game) => (
-                <Link
-                  key={game.id}
-                  href={`/games/${game.id}`}
-                  onClick={handleResultClick}
-                  className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-200 focus-visible:ring-inset"
-                  role="option"
-                  tabIndex={0}
-                >
-                  <div className="flex cursor-pointer items-center gap-4 px-6 py-4 transition-colors duration-200 hover:bg-gray-50">
-                    <div className="relative h-12 w-12 flex-shrink-0">
-                      <Image
-                        src={game.image}
-                        alt=""
-                        fill
-                        className="rounded-lg bg-gray-200 object-cover"
-                        sizes="48px"
-                      />
+        <div className="max-h-96 overflow-y-auto" id="searchResults">
+          <div className="py-2" role="listbox" aria-label="검색 결과">
+            {/* 검색 결과 있음 */}
+            {results.length > 0 && (
+              <>
+                {results.map((game) => (
+                  <Link
+                    key={game.id}
+                    href={`/games/${game.id}`}
+                    onClick={handleResultClick}
+                    className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-200 focus-visible:ring-inset"
+                    role="option"
+                    tabIndex={0}
+                  >
+                    <div className="flex cursor-pointer items-center gap-4 px-6 py-4 transition-colors duration-200 hover:bg-gray-50">
+                      <div className="relative h-12 w-12 flex-shrink-0">
+                        <Image
+                          src={game.image}
+                          alt=""
+                          fill
+                          className="rounded-lg bg-gray-200 object-cover"
+                          sizes="48px"
+                        />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <h3 className="truncate font-medium text-gray-900">
+                          {game.title}
+                        </h3>
+                        {game.category && (
+                          <p className="mt-1 truncate text-sm text-gray-500">
+                            {game.category}
+                          </p>
+                        )}
+                      </div>
                     </div>
-                    <div className="min-w-0 flex-1">
-                      <h3 className="truncate font-medium text-gray-900">
-                        {game.title}
-                      </h3>
-                      {game.category && (
-                        <p className="mt-1 truncate text-sm text-gray-500">
-                          {game.category}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          ) : (
-            <div className="flex items-center justify-center py-8 text-gray-400">
-              검색어를 입력해주세요.
-            </div>
-          )}
+                  </Link>
+                ))}
+
+                {/* 무한 스크롤 트리거 */}
+                <div ref={loadMoreRef} className="h-10" />
+              </>
+            )}
+
+            {/* 1. 검색어 없음 */}
+            {!query && (
+              <div className="flex items-center justify-center py-8 text-gray-400">
+                검색어를 입력해주세요.
+              </div>
+            )}
+
+            {/* 2. 검색 중 */}
+            {isLoading && query && (
+              <div
+                className="flex items-center justify-center py-8"
+                role="status"
+                aria-live="polite"
+              >
+                <div className="h-6 w-6 animate-spin rounded-full border-2 border-blue-500 border-t-transparent"></div>
+                <span className="ml-2 text-gray-600">검색 중...</span>
+              </div>
+            )}
+
+            {/* 4. 검색 결과 없음 */}
+            {!isLoading && query && results.length === 0 && (
+              <div
+                className="flex items-center justify-center py-8 text-gray-500"
+                role="status"
+              >
+                검색 결과가 없습니다.
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
