@@ -1,7 +1,7 @@
+import ProfileDetail from '@/app/my-page/profile/_components/ProfileDetail';
+import ProfileInfoSection from '@/app/my-page/profile/_components/ProfileInfoSection';
+import WithdrawalButton from '@/app/my-page/profile/_components/WithdrawalButton';
 import Button from '@/components/common/Button';
-import ProfileDetail from '@/components/my-page/profile/ProfileDetail';
-import ProfileInfoSection from '@/components/my-page/profile/ProfileInfoSection';
-import WithdrawalButton from '@/components/my-page/profile/WithdrawalButton';
 import { getUser } from '@/lib/auth';
 import Link from 'next/link';
 

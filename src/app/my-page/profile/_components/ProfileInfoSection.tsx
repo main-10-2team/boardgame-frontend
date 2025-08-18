@@ -1,28 +1,13 @@
 'use client';
 
+import PasswordChangeModal from '@/app/my-page/profile/_components/PasswordChangeModal';
 import Button from '@/components/common/Button';
-import PasswordChangeModal from '@/components/my-page/modals/PasswordChangeModal';
-import PhoneChangeModal from '@/components/my-page/modals/PhoneChangeModal';
 import { User } from '@/types/user/user';
 import { useState } from 'react';
 
 interface ProfileInfoSectionprops {
   user: User;
 }
-
-export const convertToLocalPhone = (phone: string) => {
-  if (phone.startsWith('+82')) {
-    const local = '0' + phone.slice(3); // +82 → 0
-    if (local.length === 11) {
-      return local.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
-    }
-    if (local.length === 10) {
-      return local.replace(/(\d{2,3})(\d{3,4})(\d{4})/, '$1-$2-$3');
-    }
-    return local;
-  }
-  return phone;
-};
 
 export default function ProfileInfoSection({ user }: ProfileInfoSectionprops) {
   const [modals, setModals] = useState({
@@ -51,24 +36,6 @@ export default function ProfileInfoSection({ user }: ProfileInfoSectionprops) {
           <PasswordChangeModal
             isOpen={modals.pwd}
             onClose={() => setModals((prev) => ({ ...prev, pwd: false }))}
-          />
-        </span>
-
-        {/* 휴대폰번호 변경 모달 */}
-        <span className="text-gray-600">휴대폰 번호</span>
-        <span className="flex items-center">
-          {convertToLocalPhone(user.phone_number)}
-          <Button
-            onClick={() => setModals((prev) => ({ ...prev, phone: true }))}
-            size="sm"
-            variant="secondary"
-            className="ml-3 w-fit font-semibold"
-          >
-            변경
-          </Button>
-          <PhoneChangeModal
-            isOpen={modals.phone}
-            onClose={() => setModals((prev) => ({ ...prev, phone: false }))}
           />
         </span>
         <span className="text-gray-600">생년월일</span>

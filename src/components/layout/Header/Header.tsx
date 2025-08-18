@@ -1,4 +1,3 @@
-export const dynamic = 'force-dynamic';
 import { AuthButtons } from '@/components/layout/Header/AuthButtons';
 import CategoryMenu from '@/components/layout/Header/CategoryMenu';
 import Logo from '@/components/layout/Header/Logo';
@@ -7,6 +6,8 @@ import { SearchInput } from '@/components/layout/Header/SearchInput';
 import { UserMenu } from '@/components/layout/Header/UserMenu';
 import { getUser } from '@/lib/auth';
 import { MobileSearchIcon } from './MobileSearchIcon';
+
+export const dynamic = 'force-dynamic';
 
 export default async function Header() {
   const user = await getUser();
