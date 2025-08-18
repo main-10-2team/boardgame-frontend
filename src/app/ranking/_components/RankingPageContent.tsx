@@ -2,13 +2,11 @@
 
 import RankingSkeleton from '@/app/ranking/_components/RankingItemSkeleton';
 import RankingList from '@/app/ranking/_components/RankingList';
+import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import { GameRankingItem } from '@/types/game/gameRanking';
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 
-const Breadcrumbs = dynamic(() => import('@/components/layout/Breadcrumbs'), {
-  ssr: false,
-});
 const RankingTab = dynamic(
   () => import('@/app/ranking/_components/RankingTab'),
   {
