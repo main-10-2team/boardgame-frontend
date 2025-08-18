@@ -40,6 +40,12 @@ export type EmailVerificationState = {
   message?: string;
 };
 
+export type FindIdState = {
+  success: boolean;
+  error: string | null;
+  email?: string;
+};
+
 async function setAuthCookies(accessToken: string, refreshToken: string) {
   const cookieStore = await cookies();
 
@@ -182,4 +188,51 @@ export async function logout() {
   const cookieStore = await cookies();
   cookieStore.delete('access_token');
   cookieStore.delete('refresh_token');
+}
+
+// --- 아이디 찾기 Server Action ---
+export async function findUserId(
+  prevState: FindIdState,
+  formData: FormData
+): Promise<FindIdState> {
+  const phone = formData.get('phone') as string;
+
+  if (!phone) {
+    return { success: false, error: '휴대폰 번호를 입력해주세요' };
+  }
+
+  const convertToInternational = (phoneNumber: string) => {
+    const cleaned = phoneNumber.replace(/[^0-9]/g, '');
+    if (cleaned.startsWith('010')) {
+      return `+82${cleaned.substring(1)}`;
+    }
+    return `+82${cleaned}`;
+  };
+
+  try {
+    const data = await fetcher<{ email: string; user_id?: string }>(
+      '/auth/find-id/',
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          phone_number: convertToInternational(phone),
+        }),
+      }
+    );
+
+    return {
+      success: true,
+      error: null,
+      email: data.email || data.user_id,
+    };
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      return { success: false, error: error.message };
+    }
+
+    return {
+      success: false,
+      error: '아이디를 찾을 수 없습니다.',
+    };
+  }
 }
