@@ -1,11 +1,11 @@
 'use client';
 
 import { logout } from '@/actions/auth';
+import PasswordConfirmModal from '@/app/my-page/profile/_components/PasswordConfirmModal';
 import Button from '@/components/common/Button';
 import Dropdown from '@/components/common/Dropdown';
 import Modal from '@/components/common/modal/Modal';
-import PasswordConfirmModal from '@/components/my-page/modals/PasswordConfirmModal';
-import { useDeleteUser } from '@/hooks/mutations/useDeleteUser';
+import { useDeleteUser } from '@/hooks/react-query/useDeleteUser';
 import { useState } from 'react';
 
 interface WithdrawalModalProps {
@@ -44,7 +44,6 @@ export default function WithdrawalModal({
 
   const { mutate: deleteUserMutate } = useDeleteUser();
   const handleConfirmPassword = (password: string) => {
-    console.log('[DEBUG] 입력된 비밀번호:', password);
     deleteUserMutate(
       {
         password,
