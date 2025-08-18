@@ -1,7 +1,7 @@
 'use client';
 
-import IntroSection from '@/components/board-pick/IntroSection';
-import SurveySection from '@/components/board-pick/SurveySection';
+import IntroSection from '@/app/today/_components/IntroSection';
+import SurveySection from '@/app/today/_components/SurveySection';
 import { useBoardPickSurvey } from '@/hooks/useBoardPickSurvey';
 import { Question } from '@/types/board-pick/boardPick';
 import { useRouter } from 'next/navigation';
@@ -34,16 +34,10 @@ const questions: Question[] = [
 ];
 
 export default function BoardPickPage() {
-  // 라우터 & 전환 상태 (전환 동안 버튼 상태/중복 클릭 방지 등에 사용 가능)
   const router = useRouter();
-
-  // 설문 상태/로직 훅 (현재 단계, 답변, 다음/이전 이동 등)
   const survey = useBoardPickSurvey();
-  // 마지막 단계 여부 (UI/전환 분기 용)
   const isLast = survey.step === survey.total;
-
   const submitAndGo = async () => {
-    // TODO: API 연동 시 여기서 POST -> OK 면 결과 페이지로
     router.push(RESULT_PATH);
   };
 
@@ -60,23 +54,7 @@ export default function BoardPickPage() {
 
     return (
       <GradientLayout>
-        <SurveySection
-          step={survey.step}
-          total={survey.total ?? 0}
-          question={q}
-          value={v}
-          onSelectSingle={(id: number) => survey.setSingle(q.key, id)}
-          onToggleMulti={(id: number) => survey.toggleMulti(q.key, id)}
-          onPrev={survey.goPrev}
-          onNext={async () => {
-            if (!isLast) {
-              survey.goNext();
-            } else {
-              await submitAndGo();
-            }
-          }}
-          canNext={survey.canNext}
-        />
+        <SurveySection onSubmit={submitAndGo} />
       </GradientLayout>
     );
   }

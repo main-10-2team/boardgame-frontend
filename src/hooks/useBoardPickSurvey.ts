@@ -9,7 +9,7 @@ export type Phase = 'intro' | 'survey';
 export function useBoardPickSurvey() {
   const [phase, setPhase] = useState<Phase>('intro');
   const [step, setStep] = useState(1);
-  const [total, setTotal] = useState<number | null>(null);
+  const [total, setTotal] = useState<number>(0);
 
   const [current, setCurrent] = useState<Question | null>(null);
   const [answers, setAnswers] = useState<AnswerMap>({});

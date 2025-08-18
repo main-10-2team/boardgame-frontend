@@ -1,7 +1,7 @@
 'use client';
 
-import QuestionCard from '@/components/board-pick/QuestionCard';
-import SurveyNav from '@/components/board-pick/SurveyNav';
+import QuestionCard from '@/app/today/_components/QuestionCard';
+import SurveyNav from '@/app/today/_components/SurveyNav';
 import ProgressBar from '@/components/common/ProgressBar';
 import type { Question } from '@/types/board-pick/boardPick';
 
@@ -17,7 +17,7 @@ interface SurveySectionProps {
   canNext: boolean;
 }
 
-export default function SurveySection({
+export default function SurveySectionItem({
   step,
   total,
   question,
