@@ -120,7 +120,7 @@ export default function FindIdPage() {
                 type="submit"
                 variant="primary"
                 size="lg"
-                className="bg-primary-400 hover:bg-primary-600 w-full text-white"
+                className="bg-primary-400 hover:bg-primary-500 w-full text-white"
                 disabled={isPending}
               >
                 {isPending ? '아이디 찾는 중...' : '아이디 찾기'}
