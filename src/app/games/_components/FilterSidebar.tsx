@@ -3,6 +3,7 @@
 import Accordion from '@/components/common/Accordian';
 import Button from '@/components/common/Button';
 import Checkbox from '@/components/common/Checkbox';
+import DualRangeSlider from '@/components/common/DualRangeSlider';
 import Radio from '@/components/common/Radio';
 import {
   ageGroups,
@@ -14,7 +15,6 @@ import {
 import { RiResetRightLine } from '@remixicon/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import DualRangeSlider from '../common/DualRangeSlider';
 
 export default function FilterSidebar() {
   const router = useRouter();

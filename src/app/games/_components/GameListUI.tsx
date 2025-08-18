@@ -7,9 +7,12 @@ import dynamic from 'next/dynamic';
 const Breadcrumbs = dynamic(() => import('@/components/layout/Breadcrumbs'), {
   ssr: false,
 });
-const FilterSidebar = dynamic(() => import('@/components/game/FilterSidebar'), {
-  ssr: false,
-});
+const FilterSidebar = dynamic(
+  () => import('@/app/games/_components/FilterSidebar'),
+  {
+    ssr: false,
+  }
+);
 
 export default function GameListUI({
   gameListData,
