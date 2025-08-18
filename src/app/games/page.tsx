@@ -24,8 +24,6 @@ async function getGameListData({
   const endpoint = `/games/?${params.toString()}`;
 
   const res = await fetcher<GameListResponse>(endpoint);
-  console.log('Fetching game list with endpoint:', endpoint);
-  console.log('response count:', res.count);
   return res;
 }
 

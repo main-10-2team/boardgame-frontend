@@ -81,7 +81,7 @@ export default function FilterSidebar() {
       params.set('playtime_max_minutes', String(maxPlayTime));
     if (difficulty && difficulty !== '0')
       params.set('difficulty', String(difficulty));
-    if (age !== null) params.set('age', String(age));
+    if (age) params.set('age', String(age));
     if (keyword) params.set('keyword', keyword);
 
     router.push(`/games?${params.toString()}`);
