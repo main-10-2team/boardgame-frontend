@@ -1,6 +1,8 @@
 import GameList from '@/components/game/GameList';
+import GameListSkeleton from '@/components/game/GameListSkeleton';
 import { useInfiniteGames } from '@/hooks/useInfiniteGames';
 import { GameListItem } from '@/types/game/game';
+import { RiArrowDownSLine } from '@remixicon/react';
 import { useEffect } from 'react';
 import SortDropdown from './SortDropdown';
 interface GameListSectionProps {
@@ -37,7 +39,26 @@ export default function GameListSection({
     };
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
-  if (status === 'pending') return <p>불러오는 중...</p>;
+  if (status === 'pending')
+    return (
+      <section>
+        <div className="mb-4 flex items-center justify-between">
+          <div className="flex items-center text-sm text-gray-600">
+            총
+            <span className="ml-1 inline-block h-4 w-8 animate-pulse rounded bg-gray-200" />
+            개
+          </div>
+          <button
+            type="button"
+            className="flex cursor-pointer items-center justify-start gap-1 text-base font-medium text-black"
+          >
+            정렬
+            <RiArrowDownSLine className="h-4 w-4" />
+          </button>
+        </div>
+        <GameListSkeleton imageRatio="1:1" count={12} />
+      </section>
+    );
   if (status === 'error') return <p>에러 발생</p>;
 
   return (
@@ -50,7 +71,11 @@ export default function GameListSection({
       {/* 카드 그리드 */}
       <GameList games={games} columnNumber={3} imageRatio="1:1" />
 
-      {isFetchingNextPage && <p>불러오는 중...</p>}
+      {isFetchingNextPage && (
+        <div className="mt-6">
+          <GameListSkeleton imageRatio="1:1" count={12} />
+        </div>
+      )}
       {!hasNextPage && <p>더 이상 데이터가 없습니다.</p>}
     </section>
   );
