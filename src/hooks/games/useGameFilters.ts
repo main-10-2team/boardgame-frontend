@@ -6,8 +6,7 @@ export function useGameFilters() {
   const searchParams = useSearchParams();
   return {
     keyword: searchParams.get('keyword') ?? '',
-    page: Number(searchParams.get('page') ?? 1),
-    pageSize: Number(searchParams.get('page_size') ?? 12),
+    page_size: Number(searchParams.get('page_size') ?? 12),
     categories: searchParams.get('categories')?.split(',') ?? [],
     genres: searchParams.get('genres')?.split(',') ?? [],
     players: Number(searchParams.get('players') ?? 0),

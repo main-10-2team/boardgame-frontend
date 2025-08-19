@@ -6,20 +6,26 @@ import { useGameFilters } from './games/useGameFilters';
 
 export function useInfiniteGames() {
   const filters = useGameFilters();
+
   return useInfiniteQuery<GameListResponse>({
     queryKey: ['games', filters],
     queryFn: async ({ pageParam = 1 }) => {
       const params = new URLSearchParams();
 
-      // react-query에서 관리하는 현재 page
+      // react-query에서 관리하는 현재 페이지
       params.set('page', String(pageParam));
+      params.set('page_size', '12');
 
-      // page_size 기본값: 없으면 12
-      params.set('page_size', String(filters.pageSize ?? 12));
-
-      // filters 나머지 항목 세팅
+      // filters 나머지 값만 세팅
       Object.entries(filters).forEach(([key, value]) => {
-        if (value !== undefined && value !== null && key !== 'page_size') {
+        const isFalsy =
+          value === undefined ||
+          value === null ||
+          value === '' ||
+          value === 0 ||
+          (Array.isArray(value) && value.length === 0);
+
+        if (!isFalsy) {
           params.set(key, String(value));
         }
       });
@@ -29,12 +35,9 @@ export function useInfiniteGames() {
       return res.json();
     },
     getNextPageParam: (lastPage) => {
-      if (lastPage.next) {
-        const url = new URL(lastPage.next);
-        const nextPage = url.searchParams.get('page');
-        return nextPage ? Number(nextPage) : undefined;
-      }
-      return undefined;
+      if (!lastPage.next) return undefined;
+      const url = new URL(lastPage.next);
+      return Number(url.searchParams.get('page'));
     },
     initialPageParam: 1,
   });

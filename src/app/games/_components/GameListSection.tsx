@@ -76,7 +76,6 @@ export default function GameListSection({
           <GameListSkeleton imageRatio="1:1" count={12} />
         </div>
       )}
-      {!hasNextPage && <p>더 이상 데이터가 없습니다.</p>}
     </section>
   );
 }
