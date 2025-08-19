@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function PreferenceSurveyCTA() {
   return (
-    <Link href={'/preference'} className="block w-full">
+    <Link href={'/auth/login'} className="block w-full">
       <section className="border-primary-300 relative flex items-center justify-between overflow-hidden rounded-2xl border bg-gradient-to-r from-[#FFE6FA] via-[#A1DCE4] to-[#D7FFAC] p-6 text-sm">
         <div>
           <p className="mb-1 text-lg font-semibold">
