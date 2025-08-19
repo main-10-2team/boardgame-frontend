@@ -46,6 +46,23 @@ export type FindIdState = {
   email?: string;
 };
 
+export type PasswordResetState = {
+  success: boolean;
+  error: string | null;
+  message?: string;
+};
+
+export type PasswordResetVerifyState = {
+  success: boolean;
+  error: string | null;
+  reset_token?: string;
+};
+
+export type PasswordChangeState = {
+  success: boolean;
+  error: string | null;
+};
+
 async function setAuthCookies(accessToken: string, refreshToken: string) {
   const cookieStore = await cookies();
 
@@ -233,6 +250,105 @@ export async function findUserId(
     return {
       success: false,
       error: '아이디를 찾을 수 없습니다.',
+    };
+  }
+}
+
+export async function sendPasswordResetCode(
+  email: string
+): Promise<PasswordResetState> {
+  try {
+    const data = await fetcher<SendCodeApiResponse>(
+      '/auth/reset-password/request/',
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          email,
+          purpose: 'restore', // purpose가 restore였죠!
+        }),
+      }
+    );
+
+    return {
+      success: true,
+      error: null,
+      message: data.message,
+    };
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      return { success: false, error: error.message };
+    }
+
+    return {
+      success: false,
+      error: '인증번호 전송 중 오류가 발생했습니다.',
+    };
+  }
+}
+
+// --- 비밀번호 재설정 인증번호 확인 Server Action ---
+export async function verifyPasswordResetCode(
+  email: string,
+  verificationCode: string
+): Promise<PasswordResetVerifyState> {
+  try {
+    const data = await fetcher<{ reset_token: string; message?: string }>(
+      '/auth/reset-password/verify/',
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          email,
+          verification_code: verificationCode,
+        }),
+      }
+    );
+
+    return {
+      success: true,
+      error: null,
+      reset_token: data.reset_token,
+    };
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      return { success: false, error: error.message };
+    }
+
+    return {
+      success: false,
+      error: '인증번호 확인 중 오류가 발생했습니다.',
+    };
+  }
+}
+
+// --- 비밀번호 변경 Server Action ---
+export async function changePassword(
+  resetToken: string,
+  newPassword: string
+): Promise<PasswordChangeState> {
+  try {
+    const data = await fetcher<{ message: string }>(
+      '/auth/reset-password/finalize/',
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          reset_token: resetToken,
+          new_password: newPassword,
+        }),
+      }
+    );
+
+    return {
+      success: true,
+      error: null,
+    };
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      return { success: false, error: error.message };
+    }
+
+    return {
+      success: false,
+      error: '비밀번호 변경 중 오류가 발생했습니다.',
     };
   }
 }
