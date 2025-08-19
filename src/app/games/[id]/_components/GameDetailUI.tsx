@@ -1,4 +1,5 @@
 import { GameDetail } from '@/types/game/game';
+import { ReviewListResponse } from '@/types/user/review';
 import { notFound } from 'next/navigation';
 import GameDetailBottomSection from './GameDetailBottomSection';
 import GameDetailPageHeader from './GameDetailPageHeader';
@@ -6,10 +7,13 @@ import GameDetailTopSection from './GameDetailTopSection';
 
 interface GameDetailPageProps {
   game: GameDetail;
-  //   game: any;
+  reviewData: ReviewListResponse;
 }
 
-export default function GameDetailUI({ game }: GameDetailPageProps) {
+export default function GameDetailUI({
+  game,
+  reviewData,
+}: GameDetailPageProps) {
   if (!game) {
     notFound();
   }
@@ -21,7 +25,7 @@ export default function GameDetailUI({ game }: GameDetailPageProps) {
       <GameDetailTopSection game={game} />
 
       {/* 게임 상세(하단) */}
-      <GameDetailBottomSection game={game} />
+      <GameDetailBottomSection game={game} reviews={reviewData} />
     </div>
   );
 }

@@ -1,24 +1,23 @@
 'use client';
-import { reviewData } from '@/assets/mocks/gameListData';
 import Button from '@/components/common/Button';
-import ReviewList from '@/components/game/detail/ReviewList';
-import ReviewModal from '@/components/game/detail/ReviewModal';
 import ReviewDetailModal from '@/components/my-page/review/ReviewDetailModal';
-import { ReviewItem } from '@/types/user/review';
-import { useEffect, useState } from 'react';
+import { ReviewItem, ReviewListResponse } from '@/types/user/review';
+import { useState } from 'react';
+import GameReviewList from './GameReviewList';
 
 interface GameReviewSectionProps {
   gameId: number;
   gameTitle: string;
   imageUrl: string;
+  reviews: ReviewListResponse;
 }
 export default function GameReviewSection({
   gameId,
   gameTitle,
   imageUrl,
+  reviews,
 }: GameReviewSectionProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [reviews, setReviews] = useState<ReviewItem[]>([]);
   const [modalReview, setModalReview] = useState<ReviewItem>();
   const [isWriteModalOpen, setIsWriteModalOpen] = useState(false);
 
@@ -29,9 +28,6 @@ export default function GameReviewSection({
     setModalReview(review);
     setIsModalOpen(true);
   };
-  useEffect(() => {
-    setReviews(reviewData.reviews);
-  }, []);
 
   return (
     <>
@@ -39,7 +35,7 @@ export default function GameReviewSection({
         <p className="flex items-center">
           게임 리뷰
           <span className="text-primary-400 ml-4 text-base font-semibold">
-            {reviewData.total_reviews ?? 0}
+            {reviews.total_reviews ?? 0}
           </span>
         </p>
         <Button size="sm" onClick={toggleReviewWrite}>
@@ -49,13 +45,24 @@ export default function GameReviewSection({
       {!reviews ? (
         <p className="text-gray-500">아직 작성된 리뷰가 없습니다.</p>
       ) : (
-        <ReviewList reviews={reviews} handleModalClick={handleReviewClick} />
+        <GameReviewList
+          reviews={reviews.reviews}
+          handleModalClick={handleReviewClick}
+        />
       )}
-      <ReviewModal
+      {/* <ReviewModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         review={modalReview}
-      />
+      /> */}
+      {modalReview && (
+        <ReviewDetailModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          review={modalReview}
+          isNew={false}
+        />
+      )}
       <ReviewDetailModal
         isOpen={isWriteModalOpen}
         onClose={toggleReviewWrite}

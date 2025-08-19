@@ -24,7 +24,7 @@ export default function ReviewItem({
           <div className="flex items-center gap-3">
             <Image
               src={review.user.profile_image_url || DEFAULT_PROFILE_IMAGE}
-              alt={review.user.username}
+              alt={review.user.username || 'User Profile'}
               width={40}
               height={40}
               className="h-10 w-10 rounded-full object-cover"
