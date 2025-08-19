@@ -1,5 +1,4 @@
 'use client';
-import BoardPickResult from '@/components/preference/result/BoardPickResult';
 import { TodaySubmitResponse } from '@/types/board-pick/boardPick';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -31,5 +30,6 @@ export default function ResultPage() {
   const result = [first, second, third];
   const similar = rest;
 
-  return <BoardPickResult result={result} similar={similar} />;
+  // return <BoardPickResult result={result} similar={similar} />;
+  return <div>타입 에러 수정중...</div>;
 }
