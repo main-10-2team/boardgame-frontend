@@ -2,10 +2,6 @@ import RankingPageContent from '@/app/ranking/_components/RankingPageContent';
 import { fetcher } from '@/lib/fetcher';
 import { GameListResponse } from '@/types/game/gameRanking';
 
-interface RankingPageProp {
-  searchParams: Promise<{ sort?: string | string[] }>;
-}
-
 export default async function RankingPage({
   searchParams,
 }: {

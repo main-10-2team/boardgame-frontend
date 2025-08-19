@@ -1,22 +1,23 @@
+import { getAccessToken } from '@/lib/getAccessToken';
 import { NextRequest, NextResponse } from 'next/server';
+
+export const dynamic = 'force-dynamic';
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { step: string } }
+  context: { params: { step: string } }
 ) {
-  const accessToken = req.cookies.get('access_token')?.value;
-
-  if (!accessToken) {
+  const { step } = await context.params;
+  const token = await getAccessToken();
+  if (!token) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
   }
 
-  const step = params.step;
-
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/v1/today/game/questions/${step}`,
+    `https://boardq.o-r.kr/api/v1/today/game/questions/${step}`,
     {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${token}`,
       },
       cache: 'no-store',
     }

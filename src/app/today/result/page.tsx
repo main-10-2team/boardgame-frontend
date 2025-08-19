@@ -1,54 +1,35 @@
+'use client';
 import BoardPickResult from '@/components/preference/result/BoardPickResult';
-import { fetcher } from '@/lib/fetcher';
-import { GameListItem, GameListResponse } from '@/types/game/game';
+import { TodaySubmitResponse } from '@/types/board-pick/boardPick';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
-async function getGameListData() {
-  const res = await fetcher<GameListResponse>(`/games/?limit=6`);
+const STORAGE_KEY = 'today:result';
 
-  const [first, second, third, ...rest] = res.results;
+export default function ResultPage() {
+  const router = useRouter();
+  const [data, setData] = useState<TodaySubmitResponse | null>(null);
+  // const res = await fetcher<GameListResponse>(`/games/?limit=6`);
 
-  const result = [first, second, third].map((game) => ({
-    game_id: game.game_id,
-    title: game.title,
-    difficulty: game.difficulty,
-    thumbnail_url: game.thumbnail_url,
-    average_rating: game.average_rating,
-    like_count: game.like_count,
-    genre: game.genre,
-    category: game.category,
-    // quote: game.quote,
-    // reviewer: game.reviewer,
-    // description: game.description,
-    quote: '리뷰내용',
-    reviewer: '리뷰어명',
-    description: '게임 설명',
-  }));
+  useEffect(() => {
+    const raw = sessionStorage.getItem(STORAGE_KEY);
+    if (!raw) {
+      router.replace('/today'); // 세션 없으면 설문으로
+      return;
+    }
+    try {
+      setData(JSON.parse(raw) as TodaySubmitResponse);
+    } catch {
+      sessionStorage.removeItem(STORAGE_KEY);
+      router.replace('/today');
+    }
+  }, [router]);
 
-  const similar: GameListItem[] = rest.map((game) => ({
-    game_id: game.game_id,
-    title: game.title,
-    difficulty: game.difficulty.toString(),
-    thumbnail_url: game.thumbnail_url,
-    average_rating: game.average_rating,
-    like_count: game.like_count,
-    genre: game.genre,
-    category: game.category,
-    age: 0,
-    description: '',
-    min_players: 0,
-    max_players: 0,
-    playtime_min_minutes: 0,
-    playtime_max_minutes: 0,
-    rules_url: '',
-    updated_at: '',
-    is_liked: false,
-    reviews_count: 0,
-  }));
-  return { result, similar };
-}
+  if (!data) return <div>불러오는 중...</div>;
 
-export default async function ResultPage() {
-  const { result, similar } = await getGameListData();
-  // const [first, second, third, ...similar] = gameListData;
+  const [first, second, third, ...rest] = data.games;
+  const result = [first, second, third];
+  const similar = rest;
+
   return <BoardPickResult result={result} similar={similar} />;
 }
