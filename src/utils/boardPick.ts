@@ -24,9 +24,12 @@ export function makeInitialAnswers(questions: Question[]): AnswerMap {
  * - multi-select : 길이가 1 이상이면 true
  */
 export function isAnswered(q: Question, v: unknown): boolean {
-  return q.type === 'single-select'
-    ? v !== null
-    : Array.isArray(v) && v.length > 0;
+  if (q.type === 'single-select') {
+    return typeof v === 'number';
+  }
+  // 멀티: 최소 1개 이상 선택
+  if (Array.isArray(v)) return v.length > 0;
+  return false;
 }
 
 const ZERO: Range = { min: 0, max: 0 };
