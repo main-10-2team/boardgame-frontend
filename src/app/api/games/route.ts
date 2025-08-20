@@ -53,7 +53,7 @@ export async function GET(request: NextRequest) {
     // 서버 간 통신이므로 CORS 에러 발생하지 않음
     const res = await fetch(externalApiUrl.toString(), {
       headers: {
-        Authorization: `Bearer ${token}`,
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
       },
     });
 
