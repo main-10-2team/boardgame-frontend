@@ -3,7 +3,7 @@ export function formatDifficulty(difficulty?: string): number {
   switch (difficulty) {
     case '쉬움':
       return 1;
-    case '보통':
+    case '중급':
       return 2;
     case '어려움':
       return 3;

@@ -1,7 +1,7 @@
 import GameDetailInfo from '@/app/games/[id]/_components/GameDetailInfo';
 import GameReviewSection from '@/app/games/[id]/_components/GameReviewSection';
-// import SimilarGameList from '@/components/game/detail/SimilarGameList';
 import YoutubeVideoSection from '@/app/games/[id]/_components/YoutubeVideoSection';
+import SimilarGameList from '@/components/game/detail/SimilarGameList';
 import Grid from '@/components/layout/Grid';
 import { GameDetail } from '@/types/game/game';
 import { ReviewListResponse } from '@/types/user/review';
@@ -45,7 +45,7 @@ export default function GameDetailBottomSection({
         <div className="game-detail-section">
           <h2 className="game-detail-title">비슷한 게임</h2>
           <div className="space-y-6">
-            {/* <SimilarGameList genre={game.genre} /> */}
+            <SimilarGameList genre={game.genre} />
           </div>
         </div>
       </Grid.Item>

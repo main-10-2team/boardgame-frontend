@@ -21,7 +21,7 @@ export default function SimilarGameItem({
       href={`/games/${gameId}`}
       className="group flex items-center gap-4"
     >
-      <div className="relative aspect-[4/5] w-25 overflow-hidden rounded-md bg-gray-100">
+      <div className="relative aspect-[4/5] w-24 shrink-0 overflow-hidden rounded-md bg-gray-100">
         <Image
           src={thumbnailUrl}
           alt={title}
@@ -31,8 +31,8 @@ export default function SimilarGameItem({
         />
       </div>
 
-      <div>
-        <h3 className="mb-2.5 truncate text-base font-semibold">{title}</h3>
+      <div className="w-full min-w-0">
+        <h3 className="mb-2.5 line-clamp-2 text-base font-semibold">{title}</h3>
 
         <div className="flex items-center gap-2">
           <RiStarFill className="h-4 w-4 text-gray-300" />

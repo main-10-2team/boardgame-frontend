@@ -21,7 +21,7 @@ export interface GameDetail extends GameBase {
   age: number;
   min_players: number;
   max_players: number;
-  playtime_minutes: number;
+  play_time: number;
   is_liked: boolean;
   created_at: string;
   updated_at: string;
