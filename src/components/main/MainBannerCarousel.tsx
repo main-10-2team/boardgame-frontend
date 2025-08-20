@@ -13,6 +13,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Autoplay, Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import MainBannerSkeleton from './MainBannerSkeleton';
 
 interface BannerGame {
   game_id: number;
@@ -40,7 +41,7 @@ export default function MainBannerCarousel() {
   }, []);
 
   if (loading) {
-    return <div className="relative mt-2 mb-16 h-96">로딩중...</div>;
+    return <MainBannerSkeleton />;
   }
 
   return (
