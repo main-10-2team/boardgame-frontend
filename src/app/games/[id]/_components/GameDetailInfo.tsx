@@ -1,21 +1,12 @@
 'use client';
 import { GameDetail } from '@/types/game/game';
-import { formatDate } from '@/utils/formatDate';
 import { formatDifficulty } from '@/utils/formatDifficulty';
 
 interface GameDetailInfoProps {
   game: GameDetail;
 }
 export default function GameDetailInfo({ game }: GameDetailInfoProps) {
-  const {
-    min_players,
-    max_players,
-    difficulty,
-    playtime_minutes,
-    genre,
-    age,
-    created_at,
-  } = game;
+  const { min_players, max_players, difficulty, play_time, genre, age } = game;
 
   const gameDetailInfo = [
     {
@@ -28,7 +19,7 @@ export default function GameDetailInfo({ game }: GameDetailInfoProps) {
     },
     {
       label: '플레이 시간',
-      value: playtime_minutes ? `${playtime_minutes}분` : '알수없음',
+      value: play_time ? `${play_time}` : '알수없음',
     },
     {
       label: '장르',
@@ -37,10 +28,6 @@ export default function GameDetailInfo({ game }: GameDetailInfoProps) {
     {
       label: '권장 연령',
       value: age ? `${age}세 이상` : '알수없음',
-    },
-    {
-      label: '출시년도',
-      value: formatDate(created_at) || '알수없음',
     },
   ];
 
