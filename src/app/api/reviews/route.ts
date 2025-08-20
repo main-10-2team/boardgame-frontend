@@ -42,3 +42,40 @@ export async function PATCH(req: NextRequest) {
     );
   }
 }
+
+export async function DELETE(req: NextRequest) {
+  const review_id = req.nextUrl.searchParams.get('review_id');
+  const token = await getAccessToken();
+
+  if (!review_id) {
+    return NextResponse.json(
+      { detail: '리뷰 ID가 필요합니다.' },
+      { status: 400 }
+    );
+  }
+
+  if (!token) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  try {
+    const backendRes = await fetch(
+      `${API_BASE_URL}/reviews/${review_id}delete`,
+      {
+        method: 'DELETE',
+        headers: {
+          accept: 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const data = await backendRes.json();
+    return NextResponse.json(data, { status: backendRes.status });
+  } catch (error) {
+    return NextResponse.json(
+      { detail: '서버 오류가 발생했습니다.' },
+      { status: 500 }
+    );
+  }
+}

@@ -21,7 +21,22 @@ export default function ReviewDetailView({
   // 중첩 모달 상태
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   // 확인 시 알림 함수
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
+    const res = await fetch(`/api/reviews?review_id=${review.review_id}`, {
+      method: 'DELETE',
+    });
+
+    const data = await res.json();
+    if (!res.ok) {
+      let message = '알 수 없는 오류가 발생했습니다.';
+      if (typeof data?.detail === 'string') {
+        message = data.detail;
+      }
+      alert(message);
+      onClose();
+      return;
+    }
+
     alert('삭제되었습니다.');
     setIsConfirmOpen(false);
     onClose();
