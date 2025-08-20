@@ -1,4 +1,4 @@
-# Externship Project
+# 보드큐(Boardque): 보드게임 추천 서비스
 
 ## 📖 프로젝트 소개
 
