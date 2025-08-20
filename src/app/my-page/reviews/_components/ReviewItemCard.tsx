@@ -21,7 +21,7 @@ export default function ReviewItemCard({
         onClick={() => setIsOpen(true)}
       >
         <Image
-          src={review.image_url || '/images/defaultReviewImg.png'}
+          src={review.image_url || '/images/img_default.png'}
           alt={`${review.title}에 대한 리뷰`}
           width={80}
           height={120}

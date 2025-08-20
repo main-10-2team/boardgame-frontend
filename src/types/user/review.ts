@@ -23,18 +23,29 @@ export interface MyReviewListResponse {
   reviews: MyReviewItem[];
 }
 
+export interface ReviewListResponse {
+  state: string;
+  title: string;
+  thumbnail_url: string;
+  total_reviews: number;
+  page: number;
+  limit: number;
+  total_pages: number;
+  reviews: ReviewItem[];
+}
+
 export interface ReviewItem {
   review_id: number;
-  game_id: number;
-  title: string;
-  content: string;
-  rating: number;
-  created_at: string;
-  updated_at?: string;
   user: {
     user_id: number;
-    username: string;
+    nickname: string;
     profile_image_url: string | null;
   };
+  game_id?: number;
+  title?: string;
+  rating: number;
+  content: string;
+  created_at: string;
+  updated_at?: string;
   image_url?: string;
 }

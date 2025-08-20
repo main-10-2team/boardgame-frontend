@@ -4,13 +4,16 @@ import YoutubeVideoSection from '@/app/games/[id]/_components/YoutubeVideoSectio
 // import SimilarGameList from '@/components/game/detail/SimilarGameList';
 import Grid from '@/components/layout/Grid';
 import { GameDetail } from '@/types/game/game';
+import { ReviewListResponse } from '@/types/user/review';
 
 interface GameDetailBottomSectionProps {
   game: GameDetail;
+  reviews: ReviewListResponse;
 }
 
 export default function GameDetailBottomSection({
   game,
+  reviews,
 }: GameDetailBottomSectionProps) {
   return (
     <Grid>
@@ -27,6 +30,7 @@ export default function GameDetailBottomSection({
             gameId={game.game_id}
             gameTitle={game.title}
             imageUrl={game.thumbnail_url}
+            reviews={reviews}
           />
         </div>
       </Grid.Item>
