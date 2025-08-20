@@ -1,6 +1,6 @@
 import { fetcher } from '@/lib/fetcher';
-import TrendingReviewWrapper from './TrendingReviewWrapper';
 import { type ReviewItem } from '@/types/user/review';
+import TrendingReviewWrapper from './TrendingReviewWrapper';
 
 interface ApiReviewPreview {
   game_id: number;
@@ -25,7 +25,7 @@ const transformApiReviewToReviewItem = (
   created_at: apiReview.created_at,
   user: {
     user_id: 0,
-    username: apiReview.nickname,
+    nickname: apiReview.nickname,
     profile_image_url: apiReview.profile_image
       ? `https://kr.object.ncloudstorage.com/boardq/${apiReview.profile_image}`
       : null,

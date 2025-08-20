@@ -1,7 +1,6 @@
 'use client';
 import Button from '@/components/common/Button';
 import ReviewItem from '@/components/game/detail/ReviewItem';
-import { fetcher } from '@/lib/fetcher';
 import {
   ReviewListResponse,
   type ReviewItem as ReviewItemType,
@@ -9,22 +8,27 @@ import {
 import { RiAddLine } from '@remixicon/react';
 import { useState } from 'react';
 interface GameReviewListProps {
-  reviews: ReviewItemType[];
+  reviews: ReviewListResponse;
   handleModalClick: (review: ReviewItemType) => void;
+  gameId: number;
 }
 export default function GameReviewList({
   reviews: reviewsData,
   handleModalClick,
+  gameId,
 }: GameReviewListProps) {
   const [page, setPage] = useState(1);
-  const [reviews, setReviews] = useState<ReviewItemType[]>(reviewsData);
+  const [reviews, setReviews] = useState<ReviewItemType[]>(reviewsData.reviews);
+
   const handleReviewMore = async () => {
+    if (reviewsData.total_pages <= page) return;
     const nextPage = page + 1;
     try {
-      const more = await fetcher<ReviewListResponse>(
-        `/games/19786/reviews?limit=1&page=${nextPage}`
+      const more = await fetch(
+        `/api/games/${gameId}/reviews?limit=4&page=${nextPage}`
       );
-      setReviews((prev) => [...prev, ...more.reviews]);
+      const reviewData = await more.json();
+      setReviews((prev) => [...prev, ...reviewData.reviews]);
     } catch (error) {
       console.error('Error fetching more reviews:', error);
     }
@@ -33,7 +37,7 @@ export default function GameReviewList({
 
   return (
     <>
-      {reviews.length > 0 ? (
+      {reviewsData.total_reviews > 0 ? (
         <>
           <ul className="grid auto-rows-fr grid-cols-1 gap-6 md:grid-cols-2">
             {reviews.map((review) => (
@@ -46,14 +50,16 @@ export default function GameReviewList({
             ))}
           </ul>
           <div className="mt-6 flex justify-center">
-            <Button
-              variant="secondary"
-              className="align-center group flex"
-              onClick={handleReviewMore}
-            >
-              더보기
-              <RiAddLine className="transition-transform group-hover:-translate-y-0.5" />
-            </Button>
+            {reviewsData.total_pages > page ? (
+              <Button
+                variant="secondary"
+                className="align-center group flex"
+                onClick={handleReviewMore}
+              >
+                더보기
+                <RiAddLine className="transition-transform group-hover:-translate-y-0.5" />
+              </Button>
+            ) : null}
           </div>
         </>
       ) : (

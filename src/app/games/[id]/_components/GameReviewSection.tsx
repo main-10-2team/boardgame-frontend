@@ -2,7 +2,9 @@
 import Button from '@/components/common/Button';
 import ReviewDetailModal from '@/components/my-page/review/ReviewDetailModal';
 import { ReviewItem, ReviewListResponse } from '@/types/user/review';
-import { useState } from 'react';
+import { User } from '@/types/user/user';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import GameReviewList from './GameReviewList';
 
 interface GameReviewSectionProps {
@@ -17,11 +19,27 @@ export default function GameReviewSection({
   imageUrl,
   reviews,
 }: GameReviewSectionProps) {
+  const router = useRouter();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalReview, setModalReview] = useState<ReviewItem>();
   const [isWriteModalOpen, setIsWriteModalOpen] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    fetch('/api/me')
+      .then((res) => res.json())
+      .then((data) => {
+        setUser(data.user);
+        console.log('gamereviewsection', data.user);
+      })
+      .catch(() => setUser(null));
+
+    console.log('gamereviewsection', user);
+  }, []);
 
   const toggleReviewWrite = () => {
+    if (!user) router.push('/auth/login');
     setIsWriteModalOpen((prev) => !prev);
   };
   const handleReviewClick = (review: ReviewItem) => {
@@ -42,14 +60,11 @@ export default function GameReviewSection({
           리뷰 쓰기
         </Button>
       </h2>
-      {!reviews ? (
-        <p className="text-gray-500">아직 작성된 리뷰가 없습니다.</p>
-      ) : (
-        <GameReviewList
-          reviews={reviews.reviews}
-          handleModalClick={handleReviewClick}
-        />
-      )}
+      <GameReviewList
+        gameId={gameId}
+        reviews={reviews}
+        handleModalClick={handleReviewClick}
+      />
       {/* <ReviewModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

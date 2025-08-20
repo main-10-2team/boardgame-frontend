@@ -18,7 +18,7 @@ async function getGameData(id: string) {
 async function getReviewData(id: string) {
   try {
     return await fetcher<ReviewListResponse>(
-      `/games/${id}/reviews?limit=10&page=1`
+      `/games/${id}/reviews?limit=4&page=1`
     );
   } catch (e) {
     if (e instanceof ApiError && e.status === 400) {
