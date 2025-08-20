@@ -40,20 +40,20 @@ export default function RankItem({ game, index }: RankItemProps) {
       <div className="flex flex-1 flex-col justify-center gap-2">
         <h3 className="text-base font-bold">{game.title}</h3>
         <div className="flex gap-4">
-          {game.like_count && (
+          {game.like_count != null ? (
             <div className="flex items-center gap-2">
               <RiHeartFill className="h-4 w-4 text-gray-300" />
               <span className="text-xs">{game.like_count ?? 0}</span>
             </div>
-          )}
-          {game.average_rating && (
+          ) : null}
+          {game.average_rating != null ? (
             <div className="flex items-center gap-2">
               <RiStarFill className="h-4 w-4 text-gray-300" />
               <span className="text-xs">
                 {game.average_rating?.toFixed(1) ?? '-'}
               </span>
             </div>
-          )}
+          ) : null}
         </div>
         <div className="mt-1 flex flex-wrap gap-1 text-xs text-white">
           <GameTags
