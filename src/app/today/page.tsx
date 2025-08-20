@@ -35,7 +35,6 @@ export default function BoardPickPage() {
     if (submitting) return;
     try {
       setSubmitting(true);
-
       const payload = buildTodaySubmitPayload(
         survey.answers,
         survey.questionsByKey
@@ -45,7 +44,6 @@ export default function BoardPickPage() {
       sessionStorage.setItem(STORAGE_KEY, JSON.stringify(result));
       router.push(RESULT_PATH);
     } catch (e) {
-      console.error(e);
       alert('제출에 실패했어요. 잠시 후 다시 시도해주세요.');
     } finally {
       setSubmitting(false);
@@ -62,7 +60,7 @@ export default function BoardPickPage() {
   if (survey.phase === 'survey') {
     return (
       <GradientLayout>
-        <SurveySection onSubmit={submitAndGo} />
+        <SurveySection onSubmit={submitAndGo} survey={survey} />
       </GradientLayout>
     );
   }

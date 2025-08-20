@@ -22,22 +22,19 @@ export async function fetchTodayQuestion(step: number): Promise<Question> {
 export async function submitTodayAnswers(
   payload: TodaySubmitPayload
 ): Promise<TodaySubmitResponse> {
-  console.log('[Submit] payload', payload);
   const res = await fetch('/api/today/submit', {
     method: 'POST',
-    credentials: 'include',
     cache: 'no-store',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
+    next: { revalidate: 0 },
   });
 
   const text = await res.text().catch(() => '');
   if (!res.ok) {
-    console.error('[Submit] fail', res.status, text);
     throw new Error(`POST /api/today/submit ${res.status} ${text}`);
   }
 
   const json = JSON.parse(text) as TodaySubmitResponse;
-  console.log('[Submit] response', json);
   return json;
 }

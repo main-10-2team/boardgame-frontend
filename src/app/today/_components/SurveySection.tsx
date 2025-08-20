@@ -4,8 +4,14 @@ import { useTodayQuestions } from '@/hooks/react-query/useTodayQuestions';
 import { useBoardPickSurvey } from '@/hooks/useBoardPickSurvey';
 import { isAnswered } from '@/utils/boardPick';
 
-export default function SurveySection({ onSubmit }: { onSubmit: () => void }) {
-  const survey = useBoardPickSurvey();
+type SurveyModel = ReturnType<typeof useBoardPickSurvey>;
+export default function SurveySection({
+  onSubmit,
+  survey,
+}: {
+  onSubmit: () => void;
+  survey: SurveyModel;
+}) {
   const step = survey.step;
   const total = survey.total;
 
