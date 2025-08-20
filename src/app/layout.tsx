@@ -3,6 +3,7 @@ import Header from '@/components/layout/Header/Header';
 import type { Metadata } from 'next';
 import './globals.css';
 import Providers from './providers';
+import ConditionalFooter from '@/components/layout/ConditionalFooter';
 
 export const metadata: Metadata = {
   title: '보드큐',
@@ -28,7 +29,7 @@ export default function RootLayout({
         <Providers>
           <Header />
           {children}
-          <Footer />
+          <ConditionalFooter />
           <div id="modal" />
         </Providers>
       </body>
