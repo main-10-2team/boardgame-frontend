@@ -29,9 +29,7 @@
 
 #### 프론트엔드
 
-<img src="https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white">
-<img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=React&logoColor=61DAFB">
-<img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white">
+<img src="https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white"> <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=React&logoColor=61DAFB"> <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white">
 
 #### 상태 관리
 
@@ -43,9 +41,7 @@
 
 #### 스타일링
 
-<img src="https://img.shields.io/badge/Tailwind%20CSS-06B6D4?style=for-the-badge&logo=TailwindCSS&logoColor=white">
-<img src="https://img.shields.io/badge/clsx-000000?style=for-the-badge">
-<img src="https://img.shields.io/badge/tailwind--merge-06B6D4?style=for-the-badge">
+<img src="https://img.shields.io/badge/Tailwind%20CSS-06B6D4?style=for-the-badge&logo=TailwindCSS&logoColor=white"> <img src="https://img.shields.io/badge/clsx-000000?style=for-the-badge"> <img src="https://img.shields.io/badge/tailwind--merge-06B6D4?style=for-the-badge">
 
 #### 배포
 
@@ -59,14 +55,14 @@
 
 ## 🖤 팀장: 김하연
 
-> 프로젝트 관리 & 기술 전반 가이드
+> 마이페이지, 랭킹 페이지, 보드픽 추천 서비스, 폰트 전역 설정
 
 ### UI 구현 및 API 연동
 
-- 마이페이지 담당
-- 랭킹페이지 담당
+- 마이페이지
+- 랭킹페이지
 - 오늘뭐하지(보드픽) 추천 서비스
-- 공통컴포넌트 - 레이아웃, 헤더, 푸터, 모달
+- 공통컴포넌트 - 레이아웃(헤더, 푸터), 모달, Spinner, 버튼
 
 ### 문서 작성
 
@@ -74,15 +70,15 @@
 
 ## 🤍 팀원: 지정민
 
-> 질문/답변 등록 및 수정
+> 디자인 및 게임 조회, 리뷰 기능, prettier 플러그인 설정
 
-### UI 구현 및 API 연
+### UI 구현 및 API 연동
 
-- 게임리스트, 상세
+- 게임리스트, 상세, 메인페이지
 - 리뷰 등록, 수정, 삭제 기능
 - 검색 기능
-- 메인페이지 등 UI
-- 공통 컴포넌트 개발
+- 공통 컴포넌트 - 체크박스, 라디오, 레인지 슬라이더, 드롭다운, Grid
+- 오늘 뭐하지(보드픽) 결과 페이지 UI
 
 ### 문서 작성
 
@@ -90,7 +86,7 @@
 
 ## 🤍 팀원: 윤강혁
 
-> 인증 및 계정 관련 기능
+> 인증 및 계정 관련 기능, 프로젝트 초기 설정
 
 ### UI 구현 및 API 연동
 
@@ -98,6 +94,7 @@
 - 로그인, 회원가입
 - 아이디, 비밀번호 찾기
 - 초기 취향 설문조사
+- 공통 컴포넌트 - input, 토스트
 
 ### 문서 작성
 
