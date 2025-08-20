@@ -29,76 +29,20 @@
 
 #### 프론트엔드
 
-<img src="https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white"> <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=React&logoColor=61DAFB"> <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white">
-
-#### 상태 관리
-
-<img src="https://img.shields.io/badge/Zustand-000000?style=for-the-badge&logo=Zustand&logoColor=white">
-
-#### 폼 관리
-
-<img src="https://img.shields.io/badge/TanStack%20Query-FF4154?style=for-the-badge&logo=ReactQuery&logoColor=white">
-
-#### 스타일링
-
-<img src="https://img.shields.io/badge/Tailwind%20CSS-06B6D4?style=for-the-badge&logo=TailwindCSS&logoColor=white"> <img src="https://img.shields.io/badge/clsx-000000?style=for-the-badge"> <img src="https://img.shields.io/badge/tailwind--merge-06B6D4?style=for-the-badge">
-
-#### 배포
-
-<img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=Vercel&logoColor=white">
-
-#### 기타
-
-<img src="https://img.shields.io/badge/swiper-66ccff.svg?&logo=swiper&logoColor=fff">
+| 구분                 | 기술 스택                                                                                                                                                                                                                                                                                                                                                     | 설명                                                                                                         |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| **프론트엔드**       | <div align="left"> <img src="https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white">&nbsp;<img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=React&logoColor=61DAFB">&nbsp;<img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white"> </div> | Next.js 기반의 서버사이드 렌더링 및 라우팅, React 컴포넌트 기반 UI, 정적 타입 지원을 통한 안정적인 개발 환경 |
+| **상태 관리**        | <img src="https://img.shields.io/badge/Zustand-000000?style=for-the-badge&logo=Zustand&logoColor=white">                                                                                                                                                                                                                                                      | 가벼운 전역 상태 관리 라이브러리로 단순하면서도 확장성 높은 관리 가능                                        |
+| **폼 / 데이터 관리** | <img src="https://img.shields.io/badge/TanStack%20Query-FF4154?style=for-the-badge&logo=ReactQuery&logoColor=white">                                                                                                                                                                                                                                          | 서버 상태 관리 및 비동기 데이터 캐싱/동기화에 최적화된 라이브러리                                            |
+| **스타일링**         | <div align="left"> <img src="https://img.shields.io/badge/Tailwind%20CSS-06B6D4?style=for-the-badge&logo=TailwindCSS&logoColor=white">&nbsp;<img src="https://img.shields.io/badge/clsx-000000?style=for-the-badge">&nbsp;<img src="https://img.shields.io/badge/tailwind--merge-06B6D4?style=for-the-badge"> </div>                                          | 유틸리티 기반 CSS 프레임워크, 조건부 클래스 병합(`clsx`), Tailwind 중복 클래스 정리(`                        |
 
 ## 💪🏻 팀 구성 및 역할
 
-## 🖤 팀장: 김하연
-
-> 마이페이지, 랭킹 페이지, 보드픽 추천 서비스, 폰트 전역 설정
-
-### UI 구현 및 API 연동
-
-- 마이페이지
-- 랭킹페이지
-- 오늘뭐하지(보드픽) 추천 서비스
-- 공통컴포넌트 - 레이아웃(헤더, 푸터), 모달, Spinner, 버튼
-
-### 문서 작성
-
-- 플로우차트, 화면 정의서
-
-## 🤍 팀원: 지정민
-
-> 디자인 및 게임 조회, 리뷰 기능, prettier 플러그인 설정
-
-### UI 구현 및 API 연동
-
-- 게임리스트, 상세, 메인페이지
-- 리뷰 등록, 수정, 삭제 기능
-- 검색 기능
-- 공통 컴포넌트 - 체크박스, 라디오, 레인지 슬라이더, 드롭다운, Grid
-- 오늘 뭐하지(보드픽) 결과 페이지 UI
-
-### 문서 작성
-
-- Figma 와이어프레임/디자인
-
-## 🤍 팀원: 윤강혁
-
-> 인증 및 계정 관련 기능, 프로젝트 초기 설정
-
-### UI 구현 및 API 연동
-
-- 사용자 인증로직 구현
-- 로그인, 회원가입
-- 아이디, 비밀번호 찾기
-- 초기 취향 설문조사
-- 공통 컴포넌트 - input, 토스트
-
-### 문서 작성
-
-- 플로우차트, 화면 정의서
+| <a href="https://github.com/idubusomuch"/><img src="https://avatars.githubusercontent.com/u/99173548?v=4" width=100px /><br/><sub><b>@idubusomuch<b/><sub/><a/><br/> | <a href="https://github.com/jngmnj"/><img src="https://avatars.githubusercontent.com/u/58453631?v=4" width=100px /><br/><sub><b>@jngmnj<b/><sub/><a/><br/>                                                                     | <a href="https://github.com/Aprasaks"/><img src="https://avatars.githubusercontent.com/u/206915635?v=4" width=100px /><br/><sub><b>@Aprasaks<b/><sub/><a/><br/>       |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **🖤 팀장: 김하연** <br> 마이페이지, 랭킹 페이지, 보드픽 추천 서비스, 폰트 전역 설정                                                                                 | **🤍 팀원: 지정민** <br> 디자인 및 게임 조회, 리뷰 기능, prettier 플러그인 설정                                                                                                                                                | **🤍 팀원: 윤강혁** <br> 인증 및 계정 관련 기능, 프로젝트 초기 설정                                                                                                   |
+| **UI 구현 및 API 연동** <br> - 마이페이지 <br> - 랭킹페이지 <br> - 오늘 뭐하지(보드픽) 추천 서비스 <br> - 공통 컴포넌트: 레이아웃(헤더·푸터), 모달, Spinner, 버튼    | **UI 구현 및 API 연동** <br> - 게임리스트, 상세, 메인페이지 <br> - 리뷰 등록·수정·삭제 기능 <br> - 검색 기능 <br> - 공통 컴포넌트: 체크박스, 라디오, 레인지 슬라이더, 드롭다운, Grid <br> - 오늘 뭐하지(보드픽) 결과 페이지 UI | **UI 구현 및 API 연동** <br> - 사용자 인증 로직 구현 <br> - 로그인·회원가입 <br> - 아이디/비밀번호 찾기 <br> - 초기 취향 설문조사 <br> - 공통 컴포넌트: Input, 토스트 |
+| **문서 작성** <br> - 플로우차트 <br> - 화면 정의서                                                                                                                   | **문서 작성** <br> - Figma 와이어프레임/디자인                                                                                                                                                                                 | **문서 작성** <br> - 플로우차트 <br> - 화면 정의서                                                                                                                    |
 
 ## ✅ Commit Convention (커밋 메시지 규칙)
 
