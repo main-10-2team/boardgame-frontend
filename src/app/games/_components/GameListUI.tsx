@@ -2,8 +2,10 @@
 import GameListSection from '@/app/games/_components/GameListSection';
 import BreadcrumbsSkeleton from '@/components/layout/BreadcrumbsSkeleton';
 import Grid from '@/components/layout/Grid';
-import { GameListResponse } from '@/types/game/game';
+import { getGameListDataClient } from '@/lib/api/games';
+import { useQuery } from '@tanstack/react-query';
 import dynamic from 'next/dynamic';
+import { notFound } from 'next/navigation';
 import FilterSidebarSkeleton from './FilterSidebarSkeleton';
 
 const Breadcrumbs = dynamic(() => import('@/components/layout/Breadcrumbs'), {
@@ -19,10 +21,18 @@ const FilterSidebar = dynamic(
 );
 
 export default function GameListUI({
-  gameListData,
+  searchParams,
 }: {
-  gameListData: GameListResponse;
+  searchParams: { [key: string]: string | string[] | undefined };
 }) {
+  const { data: gameListData, isLoading } = useQuery({
+    queryKey: ['games', searchParams],
+    queryFn: () => getGameListDataClient(searchParams),
+  });
+  if (isLoading) return <div>Loading...</div>;
+
+  if (!isLoading && !gameListData) return notFound();
+
   return (
     <div className="inner pt-6 pb-40">
       <Breadcrumbs />

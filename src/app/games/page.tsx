@@ -1,37 +1,50 @@
 import GameListUI from '@/app/games/_components/GameListUI';
-import { fetcher } from '@/lib/fetcher';
-import { GameListResponse } from '@/types/game/game';
+import { getGameListData } from '@/lib/api/games';
+import getQueryClient from '@/lib/getQueryClient';
+import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
+import { Metadata } from 'next';
 
-async function getGameListData({
+export async function generateMetadata({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
-}) {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}): Promise<Metadata> {
   const resolvedParams = await searchParams;
+  const category = resolvedParams.category;
 
-  // searchParams를 URLSearchParams로 변환
-  const params = new URLSearchParams(
-    Object.entries(resolvedParams).flatMap(([key, value]) => {
-      if (typeof value === 'undefined') return [];
-      if (Array.isArray(value)) {
-        return value.map((v) => [key, v]);
-      }
-      return [[key, value]];
-    })
-  );
+  const title = category
+    ? `보드큐 - ${category} 보드게임 리스트`
+    : '보드큐 - 보드게임 리스트';
+  const description = category
+    ? `${category} 보드게임을 한눈에 확인하세요`
+    : '다양한 보드게임을 쉽게 검색하세요!';
 
-  // 기본 URL 설정
-  const endpoint = `/games/?${params.toString()}`;
-
-  const res = await fetcher<GameListResponse>(endpoint);
-  return res;
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+    },
+  };
 }
-
 export default async function Page({
   searchParams,
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const gameListData = await getGameListData({ searchParams });
-  return <GameListUI gameListData={gameListData} />;
+  const queryClient = getQueryClient();
+
+  const resolvedParams = await searchParams;
+
+  await queryClient.prefetchQuery({
+    queryKey: ['games', resolvedParams],
+    queryFn: () => getGameListData(resolvedParams),
+  });
+
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <GameListUI searchParams={resolvedParams} />
+    </HydrationBoundary>
+  );
 }

@@ -1,8 +1,9 @@
+import { API_BASE_URL } from '@/constants/api/url';
+import { getAccessToken } from '@/lib/getAccessToken';
 import { NextRequest, NextResponse } from 'next/server';
 
-const API_BASE_URL = 'https://boardq.o-r.kr/api/v1';
-
 export async function GET(request: NextRequest) {
+  const token = await getAccessToken();
   try {
     const { searchParams } = new URL(request.url);
 
@@ -50,7 +51,11 @@ export async function GET(request: NextRequest) {
     setIf('age', age);
 
     // 서버 간 통신이므로 CORS 에러 발생하지 않음
-    const res = await fetch(externalApiUrl.toString());
+    const res = await fetch(externalApiUrl.toString(), {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     if (!res.ok) {
       const errorInfo = await res.json();
