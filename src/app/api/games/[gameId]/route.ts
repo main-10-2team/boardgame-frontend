@@ -1,0 +1,27 @@
+import { API_BASE_URL } from '@/constants/api/url';
+import { NextRequest, NextResponse } from 'next/server';
+
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { gameId: string } }
+) {
+  const { gameId } = params;
+
+  try {
+    const res = await fetch(`${API_BASE_URL}/games/${gameId}`);
+
+    if (!res.ok) {
+      const errorInfo = await res.json();
+      return NextResponse.json(errorInfo, { status: res.status });
+    }
+
+    const data = await res.json();
+    return NextResponse.json(data);
+  } catch (error) {
+    console.error('Error in API handler:', error);
+    return NextResponse.json(
+      { message: 'Internal Server Error' },
+      { status: 500 }
+    );
+  }
+}
