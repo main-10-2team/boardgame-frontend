@@ -40,7 +40,7 @@ export default function ReviewEditForm({
       <div className="flex gap-4">
         <div className="flex flex-col justify-center gap-4">
           <Image
-            src={review.image_url || '/images/defaultReviewImg.png'}
+            src={review.image_url || '/images/img_default.png'}
             alt={review.content}
             width={200}
             height={250}
