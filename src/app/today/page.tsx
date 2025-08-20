@@ -1,82 +1,68 @@
 'use client';
 
-import IntroSection from '@/components/board-pick/IntroSection';
-import SurveySection from '@/components/board-pick/SurveySection';
+import { submitTodayAnswers } from '@/api/board-pick';
+import IntroSection from '@/app/today/_components/IntroSection';
+import SurveySection from '@/app/today/_components/SurveySection';
 import { useBoardPickSurvey } from '@/hooks/useBoardPickSurvey';
-import { Question } from '@/types/board-pick/boardPick';
-import { useRouter } from 'next/navigation';
+import { TodaySubmitResponse } from '@/types/board-pick/boardPick';
+import { buildTodaySubmitPayload } from '@/utils/boardPick';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useCallback, useEffect, useState } from 'react';
 
 const RESULT_PATH = '/today/result';
-const questions: Question[] = [
-  {
-    key: 'players',
-    text: '1. 함께하는 인원 수는 몇 명인가요?',
-    type: 'single-select',
-    options: [
-      { id: 1, label: '2명' },
-      { id: 2, label: '3–4명' },
-      { id: 3, label: '5–6명' },
-      { id: 4, label: '7명 이상' },
-    ],
-  },
-  {
-    key: 'playtime_range',
-    text: '2. 플레이타임을 골라주세요',
-    type: 'multi-select',
-    options: [
-      { id: 1, label: '20분 이내', min: 0, max: 20 },
-      { id: 2, label: '20–40분', min: 20, max: 40 },
-      { id: 3, label: '40–60분', min: 40, max: 60 },
-      { id: 4, label: '60–80분', min: 60, max: 80 },
-      { id: 5, label: '80분 이상', min: 80, max: 999 },
-    ],
-  },
-];
+const STORAGE_KEY = 'today:result';
 
 export default function BoardPickPage() {
-  // 라우터 & 전환 상태 (전환 동안 버튼 상태/중복 클릭 방지 등에 사용 가능)
   const router = useRouter();
-
-  // 설문 상태/로직 훅 (현재 단계, 답변, 다음/이전 이동 등)
   const survey = useBoardPickSurvey();
-  // 마지막 단계 여부 (UI/전환 분기 용)
-  const isLast = survey.step === survey.total;
+  const [submitting, setSubmitting] = useState(false);
+  const search = useSearchParams();
 
-  const submitAndGo = async () => {
-    // TODO: API 연동 시 여기서 POST -> OK 면 결과 페이지로
-    router.push(RESULT_PATH);
-  };
+  useEffect(() => {
+    const resume = search.get('resume') === '1';
+    if (!resume) {
+      sessionStorage.removeItem(STORAGE_KEY);
+      survey.reset();
+    }
+  }, []);
+
+  const handleStart = useCallback(() => {
+    survey.reset();
+    survey.start();
+  }, [survey]);
+
+  const submitAndGo = useCallback(async () => {
+    if (submitting) return;
+    try {
+      setSubmitting(true);
+
+      const payload = buildTodaySubmitPayload(
+        survey.answers,
+        survey.questionsByKey
+      );
+      const result: TodaySubmitResponse = await submitTodayAnswers(payload);
+
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(result));
+      router.push(RESULT_PATH);
+    } catch (e) {
+      console.error(e);
+      alert('제출에 실패했어요. 잠시 후 다시 시도해주세요.');
+    } finally {
+      setSubmitting(false);
+    }
+  }, [submitting, survey.answers, survey.questionsByKey, router]);
 
   if (survey.phase === 'intro')
     return (
       <GradientLayout>
-        <IntroSection onStart={survey.start} />
+        <IntroSection onStart={handleStart} />
       </GradientLayout>
     );
 
-  if (survey.phase === 'survey' && survey.current) {
-    const q = survey.current;
-    const v = survey.answers[q.key];
-
+  if (survey.phase === 'survey') {
     return (
       <GradientLayout>
-        <SurveySection
-          step={survey.step}
-          total={survey.total ?? 0}
-          question={q}
-          value={v}
-          onSelectSingle={(id: number) => survey.setSingle(q.key, id)}
-          onToggleMulti={(id: number) => survey.toggleMulti(q.key, id)}
-          onPrev={survey.goPrev}
-          onNext={async () => {
-            if (!isLast) {
-              survey.goNext();
-            } else {
-              await submitAndGo();
-            }
-          }}
-          canNext={survey.canNext}
-        />
+        <SurveySection onSubmit={submitAndGo} />
       </GradientLayout>
     );
   }

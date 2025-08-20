@@ -1,4 +1,10 @@
-import type { AnswerMap, Question } from '@/types/board-pick/boardPick';
+import type {
+  AnswerMap,
+  AnswerValue,
+  Question,
+  Range,
+  TodaySubmitPayload,
+} from '@/types/board-pick/boardPick';
 /**
  * 질문 리스트로부터 초기 답변 객체 생성
  * - single-select: null
@@ -21,4 +27,44 @@ export function isAnswered(q: Question, v: unknown): boolean {
   return q.type === 'single-select'
     ? v !== null
     : Array.isArray(v) && v.length > 0;
+}
+
+const ZERO: Range = { min: 0, max: 0 };
+
+const asIds = (v: AnswerValue): number[] | null =>
+  Array.isArray(v) ? v : null;
+const asId = (v: AnswerValue): number | null =>
+  typeof v === 'number' ? v : null;
+
+function labelsFor(q: Question | undefined, ids: number[] | null): string[] {
+  if (!q || !ids || ids.length === 0) return [];
+  return q.options.filter((o) => ids.includes(o.id)).map((o) => o.label);
+}
+
+function rangeFor(q: Question | undefined, id: number | null): Range {
+  if (!q || id == null) return ZERO;
+  const opt = q.options.find((o) => o.id === id);
+  return { min: opt?.min ?? 0, max: opt?.max ?? 0 };
+}
+
+/** 질문 key가 API 필드명과 같다는 전제:
+ * 'categories' | 'players_range' | 'playtime_range' | 'age_group' | 'difficulty_range'
+ */
+export function buildTodaySubmitPayload(
+  answers: AnswerMap,
+  questionsByKey: Record<string, Question>
+): TodaySubmitPayload {
+  const qCat = questionsByKey['categories'];
+  const qP = questionsByKey['players_range'];
+  const qT = questionsByKey['playtime_range'];
+  const qAge = questionsByKey['age_group'];
+  const qDiff = questionsByKey['difficulty_range'];
+
+  return {
+    categories: labelsFor(qCat, asIds(answers['categories'])),
+    players_range: rangeFor(qP, asId(answers['players_range'])),
+    playtime_range: rangeFor(qT, asId(answers['playtime_range'])),
+    age_group: rangeFor(qAge, asId(answers['age_group'])),
+    difficulty_range: rangeFor(qDiff, asId(answers['difficulty_range'])),
+  };
 }
