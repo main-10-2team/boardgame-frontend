@@ -5,6 +5,7 @@ import MainBannerSkeleton from './MainBannerSkeleton';
 
 const MainBannerCarousel = dynamic(() => import('./MainBannerCarousel'), {
   ssr: false,
+  loading: () => <MainBannerSkeleton />,
 });
 
 export default function MainBannerCarouselWrapper() {
