@@ -79,8 +79,7 @@ export default function ProfileEditForm({ userProfile }: ProfileEditFormProps) {
           router.refresh();
           router.push('/my-page/profile');
         },
-        onError: (err) => {
-          console.error('프로필 수정 실패:', err);
+        onError: () => {
           alert('수정에 실패했습니다. 다시 시도해주세요.');
         },
       }

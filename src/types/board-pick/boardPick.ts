@@ -3,6 +3,7 @@ export type QuestionType = 'single-select' | 'multi-select';
 export interface Option {
   id: number;
   label: string;
+  value?: string;
   min?: number;
   max?: number;
 }
@@ -31,13 +32,23 @@ export interface TodaySubmitResponse {
   games: TodayGame[];
 }
 
+export interface TopReview {
+  content?: string;
+  nickname?: string;
+}
+
 export interface TodayGame {
+  game_id: number;
   title: string;
   thumbnail_url: string;
   category: string;
   players: string;
   difficulty: string;
   genre: string;
-  description: string;
-  top_review?: Record<string, string>;
+  average_rating: number;
+  reviews_count: number;
+  like_count: number;
+  is_liked: boolean;
+  description: string | null;
+  top_review: TopReview | null;
 }

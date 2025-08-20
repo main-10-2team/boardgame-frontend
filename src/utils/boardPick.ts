@@ -36,9 +36,12 @@ const asIds = (v: AnswerValue): number[] | null =>
 const asId = (v: AnswerValue): number | null =>
   typeof v === 'number' ? v : null;
 
-function labelsFor(q: Question | undefined, ids: number[] | null): string[] {
+function valuesFor(q: Question | undefined, ids: number[] | null): string[] {
   if (!q || !ids || ids.length === 0) return [];
-  return q.options.filter((o) => ids.includes(o.id)).map((o) => o.label);
+  return q.options
+    .filter((o) => ids.includes(o.id))
+    .map((o) => o.value ?? o.label)
+    .filter((v): v is string => !!v);
 }
 
 function rangeFor(q: Question | undefined, id: number | null): Range {
@@ -60,11 +63,13 @@ export function buildTodaySubmitPayload(
   const qAge = questionsByKey['age_group'];
   const qDiff = questionsByKey['difficulty_range'];
 
-  return {
-    categories: labelsFor(qCat, asIds(answers['categories'])),
+  const payload: TodaySubmitPayload = {
+    categories: valuesFor(qCat, asIds(answers['categories'])),
     players_range: rangeFor(qP, asId(answers['players_range'])),
     playtime_range: rangeFor(qT, asId(answers['playtime_range'])),
     age_group: rangeFor(qAge, asId(answers['age_group'])),
     difficulty_range: rangeFor(qDiff, asId(answers['difficulty_range'])),
   };
+
+  return payload;
 }
