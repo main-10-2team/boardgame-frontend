@@ -1,5 +1,5 @@
 'use client';
-import { mainBannerList } from '@/assets/mocks/mainBannerList';
+import { useEffect, useState } from 'react';
 import Button from '@/components/common/Button';
 import {
   RiArrowLeftSLine,
@@ -14,7 +14,35 @@ import 'swiper/css/pagination';
 import { Autoplay, Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+interface BannerGame {
+  game_id: number;
+  title: string;
+  thumbnail_url: string;
+  genre: string;
+  category: string;
+}
+
 export default function MainBannerCarousel() {
+  const [bannerGames, setBannerGames] = useState<BannerGame[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('/api/games?page=1&page_size=10')
+      .then((res) => res.json())
+      .then((data) => {
+        setBannerGames(data.results || []);
+        setLoading(false);
+      })
+      .catch(() => {
+        setBannerGames([]);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return <div className="relative mt-2 mb-16 h-96">로딩중...</div>;
+  }
+
   return (
     <div className="relative mt-2 mb-16">
       <div className="absolute top-0 z-10 hidden aspect-square overflow-hidden rounded-xl p-8 md:block md:w-[calc(50%_-_4px)] lg:w-[calc(33.3333%_-_5.3333px)] xl:right-[calc(50%+4px)] xl:w-[calc(25%_-_6px)]">
@@ -50,6 +78,8 @@ export default function MainBannerCarousel() {
           </Button>
         </Link>
       </div>
+
+      {/* 게임 슬라이더 */}
       <div className="overflow-hidden">
         <Swiper
           slidesPerView={1}
@@ -66,26 +96,20 @@ export default function MainBannerCarousel() {
             prevEl: '.main-button-prev',
           }}
           breakpoints={{
-            768: {
-              slidesPerView: 2,
-            },
-            1024: {
-              slidesPerView: 3,
-            },
-            1280: {
-              slidesPerView: 4,
-            },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+            1280: { slidesPerView: 4 },
           }}
         >
-          {mainBannerList.map((banner, index) => (
-            <SwiperSlide key={index}>
+          {bannerGames.map((game, index) => (
+            <SwiperSlide key={game.game_id}>
               <Link
-                href={`/games/${banner.gameId}`}
+                href={`/games/${game.game_id}`}
                 className="group relative block aspect-square w-full overflow-hidden rounded-xl"
               >
                 <Image
-                  src={banner.src}
-                  alt={banner.title}
+                  src={game.thumbnail_url}
+                  alt={game.title}
                   width={768}
                   height={360}
                   className="absolute inset-0 h-full w-full object-cover"
@@ -93,24 +117,25 @@ export default function MainBannerCarousel() {
                 />
                 <div className="absolute right-0 bottom-0 left-0 bg-gradient-to-t from-black to-transparent px-6 py-8 transition-all group-hover:h-full group-hover:from-[#00000087] group-hover:to-[#00000087]">
                   <h3 className="line-clamp-2 text-2xl font-bold text-white">
-                    {banner.title}
+                    {game.title}
                   </h3>
                   <p className="mt-3 line-clamp-2 text-sm text-gray-200">
-                    {banner.description}
+                    {game.genre} · {game.category}
                   </p>
                 </div>
               </Link>
             </SwiperSlide>
           ))}
-          <div className="pointer-events-none absolute top-1/2 left-1/2 z-20 flex w-full -translate-x-1/2 -translate-y-1/2 transform justify-between px-6 xl:w-[calc(50%+10rem)]">
-            <div className="main-button-prev">
-              <RiArrowLeftSLine className="h-10 w-10" />
-            </div>
-            <div className="main-button-next">
-              <RiArrowRightSLine className="h-10 w-10" />
-            </div>
-          </div>
         </Swiper>
+
+        <div className="pointer-events-none absolute top-1/2 left-1/2 z-20 flex w-full -translate-x-1/2 -translate-y-1/2 transform justify-between px-6 xl:w-[calc(50%+10rem)]">
+          <div className="main-button-prev pointer-events-auto cursor-pointer">
+            <RiArrowLeftSLine className="h-10 w-10 text-white" />
+          </div>
+          <div className="main-button-next pointer-events-auto cursor-pointer">
+            <RiArrowRightSLine className="h-10 w-10 text-white" />
+          </div>
+        </div>
       </div>
     </div>
   );
