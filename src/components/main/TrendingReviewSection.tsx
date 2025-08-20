@@ -5,6 +5,7 @@ import { type ReviewItem } from '@/types/user/review';
 interface ApiReviewPreview {
   game_id: number;
   nickname: string;
+  profile_image: string;
   rating: number;
   content: string;
   images: string;
@@ -25,7 +26,9 @@ const transformApiReviewToReviewItem = (
   user: {
     user_id: 0,
     username: apiReview.nickname,
-    profile_image_url: null,
+    profile_image_url: apiReview.profile_image
+      ? `https://kr.object.ncloudstorage.com/boardq/${apiReview.profile_image}`
+      : null,
   },
   image_url: apiReview.images || undefined,
 });
