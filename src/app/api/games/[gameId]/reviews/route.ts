@@ -1,6 +1,6 @@
+import { API_BASE_URL } from '@/constants/api/url';
+import { getAccessToken } from '@/lib/getAccessToken';
 import { NextRequest, NextResponse } from 'next/server';
-
-const API_BASE_URL = 'https://boardq.o-r.kr/api/v1';
 
 export async function GET(
   req: NextRequest,
@@ -39,6 +39,53 @@ export async function GET(
   } catch (error) {
     return NextResponse.json(
       { error: 'Failed to fetch reviews' },
+      { status: 500 }
+    );
+  }
+}
+
+export async function POST(
+  req: NextRequest,
+  context: { params: Promise<{ gameId: string }> }
+) {
+  const token = await getAccessToken();
+
+  if (!token) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  const { gameId } = await context.params;
+
+  if (!gameId) {
+    return NextResponse.json({ error: 'Game ID is required' }, { status: 400 });
+  }
+
+  try {
+    // 요청 본문 파싱
+    const formData = await req.formData();
+    const rating = formData.get('rating');
+    const content = formData.get('content') ?? '';
+
+    console.log('Posting review:', { gameId, rating, content });
+
+    // upstream API 호출
+    const res = await fetch(`${API_BASE_URL}/games/${gameId}/reviews/`, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const data = await res.json().catch(() => ({}));
+
+    // 그대로 전달
+    return NextResponse.json(data, { status: res.status });
+  } catch (error) {
+    console.error('Review POST error:', error);
+    return NextResponse.json(
+      { detail: '서버 오류가 발생했습니다.' },
       { status: 500 }
     );
   }

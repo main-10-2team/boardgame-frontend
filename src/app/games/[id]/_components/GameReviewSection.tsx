@@ -1,5 +1,6 @@
 'use client';
 import Button from '@/components/common/Button';
+import ReviewModal from '@/components/game/detail/ReviewModal';
 import ReviewDetailModal from '@/components/my-page/review/ReviewDetailModal';
 import { ReviewItem, ReviewListResponse } from '@/types/user/review';
 import { User } from '@/types/user/user';
@@ -71,11 +72,10 @@ export default function GameReviewSection({
         review={modalReview}
       /> */}
       {modalReview && (
-        <ReviewDetailModal
+        <ReviewModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           review={modalReview}
-          isNew={false}
         />
       )}
       <ReviewDetailModal
