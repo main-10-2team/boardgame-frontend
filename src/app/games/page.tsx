@@ -13,8 +13,8 @@ export async function generateMetadata({
   const category = resolvedParams.category;
 
   const title = category
-    ? `보드큐 - ${category} 보드게임 리스트`
-    : '보드큐 - 보드게임 리스트';
+    ? `보드큐 - ${category} 보드게임 찾기`
+    : '보드큐 - 보드게임 찾기';
   const description = category
     ? `${category} 보드게임을 한눈에 확인하세요`
     : '다양한 보드게임을 쉽게 검색하세요!';
