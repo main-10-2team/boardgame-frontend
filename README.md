@@ -60,7 +60,7 @@
 | 🚚     | build    | 빌드 관련 작업      |
 | 🚑     | hotfix   | 긴급 수정           |
 
-> 커밋 메시지는 [Husky](https://typicode.github.io/husky) + 커스텀 훅으로 검사되며, 형식이 맞지 않으면 커밋이 차단됩니다.
+> 커밋 메시지는 [Husky](https://typicode.github.io/husky) + 커스텀 훅으로 검사되며, 형식이 맞지 않거나 `any` 타입이 포함되면 커밋이 차단됩니다.
 ```
 
 ## 🗂️ Issue 템플릿 규칙
