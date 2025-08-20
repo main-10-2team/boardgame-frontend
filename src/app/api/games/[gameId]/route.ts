@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { gameId: string } }
+  { params }: { params: { gameId: number } }
 ) {
   const { gameId } = await params;
   const token = await getAccessToken();
