@@ -6,25 +6,25 @@ const contents = [
     title: '입문자 추천',
     description: '처음 시작하기 좋은 쉽고 재미있는 게임들',
     imageUrl: '/images/main/img_curation01.png',
-    link: '/games?theme=beginner',
+    link: '/games?difficulty=쉬움',
   },
   {
     title: '2인 전용',
     description: '연인, 친구와 둘이서 즐기기 좋은 게임',
     imageUrl: '/images/main/img_curation02.png',
-    link: '/games?theme=family',
+    link: '/games?players=2',
   },
   {
     title: '파티게임',
     description: '여러명이 함께 웃으며 즐길수 있는 게임',
     imageUrl: '/images/main/img_curation03.png',
-    link: '/games?theme=family',
+    link: '/games?categories=파티게임',
   },
   {
     title: '전략가 추천',
     description: '깊이 있는 전략과 사고가 필요한 게임',
     imageUrl: '/images/main/img_curation04.png',
-    link: '/games?theme=family',
+    link: '/games?categories=전략게임',
   },
 ];
 
