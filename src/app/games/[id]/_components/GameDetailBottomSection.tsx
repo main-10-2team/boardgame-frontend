@@ -1,7 +1,7 @@
 import GameDetailInfo from '@/app/games/[id]/_components/GameDetailInfo';
 import GameReviewSection from '@/app/games/[id]/_components/GameReviewSection';
-import YoutubeVideoSection from '@/app/games/[id]/_components/YoutubeVideoSection';
 // import SimilarGameList from '@/components/game/detail/SimilarGameList';
+import YoutubeVideoSection from '@/app/games/[id]/_components/YoutubeVideoSection';
 import Grid from '@/components/layout/Grid';
 import { GameDetail } from '@/types/game/game';
 import { ReviewListResponse } from '@/types/user/review';
