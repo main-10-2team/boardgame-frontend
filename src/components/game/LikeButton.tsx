@@ -1,4 +1,5 @@
 'use client';
+import { useToggleLike } from '@/hooks/react-query/useToggleLike';
 import { cn } from '@/utils/cn';
 import { RiHeartFill, RiHeartLine } from '@remixicon/react';
 import { useState } from 'react';
@@ -12,20 +13,24 @@ interface LikeButtonProps {
 
 export default function LikeButton({
   liked = false,
-  gameId: _gameId,
+  gameId,
   className,
   lineColor = 'text-white',
 }: LikeButtonProps) {
   const [isLiked, setIsLiked] = useState(liked);
-  const handleLikeClick = (e: React.MouseEvent) => {
+  const { mutate } = useToggleLike(gameId);
+  const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
-    setIsLiked((prev) => !prev);
+    setIsLiked((prev) => !prev); // ✅ Optimistic UI
+    mutate(undefined, {
+      onError: () => setIsLiked(liked), // 실패 시 롤백
+    });
   };
 
   return (
     <button
-      onClick={handleLikeClick}
+      onClick={handleClick}
       className={cn('z-10 cursor-pointer p-2', className)}
     >
       {isLiked ? (

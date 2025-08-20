@@ -14,11 +14,12 @@ export class ApiError extends Error {
 export async function fetcher<T>(
   endpoint: string,
   options?: RequestInit,
-  accessToken?: string // SSR일 경우 직접 전달
+  accessToken?: string | null // SSR일 경우 직접 전달
 ): Promise<T> {
   const isFormData = options?.body instanceof FormData;
 
   const res = await fetch(`${API_BASE_URL}${endpoint}`, {
+    credentials: 'include',
     ...options,
     headers: {
       // FormData일 때는 Content-Type을 설정하지 않음 (브라우저가 자동으로 multipart/form-data 설정)
