@@ -7,10 +7,10 @@ export default function SortDropdown() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const [sort, setSort] = useState('popular');
+  const [sort, setSort] = useState('popularity');
 
   const sortOptions = [
-    { label: '인기순', value: 'popular' },
+    { label: '인기순', value: 'popularity' },
     { label: '최신순', value: 'latest' },
     { label: '평점순', value: 'rating' },
     { label: '리뷰순', value: 'review' },
@@ -30,7 +30,7 @@ export default function SortDropdown() {
     newSearchParams.set('sort_by', selectedValue);
 
     // 현재 URL에 새로운 쿼리 파라미터를 적용하여 페이지 이동
-    router.push(`?${newSearchParams.toString()}`);
+    router.push(`/games?${newSearchParams.toString()}`);
   };
 
   return (

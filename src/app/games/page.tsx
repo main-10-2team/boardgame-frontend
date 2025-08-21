@@ -1,6 +1,8 @@
 import GameListUI from '@/app/games/_components/GameListUI';
 import { getGameListData } from '@/lib/api/games';
 import getQueryClient from '@/lib/getQueryClient';
+import { QueryParams } from '@/types/api';
+import { buildQueryString } from '@/utils/buildQueryString';
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 import { Metadata } from 'next';
 
@@ -31,20 +33,21 @@ export async function generateMetadata({
 export default async function Page({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: QueryParams;
 }) {
   const queryClient = getQueryClient();
 
   const resolvedParams = await searchParams;
 
   await queryClient.prefetchQuery({
-    queryKey: ['games', resolvedParams],
+    queryKey: ['games', buildQueryString(resolvedParams)],
     queryFn: () => getGameListData(resolvedParams),
   });
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <GameListUI searchParams={resolvedParams} />
+      {/* <GameListUI searchParams={resolvedParams} /> */}
+      <GameListUI />
     </HydrationBoundary>
   );
 }

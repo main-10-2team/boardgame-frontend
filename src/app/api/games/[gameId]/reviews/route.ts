@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(
   req: NextRequest,
-  context: { params: Promise<{ gameId: string }> }
+  context: { params: Promise<{ gameId: number }> }
 ) {
   const { gameId } = await context.params;
   const { searchParams } = new URL(req.url);
@@ -46,7 +46,7 @@ export async function GET(
 
 export async function POST(
   req: NextRequest,
-  context: { params: Promise<{ gameId: string }> }
+  context: { params: Promise<{ gameId: number }> }
 ) {
   const token = await getAccessToken();
 
@@ -65,8 +65,6 @@ export async function POST(
     const formData = await req.formData();
     const rating = formData.get('rating');
     const content = formData.get('content') ?? '';
-
-    console.log('Posting review:', { gameId, rating, content });
 
     // upstream API 호출
     const res = await fetch(`${API_BASE_URL}/games/${gameId}/reviews/`, {

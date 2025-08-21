@@ -14,5 +14,6 @@ export function useGameFilters() {
     playtime_max_minutes: Number(searchParams.get('playtime_max_minutes') ?? 0),
     difficulty: searchParams.get('difficulty') ?? null,
     age: searchParams.get('age') ?? null,
+    sort_by: searchParams.get('sort_by') ?? 'popularity',
   };
 }

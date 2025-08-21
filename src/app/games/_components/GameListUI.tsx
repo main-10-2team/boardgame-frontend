@@ -2,7 +2,9 @@
 import GameListSection from '@/app/games/_components/GameListSection';
 import BreadcrumbsSkeleton from '@/components/layout/BreadcrumbsSkeleton';
 import Grid from '@/components/layout/Grid';
+import { useQueryParamsObject } from '@/hooks/useQueryParamsObject';
 import { getGameListDataClient } from '@/lib/api/games';
+import { buildQueryString } from '@/utils/buildQueryString';
 import { useQuery } from '@tanstack/react-query';
 import dynamic from 'next/dynamic';
 import { notFound } from 'next/navigation';
@@ -20,14 +22,13 @@ const FilterSidebar = dynamic(
   }
 );
 
-export default function GameListUI({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined };
-}) {
+export default function GameListUI() {
+  const queryObj = useQueryParamsObject();
+  const queryString = buildQueryString(queryObj);
+
   const { data: gameListData, isLoading } = useQuery({
-    queryKey: ['games', searchParams],
-    queryFn: () => getGameListDataClient(searchParams),
+    queryKey: ['games', queryString],
+    queryFn: () => getGameListDataClient(queryObj),
   });
   if (isLoading) return <div>Loading...</div>;
 

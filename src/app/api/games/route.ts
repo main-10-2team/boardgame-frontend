@@ -17,6 +17,7 @@ export async function GET(request: NextRequest) {
     const maxPlayTime = Number(searchParams.get('playtime_max_minutes'));
     const difficulty = searchParams.get('difficulty');
     const age = searchParams.get('age');
+    const sort_by = searchParams.get('sort_by');
 
     // 외부 API로 요청을 보낼 URL 생성
     const externalApiUrl = new URL(`${API_BASE_URL}/games/`);
@@ -33,6 +34,7 @@ export async function GET(request: NextRequest) {
     setIf('categories', categories);
     setIf('genres', genres);
     setIf('players', players);
+    setIf('sort_by', sort_by);
 
     if (minPlayTime > 0) {
       externalApiUrl.searchParams.set(
@@ -56,6 +58,8 @@ export async function GET(request: NextRequest) {
         ...(token ? { Authorization: `Bearer ${token}` } : {}),
       },
     });
+
+    console.log('fetching games with query:', externalApiUrl.toString());
 
     if (!res.ok) {
       const errorInfo = await res.json();

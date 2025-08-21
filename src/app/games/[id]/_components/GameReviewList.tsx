@@ -6,7 +6,7 @@ import {
   type ReviewItem as ReviewItemType,
 } from '@/types/user/review';
 import { RiAddLine } from '@remixicon/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 interface GameReviewListProps {
   reviews: ReviewListResponse;
   handleModalClick: (review: ReviewItemType) => void;
@@ -19,6 +19,10 @@ export default function GameReviewList({
 }: GameReviewListProps) {
   const [page, setPage] = useState(1);
   const [reviews, setReviews] = useState<ReviewItemType[]>(reviewsData.reviews);
+
+  useEffect(() => {
+    setReviews(reviewsData.reviews);
+  }, [reviewsData]);
 
   const handleReviewMore = async () => {
     if (reviewsData.total_pages <= page) return;
