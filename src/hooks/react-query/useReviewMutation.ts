@@ -12,10 +12,10 @@ export function useReviewMutation(
   const create = useMutation({
     mutationFn: (payload: { content: string; rating: number }) =>
       createReview(gameId, payload.content, payload.rating),
-    onSuccess: async () => {
-      queryClient.invalidateQueries(['game', gameId]);
-      await queryClient.invalidateQueries({ queryKey: ['reviews', gameId] });
-      await queryClient.refetchQueries({ queryKey: ['reviews', gameId] });
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['game', gameId] });
+      queryClient.invalidateQueries({ queryKey: ['reviews', gameId] });
+      queryClient.refetchQueries({ queryKey: ['reviews', gameId] });
       onSave();
       onClose();
     },
