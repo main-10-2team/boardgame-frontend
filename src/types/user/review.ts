@@ -41,7 +41,7 @@ export interface ReviewItem {
     nickname: string;
     profile_image_url: string | null;
   };
-  game_id?: number;
+  game_id: number;
   title?: string;
   rating: number;
   content: string;
