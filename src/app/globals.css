@@ -1,1 +1,148 @@
 @import 'tailwindcss';
+
+@theme {
+  --color-black: #17171b;
+  --color-success-50: #f6fef9;
+  --color-success-100: #effdf6;
+  --color-success-200: #d9f9e6;
+  --color-success-300: #b8f1d2;
+  --color-success-400: #8ee4ba;
+  --color-success-500: #6ad09d;
+  --color-success-600: #53b483;
+  --color-success-700: #2f9461;
+  --color-success-800: #2f7657;
+  --color-success-900: #255e46;
+  --color-success-1000: #1e4d3a;
+
+  --color-error-50: #fffbfa;
+  --color-error-100: #fef2f2;
+  --color-error-200: #fde9e9;
+  --color-error-300: #fac7c7;
+  --color-error-400: #f7a1a1;
+  --color-error-500: #f37373;
+  --color-error-600: #f34141;
+  --color-error-700: #cd3636;
+  --color-error-800: #a32e2e;
+  --color-error-900: #7c2323;
+  --color-error-1000: #601b1b;
+
+  --color-warning-50: #fffcf5;
+  --color-warning-100: #fefaf5;
+  --color-warning-200: #fbf2cb;
+  --color-warning-300: #fde57e;
+  --color-warning-400: #ffd16a;
+  --color-warning-500: #fbbc55;
+  --color-warning-600: #e9a23b;
+  --color-warning-700: #c8811a;
+  --color-warning-800: #a35c00;
+  --color-warning-900: #8b4400;
+  --color-warning-1000: #78310b;
+
+  --color-primary-50: #fef1fb;
+  --color-primary-100: #fee5f8;
+  --color-primary-200: #ffcbf4;
+  --color-primary-300: #ffa1e9;
+  --color-primary-400: #ff61d5;
+  --color-primary-500: #fa3ac2;
+  --color-primary-600: #ea18a1;
+  --color-primary-700: #cc0a84;
+  --color-primary-800: #a80c6c;
+  --color-primary-900: #8c0f5b;
+  --color-primary-950: #560135;
+}
+
+.inner {
+  @apply mx-auto w-full max-w-5xl px-4 lg:px-0;
+}
+
+@font-face {
+  font-family: 'KCC-Sonkeechung';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KCC-Sonkeechung.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family:
+    'Pretendard Variable',
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    'Helvetica Neue',
+    'Segoe UI',
+    'Apple SD Gothic Neo',
+    'Noto Sans KR',
+    'Malgun Gothic',
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol',
+    sans-serif;
+}
+
+.font-handwriting {
+  font-family: 'KCC-Sonkeechung', sans-serif;
+}
+
+@keyframes fade-down {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(4px);
+    opacity: 0;
+  }
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out forwards;
+}
+
+.animate-fade-out {
+  animation: fade-out 0.3s ease-in forwards;
+}
+
+.animate-fade-down {
+  animation: fade-down 1s ease-in-out infinite;
+}
+
+.game-detail-section {
+  @apply rounded-2xl border border-gray-200 px-4 py-6;
+}
+.game-detail-title {
+  @apply mb-6 text-2xl font-semibold text-gray-900;
+}
+
+.theme-button-next,
+.theme-button-prev {
+  @apply hover:bg-primary-500 border-primary-400 text-primary-500 pointer-events-auto flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border transition-colors hover:text-white;
+}
+
+.main-button-next,
+.main-button-prev {
+  @apply hover:bg-primary-500 text-primary-500 pointer-events-auto flex h-12 w-12 cursor-pointer items-center justify-center rounded-full transition-colors hover:text-white;
+}

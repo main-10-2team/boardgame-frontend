@@ -1,0 +1,36 @@
+import ProfileDetail from '@/app/my-page/profile/_components/ProfileDetail';
+import ProfileInfoSection from '@/app/my-page/profile/_components/ProfileInfoSection';
+import WithdrawalButton from '@/app/my-page/profile/_components/WithdrawalButton';
+import Button from '@/components/common/Button';
+import { getUser } from '@/lib/auth';
+import Link from 'next/link';
+
+export default async function ProfilePage() {
+  const userProfile = await getUser();
+
+  return (
+    <>
+      <h1 className="mb-6 text-3xl font-semibold">내 정보</h1>
+      <section className="flex flex-col gap-8 rounded-xl border border-gray-200 p-6">
+        <div className="flex items-center justify-between">
+          <h2 className="text-2xl font-semibold">프로필</h2>
+          <Link href="/my-page/profile/edit">
+            <Button size="sm" variant="secondary" className="font-semibold">
+              프로필 수정
+            </Button>
+          </Link>
+        </div>
+
+        {/* 프로필 영역 */}
+        <ProfileDetail user={userProfile} />
+
+        <div className="my-1 border border-gray-300"></div>
+        {/* 기본 정보 영역 */}
+        <ProfileInfoSection user={userProfile} />
+      </section>
+
+      {/* 회원 탈퇴 */}
+      <WithdrawalButton userName={userProfile.name} />
+    </>
+  );
+}
